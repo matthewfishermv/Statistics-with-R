@@ -134,7 +134,7 @@ In addition to summarizing data graphically, we will learn how to summarize data
 
 In statistics, the artihmetic mean is denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all of its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
 
-![Formula for arithmetic mean](/Course-Content/img/equations/arithmetic-mean-student-grades.png)
+![Arithmetic mean of student grades](/Course-Content/img/equations/arithmetic-mean-student-grades.png)
 
 R has a built-in function `sum()`, which performs the summation for us, so we can calculate the arithmetic mean for student grades as follows:
 
