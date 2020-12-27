@@ -19,9 +19,10 @@
       - [Five-Number Summary](#five-number-summary)
     - [Measures of Variability](#measures-of-variability)
       - [Range, Interquartile Range, and Outliers](#range-interquartile-range-and-outliers)
+      - [Variance](#variance)
   - [Graphical Summaries](#graphical-summaries)
     - [Histograms](#histograms-1)
-  - [Boxplots](#boxplots)
+    - [Boxplots](#boxplots)
   - [References](#references)
 
 ## Introduction
@@ -142,11 +143,11 @@ In statistics, we are particularly concerned with measures of central tendency a
 
 ### Measures of Central Tendency
 
-We will seek to understand the arithmetic mean and the median next. These **measures of central tendency** attempt to summarize the data, recognizing the property that data tend to cluster around some central value [[5]](#references).
+We will seek to understand the arithmetic mean and the median next. These **measures of central tendency** attempt to summarize the data, recognizing the property that data tend to cluster around some central value.
 
 #### Arithmetic Mean
 
-The simplest numerical summary is the **arithmeatic mean**, which can be thought of as the average or expected value. It is calculated as the sum of all observations divided by the number of observations:
+The simplest numerical summary is the **arithmetic mean**, which can be thought of as the average or expected value. It is calculated as the sum of all observations divided by the number of observations:
 
 ![Formula for arithmetic mean](/Course-Content/img/equations/arithmetic-mean.png)
 
@@ -256,7 +257,9 @@ IQR(grades)
 [1] 6.8
 ```
 
-The overall range gives the total amount of variation in the data, while the interquartile range gives the amount of variation in the middle 50% of the data. Remembering the tendency of data to be clustered around the central value, we can use the interquartile range to identify data points that do not follow that tendency. In general, we define outliers in the data to be data points that are less than (Q1 - 1.5 * IQR) or greater than (Q3 + 1.5 * IQR).
+The overall range gives the total amount of variation in the data, while the interquartile range gives the amount of variation in the middle 50% of the data. Remembering the tendency of data to be clustered around the central value, we can use the interquartile range to identify data points that do not follow that tendency. In general, we define outliers in the data to be data points that are less than (Q1 - 1.5 * IQR) or greater than (Q3 + 1.5 * IQR). Or, equivalently, we say that outliers fall in the ranges:
+
+![Formula for outliers](/Course-Content/img/equations/outliers.png)
 
 Let us see if we have any outliers in our student grades data:
 
@@ -272,15 +275,77 @@ grades[grades >= high]
 
 It appears that there are no outliers.
 
+#### Variance
+
+Recall that we are concerned with uncertainty and variability in statistics. For this reason, measures of variability are some of the most important quantities in statistics [[6]](#references). Variation helps us understand the way data are spread or distributed better. Consider two variables, X= {3, 4, 5} and Y = {1, 4, 7}. Both X and Y have the same mean, 4, but the data are clearly not the same. The values are spread out much more from each other in Y than in X. Variation allows us to capture this property in a numerical summary.
+
+Before we can understand variance, we need to understand the concept of degrees of freedom. **Degrees of freedom** are the number of values that are free to vary. Suppose we had a sample of 4 numbers and their arithmetic mean was 4. We pick numbers for our sample set one by one and observe the overall set at each step:
+
+{1, _, _, _}
+
+We have added one number. We can pick any value for the next element. Let us pick 5:
+
+{1, 5, _, _}
+
+We have added another number. We can pick any value for the next element. Let us pick 3:
+
+{1, 5, 3, _}
+
+We have added another number, but we cannot pick any value for the next element. Because the mean for the sample set is 4, the only possible value for the last element is 3 since (1 + 5 + 3 + 3) / 4 = 4.
+
+In this example, we had a variable with n=4 observations and n-1=3 of them were allowed to vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
+
+![Formula for degrees of freedom with one parameter](/Course-Content/img/equations/degrees-of-freedom-1param.png)
+
+The degrees of freedom can be calculated for the grades example in R by `length(grades) - 1`. Returning to variance, we are interested in measuring the variability in the data, or how much the data tends to differ from the mean. For each data point, we can calculate its difference from the mean. This quantity is known as a **residual** and is given by:
+
+![Formula for residuals](/Course-Content/img/equations/residual.png)
+
+The residuals can be calculated for the grades example in R by `grades - mean(grades)`. If we were to add the residuals together, they would equal 0 for every data set. This is not a useful property, so we instead add the squared residuals together. This quantity is one of the most important in statistics [[6]](#references) and is known as the **sum of squares**:
+
+![Formula for residuals](/Course-Content/img/equations/sum-of-squares.png)
+
+The sum of squares can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)`. Now we average the sum of squares across all values in the data to get the variance. Since we lose one degree of freedom by calculating the mean, we divide by n-1:
+
+![Formula for variance](/Course-Content/img/equations/variance.png)
+
+The variance can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)/(length(grades) - 1)`. R has a built-in function for calculating the variance that performes exactly these calculations, `var()`:
+
+```R
+var(grades)
+[1] 28.02597
+```
+
 ## Graphical Summaries
 
 ### Histograms
 
 We have already seen one graphical summary - the histogram. It shows the frequency of observations in the data that fall within a range of values called bins. Histograms are useful under the same conditions as means, i.e., when there are no large outliers present and the data are not skewed. Histograms are generated in R using the `hist()` function.
 
-## Boxplots
+### Boxplots
 
-Another graphical summary that is useful for understanding data is a **boxplot** or **box and whiskers plot**.
+Another graphical summary that is useful for understanding data is a **boxplot** or **box and whiskers diagram**. Boxplots depict the five-number summary we saw earlier in a graphical format and can be easily generated by using the `boxplot()` function in R. The boxplot below was generated for the grades data we have been working with:
+
+```R
+# Generate a boxplot for student grades.
+boxplot(grades, main="Boxplot for Student Grades", xlab="Grade", horizontal=TRUE)
+```
+
+![Boxplot of statistics student grades](/Course-Content/img/boxplot-of-statistics-student-grades.png)
+
+You can see the main features of a boxplot: the minimum and maximum values plotted as whiskers on the extreme edges of the plot; and Q1, the median, and Q3 in the central region of the plot. Observing the plot, we get a sense of the spread and distribution of the data. It shows how large a region is spanned by each quarter of the data [[4]](#references).
+
+Outliers in the data can be read off a boxplot - R plots outliers by default as being outside of the upper and lower whiskers:
+
+```R
+# Generate a boxplot for a variable with an outlier.
+y <- c(10, 15, 14, 15, 4, 20, 5, 3, 2, 9, 12, 16, 6, 13, 10, 9,
+       14,8, 9, 3, 2, 7, 11, 12, 13, 16, 8, 7, 5, 7, 6, 9, 4, 21, 30)
+boxplot(y, horizontal=TRUE)
+```
+
+![Boxplot with outlier](/Course-Content/img/boxplot-with-outlier.png)
+
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
@@ -288,3 +353,4 @@ Another graphical summary that is useful for understanding data is a **boxplot**
 3. https://www.r-project.org/about.html
 4. https://faculty.atu.edu/mfinan/3153/section13.pdf
 5. https://statistics.laerd.com/statistical-guides/measures-central-tendency-mean-mode-median.php
+6. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 50-62.
