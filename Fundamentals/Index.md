@@ -12,9 +12,16 @@
     - [Try it Yourself](#try-it-yourself)
     - [Stem and Leaf Plots](#stem-and-leaf-plots)
   - [Numerical Summaries](#numerical-summaries)
-    - [Arithmetic Mean](#arithmetic-mean)
-    - [Median](#median)
-    - [Median](#median-1)
+    - [Measures of Central Tendency](#measures-of-central-tendency)
+      - [Arithmetic Mean](#arithmetic-mean)
+      - [Median](#median)
+      - [Mean vs. Median](#mean-vs-median)
+      - [Five-Number Summary](#five-number-summary)
+    - [Measures of Variability](#measures-of-variability)
+      - [Range, Interquartile Range, and Outliers](#range-interquartile-range-and-outliers)
+  - [Graphical Summaries](#graphical-summaries)
+    - [Histograms](#histograms-1)
+  - [Boxplots](#boxplots)
   - [References](#references)
 
 ## Introduction
@@ -24,9 +31,9 @@
 The aim of this course is to develop your understanding of the science of statistics using principles of mathematics and computation. You will learn how to:
 
 1. design experiments to collect data;
-1. perform a variety of statistical analyses;
-2. build and interpret mathematical models; and
-3. produce graphics like the one above.
+1. perform statistical analyses;
+2. build and interpret mathematical models of data; and
+3. produce and interpret graphics like the one above.
 
 It is likely that you have come across statistics in one form or another, whether you were aware of it or not. Statistics is used to gain an understanding of data and make predictions about the future. It allows weather reporters to predict what a storm might do and doctors to understand the health of their patients or the prognosis of an illness. Statistics is applied in a wide range of areas: mathematics, economics, social sciences, trade, research, programming, Big Data, data science, health, business, government, and education [[1]](#references). And this list is far from exhaustive.
 
@@ -131,13 +138,19 @@ stem(grades)
 
 ## Numerical Summaries
 
-### Arithmetic Mean
+In statistics, we are particularly concerned with measures of central tendency and measures of variability, which we will discuss next. These summaries will aid in our understanding of the uncertainty and variation inherent in the data and introduced as a result of our analysis.
 
-In addition to summarizing data graphically, we will learn how to summarize data numerically. The simplest numerical summary is the **arithmeatic mean**, which can be thought of as the sum of all observations divided by the number of observations:
+### Measures of Central Tendency
+
+We will seek to understand the arithmetic mean and the median next. These **measures of central tendency** attempt to summarize the data, recognizing the property that data tend to cluster around some central value [[5]](#references).
+
+#### Arithmetic Mean
+
+The simplest numerical summary is the **arithmeatic mean**, which can be thought of as the average or expected value. It is calculated as the sum of all observations divided by the number of observations:
 
 ![Formula for arithmetic mean](/Course-Content/img/equations/arithmetic-mean.png)
 
-In statistics, the artihmetic mean is denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all of its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
+In statistics, the artithmetic mean is often denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all of its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
 
 ![Arithmetic mean of student grades](/Course-Content/img/equations/arithmetic-mean-student-grades.png)
 
@@ -171,14 +184,107 @@ This code produces the follow plot. Note that the mean (red line) is pulled righ
 
 ![Histogram of data skewed by an outlier](/Course-Content/img/histogram-of-skewed-data.png)
 
-### Median
+#### Median
 
-The shortcoming of the mean is overcome by the **median**, which is far more resistant to outliers.
+The shortcomings of the mean are overcome by the **median**, which is far more resistant to outliers. The median is the middle value in the data set when the data are written in order. The formula for median is:
 
-### Median
+![Formula for median](/Course-Content/img/equations/median.png)
+
+Fortunately, R has a built-in function for this, too:
+
+```R
+median(y)
+[1] 9
+```
+
+#### Mean vs. Median
+
+The mean is "essentially a model of your data set[;] it is the value that is most common" [[5]](#references), and it should be noted that the mean and median values many not be present as an observation in the data. For example, the median value may be exactly between the two values in the middle of the data (if n, the number of observations, is even). While both the mean and the median summarize the data, do not expect that either will actually be present in the data.
+
+In summary, you should use the mean as a measure of central tendency when:
+
+- data do not contain large outliers; and
+- data are not significantly skewed.
+
+You should use median as a measure of central tendency when these conditions are not met.
+
+#### Five-Number Summary
+
+The mean and median are used in a common set of numerical summaries known as a **five-number summary**. This summary involves the minimum (smallest) values, first quartile, median, third quartile, and maximum (largest value). We will discuss quartiles in the section on variability below, but for our purposes now, you can generate a five-number summary in R using the `summary()` function:
+
+```R
+summary(grades)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  77.30   84.35   88.40   88.19   91.15   98.80 
+```
+
+Notice that R includes the mean in the summary, so this is really a 5+1-number summary.
+
+### Measures of Variability
+
+#### Range, Interquartile Range, and Outliers
+
+Let us return to the concept of a five-number summary:
+
+```R
+summary(grades)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  77.30   84.35   88.40   88.19   91.15   98.80 
+```
+
+Expanding on our understanding of this output, **quartiles** divide data into four equally-sized groupings, such that 25% of the observations fall below the first quartile (and 75% above), 50% fall below the second quartile (and 50% above), and 75% fall below the third quartile (and 25% above). To visualize this, observe the following variable X and convince yourself that 25% of the observations fall below 25 (Q1), 50% fall below 32 (Q2), and 75% fall below 36 (Q3):
+
+![Example values for understanding quartiles](/Course-Content/img/equations/quartiles-example.png)
+
+The median, by definition is the second quartile (Q2) because 50% of the observations fall below and and 50% fall above it. In the data above, the mean and second quartile would be (28 + 32) /2 = 30.
+
+From the five-number summary, we can calculate two ranges. The **range** is the total amount of variation in the data, or the difference between the largest and smallest values. From the five-number summary of statistics students' grades above, we see that the range is 98.80 - 77.30 = 21.5. R has a helpful function `range()` that returns the smallest and largest values of a variable:
+
+```R
+range(grades)
+[1] 77.3 98.8
+```
+
+The second range we can calculate is known as the **interquartile range** and it is the difference between Q3 (the third quartile) and Q1 (the first quartile):
+
+![Formula for interquantile range](/Course-Content/img/equations/interquartile-range.png)
+
+In our student grades data, we can calculate the interquartile range by subtracting Q1 from Q3 or by using the `IQR()` function:
+
+```R
+IQR(grades)
+[1] 6.8
+```
+
+The overall range gives the total amount of variation in the data, while the interquartile range gives the amount of variation in the middle 50% of the data. Remembering the tendency of data to be clustered around the central value, we can use the interquartile range to identify data points that do not follow that tendency. In general, we define outliers in the data to be data points that are less than (Q1 - 1.5 * IQR) or greater than (Q3 + 1.5 * IQR).
+
+Let us see if we have any outliers in our student grades data:
+
+```R
+# Check for outliers in student grades.
+low <- quantile(grades)['25%'] - (1.5 * IQR(grades))
+high <- quantile(grades)['75%'] + (1.5 * IQR(grades))
+grades[grades <= low]
+  numeric(0)
+grades[grades >= high]
+  numeric(0)
+```
+
+It appears that there are no outliers.
+
+## Graphical Summaries
+
+### Histograms
+
+We have already seen one graphical summary - the histogram. It shows the frequency of observations in the data that fall within a range of values called bins. Histograms are useful under the same conditions as means, i.e., when there are no large outliers present and the data are not skewed. Histograms are generated in R using the `hist()` function.
+
+## Boxplots
+
+Another graphical summary that is useful for understanding data is a **boxplot** or **box and whiskers plot**.
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
 2. https://www.stat.uci.edu/what-is-statistics/
 3. https://www.r-project.org/about.html
 4. https://faculty.atu.edu/mfinan/3153/section13.pdf
+5. https://statistics.laerd.com/statistical-guides/measures-central-tendency-mean-mode-median.php
