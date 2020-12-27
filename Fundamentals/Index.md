@@ -48,7 +48,7 @@ hist(grades, main="Histogram of Grades", xlab="Grade", ylab="Frequency")
 ```
 This code produces the following output:
 
-![Histogram of statistics student grades](/Course Content/img/histogram-of-statistics-student-grades.png)
+![Histogram of statistics student grades](/Course-Content/img/histogram-of-statistics-student-grades.png)
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
