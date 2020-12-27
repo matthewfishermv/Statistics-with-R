@@ -6,6 +6,8 @@
   - [Contents](#contents)
   - [Introduction](#introduction)
   - [Getting Started with R](#getting-started-with-r)
+  - [Data and Statistics](#data-and-statistics)
+  - [Example: Student Grades](#example-student-grades)
   - [References](#references)
 
 ## Introduction
@@ -18,9 +20,35 @@ In a statistical setting, we are concerned with the collection, analysis, and pr
 
 ## Getting Started with R
 
-The computational tool that will be used throughout this course is R. It is a "language and environment for statistical computing and graphics" [[3]](##-References). To get started, it is recommended that you download the latest version of RStudio, the integrated development environment for R that will be used in this course:
+The computational tool that will be used throughout this course is R. It is a "language and environment for statistical computing and graphics" [[3]](##-References). To get started, it is recommended that you download and install the latest version of RStudio, an integrated development environment for R that will be used in this course:
 
 [Download R Studio](https://rstudio.com/products/rstudio/download/#download)
+
+## Data and Statistics
+
+Let us first discuss the general design of experiments to gain an appreciation for data and statistics.
+
+When we do analytical work, we have a **population** we are interested in studying, comprised of people, objects, or events. For example, we may study the grades of students in a statistics course or the number of car accidents that occur with different road conditions or the efficacy of a vaccine. Each member or unit in the population is an **observational unit** or **experimental unit**.
+
+To study these populations, we collect **data** about them. That is, we make **observations** by taking **measurements** of certain aspects of the observational units. For example, we may record the grades of statistics students, the number of vehicles involved in accidents and the road conditions, or the reduction of disease in vaccinated groups of individuals.
+
+Each of these characteristics of a population (and we can study multiple characteristics of a single population) is called a **variable**. The value of a characteristic is different between different observational units. One student in a statistics course may have earned a 96% in the course, while another student earned a 74%. There are two types of variables:
+
+- **Quantitative variables**: Variables that take on a numerical value (e.g., grades, ages, temperature). These are also called **continuous variables**.
+- **Qualitative variables**: Variables that categorize observational units (e.g., gender, vehicle color, group). These are also called **categorical variables**.
+
+## Example: Student Grades
+
+With this understanding of data and statistics, we simulate our first data set - the grades of statistics students. Run the code below for yourself and we will analyze the output.
+
+```R
+# Simulate student grades.
+grades <- rnorm(35, 88, 4.7)
+hist(grades, main="Histogram of Grades", xlab="Grade", ylab="Frequency")
+```
+This code produces the following output:
+
+![Histogram of statistics student grades](/Course Content/img/histogram-of-statistics-student-grades.png)
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
