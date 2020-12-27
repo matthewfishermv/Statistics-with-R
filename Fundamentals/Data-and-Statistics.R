@@ -14,3 +14,9 @@ length(grades[grades >= 90]) / length(grades)
 # Calculate arithmetic mean.
 sum(grades) / length(grades)
 mean(grades)
+
+# Visualize skew from an outlier.
+y <- c(10, 15, 14, 15, 4, 20, 5, 3, 2, 9, 12, 16, 6, 13, 10, 9,
+       14,8, 9, 3, 2, 7, 11, 12, 13, 16, 8, 7, 5, 7, 6, 9, 4, 21, 30)
+hist(y)
+abline(v=mean(y), col="tomato2", lty=3)

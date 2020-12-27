@@ -12,6 +12,9 @@
     - [Try it Yourself](#try-it-yourself)
     - [Stem and Leaf Plots](#stem-and-leaf-plots)
   - [Numerical Summaries](#numerical-summaries)
+    - [Arithmetic Mean](#arithmetic-mean)
+    - [Median](#median)
+    - [Median](#median-1)
   - [References](#references)
 
 ## Introduction
@@ -128,6 +131,8 @@ stem(grades)
 
 ## Numerical Summaries
 
+### Arithmetic Mean
+
 In addition to summarizing data graphically, we will learn how to summarize data numerically. The simplest numerical summary is the **arithmeatic mean**, which can be thought of as the sum of all observations divided by the number of observations:
 
 ![Formula for arithmetic mean](/Course-Content/img/equations/arithmetic-mean.png)
@@ -149,6 +154,28 @@ Calculating means is such a common activity that R has a built-in function for i
 mean(grades)
 [1] 88.18571
 ```
+
+The arithmetic mean (we will refer to it as the "mean" from now on) is a one-number summary of the data. That is, we take the entire set of data into consideration to produce a single numerical summary, the mean. In the process of boiling the data down into a single number or **point estimate**, we lose some information. In particular, we cannot reverse engineer the mean to get the original data back out of it.
+
+It is important to note at this point that the mean has a major shortcoming: it is heavily influenced by outliers and especially large outliers. That is, extermely large values that are unusal for a given data set skew the mean to be artificially high. This kind of skew caused by large outliers can be visualized as below:
+
+```R
+# Visualize skew caused by an outlier.
+y <- c(10, 15, 14, 15, 4, 20, 5, 3, 2, 9, 12, 16, 6, 13, 10, 9,
+       14,8, 9, 3, 2, 7, 11, 12, 13, 16, 8, 7, 5, 7, 6, 9, 4, 21, 30)
+hist(y)
+abline(v=mean(y), col="tomato2")
+```
+
+This code produces the follow plot. Note that the mean (red line) is pulled right of the bin with the highest frequency by the outlier, in this case 30:
+
+![Histogram of data skewed by an outlier](/Course-Content/img/histogram-of-skewed-data.png)
+
+### Median
+
+The shortcoming of the mean is overcome by the **median**, which is far more resistant to outliers.
+
+### Median
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
