@@ -20,6 +20,7 @@
     - [Measures of Variability](#measures-of-variability)
       - [Range, Interquartile Range, and Outliers](#range-interquartile-range-and-outliers)
       - [Variance](#variance)
+      - [Standard Deviation](#standard-deviation)
   - [Graphical Summaries](#graphical-summaries)
     - [Histograms](#histograms-1)
     - [Boxplots](#boxplots)
@@ -29,7 +30,7 @@
 
 ![Linear model constructed from Old Faithful waiting time and eruption time](/Course-Content/img/old-faithful-linear-model.png)
 
-The aim of this course is to develop your understanding of the science of statistics using principles of mathematics and computation. You will learn how to:
+The aim of this course is to develop your understanding of the science and practice of statistics using principles of mathematics and computation. You will learn how to:
 
 1. design experiments to collect data;
 1. perform statistical analyses;
@@ -316,6 +317,24 @@ var(grades)
 [1] 28.02597
 ```
 
+The variance gives us a sense of the variability in the data. The higher the variance, the more likely individual observations are to deviate from the mean and the wider the spread and distribution of the data. The smaller the variance, the more likely individual observations are to be clustered very close to center. Variance is used in many statistical techniques, so it is recommended that you review this section until you understand it intuitively.
+
+#### Standard Deviation
+
+As we have seen, variance gives us a sense of the variability in the data, or how much the observations tend to deviate from the mean. Due to the way the variance is calculated, it is **dimensionless**, meaning it cannot be expressed in terms of any units like percentage or miles. To account for this, the **standard deviation** takes the square root of the variance, which produces a measure of variability that can be expressed in the same units as the original data.
+
+![Formula for standard deviation](/Course-Content/img/equations/standard-deviation.png)
+
+In R, the standard devation can be calculated as the square root of the variance using the `sqrt()` function or simply by using the `sd()` function:
+
+```R
+sqrt(var(grades))
+[1] 5.293956
+
+sd(grades)
+[1] 5.293956
+```
+
 ## Graphical Summaries
 
 ### Histograms
@@ -353,4 +372,4 @@ boxplot(y, horizontal=TRUE)
 3. https://www.r-project.org/about.html
 4. https://faculty.atu.edu/mfinan/3153/section13.pdf
 5. https://statistics.laerd.com/statistical-guides/measures-central-tendency-mean-mode-median.php
-6. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 50-62.
+6. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 50-54.
