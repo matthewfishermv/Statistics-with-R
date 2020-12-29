@@ -24,11 +24,12 @@
   - [Graphical Summaries](#graphical-summaries)
     - [Histograms](#histograms-1)
     - [Boxplots](#boxplots)
+  - [Statistics](#statistics)
   - [References](#references)
 
 ## Introduction
 
-![Linear model constructed from Old Faithful waiting time and eruption time](/Course-Content/img/old-faithful-linear-model.png)
+![Linear model constructed from Old Faithful waiting time and eruption time](/Course-Content/Images/old-faithful-linear-model.png)
 
 The aim of this course is to develop your understanding of the science and practice of statistics using principles of mathematics and computation. You will learn how to:
 
@@ -71,7 +72,7 @@ hist(grades, main="Histogram of Grades", xlab="Grade", ylab="Frequency")
 ```
 This code produces the following output (your specific output will vary):
 
-![Histogram of statistics student grades](/Course-Content/img/histogram-of-statistics-student-grades.png)
+![Histogram of statistics student grades](/Course-Content/Images/histogram-of-statistics-student-grades.png)
 
 ### Histograms
 
@@ -150,11 +151,11 @@ We will seek to understand the arithmetic mean and the median next. These **meas
 
 The simplest numerical summary is the **arithmetic mean**, which can be thought of as the average or expected value. It is calculated as the sum of all observations divided by the number of observations:
 
-![Formula for arithmetic mean](/Course-Content/img/equations/arithmetic-mean.png)
+![Formula for arithmetic mean](/Course-Content/Images/Equations/arithmetic-mean.png)
 
 In statistics, the artithmetic mean is often denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all of its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
 
-![Arithmetic mean of student grades](/Course-Content/img/equations/arithmetic-mean-student-grades.png)
+![Arithmetic mean of student grades](/Course-Content/Images/Equations/arithmetic-mean-student-grades.png)
 
 R has a built-in function `sum()`, which performs the summation for us, so we can calculate the arithmetic mean for student grades as follows:
 
@@ -184,13 +185,13 @@ abline(v=mean(y), col="tomato2")
 
 This code produces the follow plot. Note that the mean (red line) is pulled right of the bin with the highest frequency by the outlier, in this case 30:
 
-![Histogram of data skewed by an outlier](/Course-Content/img/histogram-of-skewed-data.png)
+![Histogram of data skewed by an outlier](/Course-Content/Images/histogram-of-skewed-data.png)
 
 #### Median
 
 The shortcomings of the mean are overcome by the **median**, which is far more resistant to outliers. The median is the middle value in the data set when the data are written in order. The formula for median is:
 
-![Formula for median](/Course-Content/img/equations/median.png)
+![Formula for median](/Course-Content/Images/Equations/median.png)
 
 Fortunately, R has a built-in function for this, too:
 
@@ -236,7 +237,7 @@ summary(grades)
 
 Expanding on our understanding of this output, **quartiles** divide data into four equally-sized groupings, such that 25% of the observations fall below the first quartile (and 75% above), 50% fall below the second quartile (and 50% above), and 75% fall below the third quartile (and 25% above). To visualize this, observe the following variable X and convince yourself that 25% of the observations fall below 25 (Q1), 50% fall below 32 (Q2), and 75% fall below 36 (Q3):
 
-![Example values for understanding quartiles](/Course-Content/img/equations/quartiles-example.png)
+![Example values for understanding quartiles](/Course-Content/Images/Equations/quartiles-example.png)
 
 The median, by definition is the second quartile (Q2) because 50% of the observations fall below and and 50% fall above it. In the data above, the mean and second quartile would be (28 + 32) /2 = 30.
 
@@ -249,7 +250,7 @@ range(grades)
 
 The second range we can calculate is known as the **interquartile range** and it is the difference between Q3 (the third quartile) and Q1 (the first quartile):
 
-![Formula for interquantile range](/Course-Content/img/equations/interquartile-range.png)
+![Formula for interquantile range](/Course-Content/Images/Equations/interquartile-range.png)
 
 In our student grades data, we can calculate the interquartile range by subtracting Q1 from Q3 or by using the `IQR()` function:
 
@@ -260,7 +261,7 @@ IQR(grades)
 
 The overall range gives the total amount of variation in the data, while the interquartile range gives the amount of variation in the middle 50% of the data. Remembering the tendency of data to be clustered around the central value, we can use the interquartile range to identify data points that do not follow that tendency. In general, we define outliers in the data to be data points that are less than (Q1 - 1.5 * IQR) or greater than (Q3 + 1.5 * IQR). Or, equivalently, we say that outliers fall in the ranges:
 
-![Formula for outliers](/Course-Content/img/equations/outliers.png)
+![Formula for outliers](/Course-Content/Images/Equations/outliers.png)
 
 Let us see if we have any outliers in our student grades data:
 
@@ -296,19 +297,19 @@ We have added another number, but we cannot pick any value for the next element.
 
 In this example, we had a variable with n=4 observations and n-1=3 of them were allowed to vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
 
-![Formula for degrees of freedom with one parameter](/Course-Content/img/equations/degrees-of-freedom-1param.png)
+![Formula for degrees of freedom with one parameter](/Course-Content/Images/Equations/degrees-of-freedom-1param.png)
 
 The degrees of freedom can be calculated for the grades example in R by `length(grades) - 1`. Returning to variance, we are interested in measuring the variability in the data, or how much the data tends to differ from the mean. For each data point, we can calculate its difference from the mean. This quantity is known as a **residual** and is given by:
 
-![Formula for residuals](/Course-Content/img/equations/residual.png)
+![Formula for residuals](/Course-Content/Images/Equations/residual.png)
 
 The residuals can be calculated for the grades example in R by `grades - mean(grades)`. If we were to add the residuals together, they would equal 0 for every data set. This is not a useful property, so we instead add the squared residuals together. This quantity is one of the most important in statistics [[6]](#references) and is known as the **sum of squares**:
 
-![Formula for residuals](/Course-Content/img/equations/sum-of-squares.png)
+![Formula for residuals](/Course-Content/Images/Equations/sum-of-squares.png)
 
 The sum of squares can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)`. Now we average the sum of squares across all values in the data to get the variance. Since we lose one degree of freedom by calculating the mean, we divide by n-1:
 
-![Formula for variance](/Course-Content/img/equations/variance.png)
+![Formula for variance](/Course-Content/Images/Equations/variance.png)
 
 The variance can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)/(length(grades) - 1)`. R has a built-in function for calculating the variance that performes exactly these calculations, `var()`:
 
@@ -323,7 +324,7 @@ The variance gives us a sense of the variability in the data. The higher the var
 
 As we have seen, variance gives us a sense of the variability in the data, or how much the observations tend to deviate from the mean. Due to the way the variance is calculated, it is **dimensionless**, meaning it cannot be expressed in terms of any units like percentage or miles. To account for this, the **standard deviation** takes the square root of the variance, which produces a measure of variability that can be expressed in the same units as the original data.
 
-![Formula for standard deviation](/Course-Content/img/equations/standard-deviation.png)
+![Formula for standard deviation](/Course-Content/Images/Equations/standard-deviation.png)
 
 In R, the standard devation can be calculated as the square root of the variance using the `sqrt()` function or simply by using the `sd()` function:
 
@@ -350,7 +351,7 @@ Another graphical summary that is useful for understanding data is a **boxplot**
 boxplot(grades, main="Boxplot for Student Grades", xlab="Grade", horizontal=TRUE)
 ```
 
-![Boxplot of statistics student grades](/Course-Content/img/boxplot-of-statistics-student-grades.png)
+![Boxplot of statistics student grades](/Course-Content/Images/boxplot-of-statistics-student-grades.png)
 
 You can see the main features of a boxplot: the minimum and maximum values plotted as whiskers on the extreme edges of the plot; and Q1, the median, and Q3 in the central region of the plot. Observing the plot, we get a sense of the spread and distribution of the data. It shows how large a region is spanned by each quarter of the data [[4]](#references).
 
@@ -363,8 +364,9 @@ y <- c(10, 15, 14, 15, 4, 20, 5, 3, 2, 9, 12, 16, 6, 13, 10, 9,
 boxplot(y, horizontal=TRUE)
 ```
 
-![Boxplot with outlier](/Course-Content/img/boxplot-with-outlier.png)
+![Boxplot with outlier](/Course-Content/Images/boxplot-with-outlier.png)
 
+## Statistics
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
