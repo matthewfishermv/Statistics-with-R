@@ -2,7 +2,7 @@ library(datasets)
 attach(faithful)
 
 # Using Old Faithful Geyser Data from the datasets package, construct a simple
-# linear model of 
+# linear model of eruption time as a function of waiting time.
 
 # Produce a scatterplot.
 plot(eruptions ~ waiting,

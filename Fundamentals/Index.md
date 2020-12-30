@@ -55,6 +55,17 @@ The computational tool that will be used throughout this course is R. It is a "l
 
 [Download R Studio](https://rstudio.com/products/rstudio/download/#download)
 
+If you choose to use R Studio, these are the four primary areas of the application you will need to be concerned with:
+
+![Layout of R Studio](../Course-Content/Images/rstudio-layout.png)
+
+| # | Name | Description |
+|--|------|-------------|
+| A | Source Pane | Displays your R scripts; allows you to run and save code |
+| B | Console | Displays the output of your code; allows to to execute code on-demand |
+| C | Environment Pane | Displays information about the R environment, including variables and their current values |
+| D | Files, Plots, Packages | Displays graphical plots, files, and information such as help files |
+
 We will briefly discuss the basic aspects of R that you will need to know to get started in this course.
 
 ### Operators
@@ -245,6 +256,8 @@ stem(grades)
 ```
 
 ## Numerical Summaries
+
+*Code for this section:* [Data and Statistics](/Fundamentals/Data-and-Statistics.R)
 
 In statistics, we are particularly concerned with measures of central tendency and measures of variability, which we will discuss next. These summaries will aid in our understanding of the uncertainty and variation inherent in the data and introduced as a result of our analysis.
 
@@ -442,6 +455,8 @@ sd(grades)
 ```
 
 ## Graphical Summaries
+
+*Code for this section:* [Data and Statistics](/Fundamentals/Data-and-Statistics.R)
 
 ### Histograms
 
