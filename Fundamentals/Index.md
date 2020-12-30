@@ -62,11 +62,11 @@ If you choose to use R Studio, these are the four primary areas of the applicati
 | # | Name | Description |
 |--|------|-------------|
 | A | Source Pane | Displays your R scripts; allows you to run and save code |
-| B | Console | Displays the output of your code; allows to to execute code on-demand |
+| B | Console | Displays the output of your code; allows you to execute code on-demand |
 | C | Environment Pane | Displays information about the R environment, including variables and their current values |
 | D | Files, Plots, Packages | Displays graphical plots, files, and information such as help files |
 
-We will briefly discuss the basic aspects of R that you will need to know to get started in this course.
+We will briefly discuss the basic aspects of the R programming language that you will need to know to get started in this course.
 
 ### Operators
 
@@ -82,7 +82,7 @@ To begin, the table below summarizes common operators you will use.
 
 ### Expressions
 
-Similar to mathematics, R allows you, the programmer, to combine terms using operators in order to compute a result. Each such combination of terms and operators is an **expression**. Complex expressions can be combined, and R will generally follow the mathematical order of operations. For example, the expression `2 * 4 + 7 / 2` evaluates to `11.5`. It is as though the expression has implicit parenthetheses: `(2 * 4) + (7 / 2)`. Also similar to mathematics, you can force an expression to be evaluated in a specific order by adding patentheses. The expression `2 * (4 + 7) / 2`, for example, contains the same numbers in the same order before, but evaluates to `11` instead of `11.5`.
+R allows you, the programmer, to combine terms using operators and compute a result. This kind of combination of terms and operators is an **expression**. Many terms can be combined, and R will generally follow the mathematical order of operations. For example, the expression `2 * 4 + 7 / 2` evaluates to `11.5`. It is as though the expression has implicit parentheses: `(2 * 4) + (7 / 2)`. You can cause an expression to be evaluated in a specific order by adding parentheses. The inner-most expressions will be evaluated before the outer-most expressions. The compound expression `2 * (4 + 7) / 2`, for example, contains the same numbers in the same order before, but evaluates to `11` instead of `11.5`.
 
 ### Variables
 
@@ -120,7 +120,7 @@ print(total.ages)
 [1] 142
 ```
 
-Frequently in statistics, we are working with more than a single value. We work with data sets that include many values, so storing values in individually named variables would quickly become inefficient. A **vector** in R is a collection of elements, all of the same type. It allows us to save multiple values into a single variable name. Vectors are created in R using the `c()` function and passing in a comma-separated list of values:
+Frequently in statistics, we are working with more than a single value. We work with data sets that include many values, so storing values in individually named variables would quickly become inefficient. A **vector** in R is a collection of elements, all the same type. It allows us to save multiple values into a single variable name. Vectors are created in R using the `c()` function and passing in a comma-separated list of values:
 
 ```R
 patient.ages <- c(46, 49, 47)
@@ -128,7 +128,7 @@ print(patient.ages)
 [1] 46 49 47
 ```
 
-A conventient propert of vectors in R is that operations can be stated once and then computed for *each* value in the vector. Suppose we know the dosages of a medication for 7 patients and new research comes out, strongly urging that dosages of the medication are cut in half. The following code illustrates this scenario:
+A convenient property of vectors in R is that operations can be stated once and then computed for *each* value in the vector. Suppose we know the dosages of a medication for 7 patients and new research comes out, strongly urging that dosages of the medication are cut in half. The following code illustrates this scenario:
 
 ```R
 dosages <- c(2, 3.5, 4, 5, 2.5, 3, 3)
@@ -149,7 +149,7 @@ This is the general form of functions in R - they have a name followed by parent
 | Function | Description | Arguments | Example |
 |----------|-------------|-----------|---------|
 | help(topic) | Retrieve helpful information about a topic in R | topic - the topic, for which help is sought | help(print) |
-| c() | Combines items into a vector | A comma-separated list of values, all of the same type | c(1, 2, 3, 4, 5) |
+| c() | Combines items into a vector | A comma-separated list of values, all the same type | c(1, 2, 3, 4, 5) |
 | print(x) | Prints output to the console | x - the object to print | print("This is an example.") |
 | sqrt(x) | Take the square root | x - the value to take the square root of | area <- 81; sqrt(area) |
 | log(x, b) | Compute a logarithm | x - the number to take the log of; b - the base of the log | log(16, 2) |
@@ -207,7 +207,7 @@ grades >= 90
 [27] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
 ```
 
-We can use this to include all of the `TRUE` and exclude all of the `FALSE` from our grades data:
+We can use this to include all the `TRUE` values and exclude all the `FALSE` values from our grades data:
 
 ```R
 grades[grades >= 90]
@@ -234,7 +234,7 @@ Use R to find out what percentage of students received grades less than 75%.
 
 ### Stem and Leaf Plots
 
-R also has a `stem()` function than produces a **stem and leaf plot** like the one below. Notice that this is similar to the histogram above, but uses numbers instead of graphics. Stem and leaf plots partition each observation in the data into a stem (left of the "|") and a leaf (right of the "|") [[4]](#references). The stem and leaf plot produced by R below partitions each observation at the decimal point. The values in the data set (76.3, 78.2, 78.9, ...) are mapped to (76|3, 78|2, 78|9, ...) Check that you understand how to translate between the plot below and the histogram above:
+R also has a `stem()` function than produces a **stem and leaf plot** like the one below. Notice that this is similar to the histogram above but uses numbers instead of graphics. Stem and leaf plots partition each observation in the data into a stem (left of the "|") and a leaf (right of the "|") [[4]](#references). The stem and leaf plot produced by R below partitions each observation at the decimal point. The values in the data set (76.3, 78.2, 78.9, ...) are mapped to (76|3, 78|2, 78|9, ...) Check that you understand how to translate between the plot below and the histogram above:
 
 ```R
 stem(grades)
@@ -259,7 +259,7 @@ stem(grades)
 
 *Code for this section:* [Data and Statistics](/Fundamentals/Data-and-Statistics.R)
 
-In statistics, we are particularly concerned with measures of central tendency and measures of variability, which we will discuss next. These summaries will aid in our understanding of the uncertainty and variation inherent in the data and introduced as a result of our analysis.
+In statistics, we are particularly concerned with measures of central tendency and measures of variability, which we will discuss next. These summaries will aid in our understanding of the uncertainty and variation inherent in the data and that which introduced because of our analysis.
 
 ### Measures of Central Tendency
 
@@ -271,7 +271,7 @@ The simplest numerical summary is the **arithmetic mean**, which can be thought 
 
 ![Formula for arithmetic mean](/Course-Content/Images/Equations/arithmetic-mean.png)
 
-In statistics, the artithmetic mean is often denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all of its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
+In statistics, the arithmetic mean is often denoted by the variable y with a bar over it, pronounced "y-bar". The variable n in statistics is used to denote the number of observations. The Σ is the Greek letter sigma and in mathematics, it is used to mean that you add together all its terms. For our example of statistics student grades, the arithmetic mean would be calculated as:
 
 ![Arithmetic mean of student grades](/Course-Content/Images/Equations/arithmetic-mean-student-grades.png)
 
@@ -291,7 +291,7 @@ mean(grades)
 
 The arithmetic mean (we will refer to it as the "mean" from now on) is a one-number summary of the data. That is, we take the entire set of data into consideration to produce a single numerical summary, the mean. In the process of boiling the data down into a single number or **point estimate**, we lose some information. In particular, we cannot reverse engineer the mean to get the original data back out of it.
 
-It is important to note at this point that the mean has a major shortcoming: it is heavily influenced by outliers and especially large outliers. That is, extermely large values that are unusal for a given data set skew the mean to be artificially high. This kind of skew caused by large outliers can be visualized as below:
+It is important to note at this point that the mean has a major shortcoming: it is heavily influenced by outliers and especially large outliers. That is, extremely large values that are unusual for a given data set skew the mean to be artificially high. This kind of skew caused by large outliers can be visualized as below:
 
 ```R
 # Visualize skew caused by an outlier.
@@ -320,7 +320,7 @@ median(y)
 
 #### Mean vs. Median
 
-The mean is "essentially a model of your data set[;] it is the value that is most common" [[5]](#references), and it should be noted that the mean and median values many not be present as an observation in the data. For example, the median value may be exactly between the two values in the middle of the data (if n, the number of observations, is even). While both the mean and the median summarize the data, do not expect that either will actually be present in the data.
+The mean is "essentially a model of your data set[;] it is the value that is most common" [[5]](#references), and it should be noted that the mean and median values many not be present as an observation in the data. For example, the median value may be exactly between the two values in the middle of the data (if n, the number of observations, is even). While both the mean and the median summarize the data, do not expect that either will be present in the data.
 
 In summary, you should use the mean as a measure of central tendency when:
 
@@ -353,11 +353,11 @@ summary(grades)
   77.30   84.35   88.40   88.19   91.15   98.80 
 ```
 
-Expanding on our understanding of this output, **quartiles** divide data into four equally-sized groupings, such that 25% of the observations fall below the first quartile (and 75% above), 50% fall below the second quartile (and 50% above), and 75% fall below the third quartile (and 25% above). To visualize this, observe the following variable X and convince yourself that 25% of the observations fall below 25 (Q1), 50% fall below 32 (Q2), and 75% fall below 36 (Q3):
+Expanding on our understanding of this output, **quartiles** divide data into four equally sized groupings, such that 25% of the observations fall below the first quartile (and 75% above), 50% fall below the second quartile (and 50% above), and 75% fall below the third quartile (and 25% above). To visualize this, observe the following variable X and convince yourself that 25% of the observations fall below 25 (Q1), 50% fall below 32 (Q2), and 75% fall below 36 (Q3):
 
 ![Example values for understanding quartiles](/Course-Content/Images/Equations/quartiles-example.png)
 
-The median, by definition is the second quartile (Q2) because 50% of the observations fall below and and 50% fall above it. In the data above, the mean and second quartile would be (28 + 32) /2 = 30.
+The median is by definition the second quartile (Q2) because 50% of the observations fall below and 50% fall above it. In the data above, the mean and second quartile would be (28 + 32) /2 = 30.
 
 From the five-number summary, we can calculate two ranges. The **range** is the total amount of variation in the data, or the difference between the largest and smallest values. From the five-number summary of statistics students' grades above, we see that the range is 98.80 - 77.30 = 21.5. R has a helpful function `range()` that returns the smallest and largest values of a variable:
 
@@ -413,7 +413,7 @@ We have added another number. We can pick any value for the next element. Let us
 
 We have added another number, but we cannot pick any value for the next element. Because the mean for the sample set is 4, the only possible value for the last element is 3 since (1 + 5 + 3 + 3) / 4 = 4.
 
-In this example, we had a variable with n=4 observations and n-1=3 of them were allowed to vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
+In this example, we had a variable with n=4 observations and n-1=3 of them could vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
 
 ![Formula for degrees of freedom with one parameter](/Course-Content/Images/Equations/degrees-of-freedom-1param.png)
 
@@ -429,14 +429,14 @@ The sum of squares can be calculated for the grades example in R by `sum((grades
 
 ![Formula for variance](/Course-Content/Images/Equations/variance.png)
 
-The variance can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)/(length(grades) - 1)`. R has a built-in function for calculating the variance that performes exactly these calculations, `var()`:
+The variance can be calculated for the grades example in R by `sum((grades - mean(grades)) ^ 2)/(length(grades) - 1)`. R has a built-in function for calculating the variance that performs exactly these calculations, `var()`:
 
 ```R
 var(grades)
 [1] 28.02597
 ```
 
-The variance gives us a sense of the variability in the data. The higher the variance, the more likely individual observations are to deviate from the mean and the wider the spread and distribution of the data. The smaller the variance, the more likely individual observations are to be clustered very close to center. Variance is used in many statistical techniques, so it is recommended that you review this section until you understand it intuitively.
+The variance gives us a sense of the variability in the data. The higher the variance, the more likely individual observations are to deviate from the mean and the wider the spread and distribution of the data. The smaller the variance, the more likely individual observations are to be clustered near the center. Variance is used in many statistical techniques, so it is recommended that you review this section until you understand it intuitively.
 
 #### Standard Deviation
 
@@ -444,7 +444,7 @@ As we have seen, variance gives us a sense of the variability in the data, or ho
 
 ![Formula for standard deviation](/Course-Content/Images/Equations/standard-deviation.png)
 
-In R, the standard devation can be calculated as the square root of the variance using the `sqrt()` function or simply by using the `sd()` function:
+In R, the standard deviation can be calculated as the square root of the variance using the `sqrt()` function or simply by using the `sd()` function:
 
 ```R
 sqrt(var(grades))
