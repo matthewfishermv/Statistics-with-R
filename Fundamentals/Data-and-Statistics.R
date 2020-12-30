@@ -57,3 +57,7 @@ length(grades) - 1
 sum((grades - mean(grades)) ^ 2)/(length(grades) - 1)
 
 var(grades)
+
+# Calculate the standard deviation.
+sqrt(var(grades))
+sd(grades)

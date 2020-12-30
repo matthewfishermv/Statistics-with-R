@@ -6,7 +6,11 @@
   - [Contents](#contents)
   - [Introduction](#introduction)
   - [Getting Started with R](#getting-started-with-r)
-  - [Data](#data)
+    - [Operators](#operators)
+    - [Expressions](#expressions)
+    - [Variables](#variables)
+    - [Functions](#functions)
+  - [Data and Statistics](#data-and-statistics)
     - [Example: Student Grades](#example-student-grades)
     - [Histograms](#histograms)
     - [Try it Yourself](#try-it-yourself)
@@ -24,10 +28,11 @@
   - [Graphical Summaries](#graphical-summaries)
     - [Histograms](#histograms-1)
     - [Boxplots](#boxplots)
-  - [Statistics](#statistics)
   - [References](#references)
 
 ## Introduction
+
+*Code for this section:* [Introduction](/Fundamentals/Introduction.R)
 
 ![Linear model constructed from Old Faithful waiting time and eruption time](/Course-Content/Images/old-faithful-linear-model.png)
 
@@ -44,13 +49,113 @@ In a statistical setting, we are concerned with the collection, analysis, and pr
 
 ## Getting Started with R
 
+*Code for this section:* [Getting Started with R](/Fundamentals/Getting-Started-with-R.R)
+
 The computational tool that will be used throughout this course is R. It is a "language and environment for statistical computing and graphics" [[3]](#references). To get started, it is recommended that you download and install the latest version of RStudio, an integrated development environment for R that will be used in this course:
 
 [Download R Studio](https://rstudio.com/products/rstudio/download/#download)
 
-## Data
+We will briefly discuss the basic aspects of R that you will need to know to get started in this course.
 
-Let us first discuss the general design of experiments to gain an appreciation for data and statistics.
+### Operators
+
+To begin, the table below summarizes common operators you will use.
+
+| Operator | Purpose | Example | Example Output |
+|----------|---------|---------|----------------|
+| + | Add | 4 + 2 | 6 |
+| - | Subtract | 4 - 2 | 2 |
+| * | Multiply | 4 * 2 | 8 |
+| / | Divide | 4 / 2 | 2 |
+| ^ | Raise to a power | 4 ^ 2 | 16 |
+
+### Expressions
+
+Similar to mathematics, R allows you, the programmer, to combine terms using operators in order to compute a result. Each such combination of terms and operators is an **expression**. Complex expressions can be combined, and R will generally follow the mathematical order of operations. For example, the expression `2 * 4 + 7 / 2` evaluates to `11.5`. It is as though the expression has implicit parenthetheses: `(2 * 4) + (7 / 2)`. Also similar to mathematics, you can force an expression to be evaluated in a specific order by adding patentheses. The expression `2 * (4 + 7) / 2`, for example, contains the same numbers in the same order before, but evaluates to `11` instead of `11.5`.
+
+### Variables
+
+Often, you will want to store data and the results of performing operations on data so that you can use them later. A **variable** allows you to assign names to values of interest. In R, the general form of a variable is:
+
+```R
+variable.name <- value.or.expression
+```
+
+To the left of the `<-` is the name you want to give your variable. The convention in R is to use lower-case letters and separate words by a period. You can also include numbers in your variable names. The `<-` itself is known as the **assignment operator**, as it is the operator you use to assign values to variables. To the right of the assignment operator is the value or expression you want to store in your variable.
+
+As an example, suppose you want to store the ages of three hospital patients. You could do the following:
+
+```R
+patient.1.age <- 46
+patient.2.age <- 49
+patient.3.age <- 47
+```
+
+Now you can use the patients' ages anywhere in your R code by referring to the variable name. For example, to view patient 2's age, you can enter the variable name in the console or use the `print()` function on the variable. Both are shown below with the corresponding output:
+
+```R
+patient.2.age
+[1] 49
+
+print(patient.2.age)
+[1] 49
+```
+
+You do not need to store single values in a variable; you can also store expressions. The code below adds the age of all three patients together and stores the result in a variable `total.ages`, then prints out the result:
+
+```R
+total.ages <- patient.1.age + patient.2.age + patient.3.age
+print(total.ages)
+[1] 142
+```
+
+Frequently in statistics, we are working with more than a single value. We work with data sets that include many values, so storing values in individually named variables would quickly become inefficient. A **vector** in R is a collection of elements, all of the same type. It allows us to save multiple values into a single variable name. Vectors are created in R using the `c()` function and passing in a comma-separated list of values:
+
+```R
+patient.ages <- c(46, 49, 47)
+print(patient.ages)
+[1] 46 49 47
+```
+
+A conventient propert of vectors in R is that operations can be stated once and then computed for *each* value in the vector. Suppose we know the dosages of a medication for 7 patients and new research comes out, strongly urging that dosages of the medication are cut in half. The following code illustrates this scenario:
+
+```R
+dosages <- c(2, 3.5, 4, 5, 2.5, 3, 3)
+dosages / 2
+[1] 1.00 1.75 2.00 2.50 1.25 1.50 1.50
+```
+
+### Functions
+
+R is comprised of functions that are useful for many actions. You have already seen `print()`, which prints the value of the variable (or text in quotation marks) that you pass to it, and `c()` which returns a vector comprised of the values you pass to it. Try to anticipate the output of running the following code before running it to check that you understand the concept.
+
+```R
+print(c("This", "is", "a", "string", "vector"))
+```
+
+This is the general form of functions in R - they have a name followed by parentheses, inside of which are the **arguments** that you pass to them. The arguments are taken as input to the functions, actions are performed using those inputs, and the functions return a value or stop processing once the work is complete. The table below shows some functions in R to get you started. We will learn many more functions throughout the course and even create our own.
+
+| Function | Description | Arguments | Example |
+|----------|-------------|-----------|---------|
+| help(topic) | Retrieve helpful information about a topic in R | topic - the topic, for which help is sought | help(print) |
+| c() | Combines items into a vector | A comma-separated list of values, all of the same type | c(1, 2, 3, 4, 5) |
+| print(x) | Prints output to the console | x - the object to print | print("This is an example.") |
+| sqrt(x) | Take the square root | x - the value to take the square root of | area <- 81; sqrt(area) |
+| log(x, b) | Compute a logarithm | x - the number to take the log of; b - the base of the log | log(16, 2) |
+
+Functions can be vectorized in R. That is, you can pass a vector of values into many R functions and they will be perform their actions for *each* value in the vector. Consider the following example and its output, showing how we could find the length of the sides of squares from their areas:
+
+```R
+areas <- c(25, 64, 81, 49, 36)
+sqrt(areas)
+[1] 5 8 9 7 6
+```
+
+## Data and Statistics
+
+*Code for this section:* [Data and Statistics](/Fundamentals/Data-and-Statistics.R)
+
+Let us discuss the general design of experiments to gain an appreciation for data and statistics.
 
 When we do analytical work, we have a **population** we are interested in studying, comprised of people, objects, or events. For example, we may study the grades of students in a statistics course or the number of car accidents that occur with different road conditions or the efficacy of a vaccine. Each member or unit in the population is an **observational unit** or **experimental unit**.
 
@@ -365,8 +470,6 @@ boxplot(y, horizontal=TRUE)
 ```
 
 ![Boxplot with outlier](/Course-Content/Images/boxplot-with-outlier.png)
-
-## Statistics
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
