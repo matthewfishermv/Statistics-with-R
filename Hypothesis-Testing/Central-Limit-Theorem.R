@@ -1,21 +1,7 @@
-# Generate 100 data points from the normal distribution with a mean of 10.6
-# and a standard deviation of 2.9.
-x <- rnorm(100, 10.6, 2.9)
+# Generate 100 data points from the uniform distribution.
+x <- runif(100) * 100
 
-# Summarize the data (numerically).
-mean(x)
-sd(x)
-
-range(x)
-summary(x)
-
-# Summarize the data (graphically).
-hist(x)
-hist(x, breaks=0:22)
-
-boxplot(x)
-
-# Develop a sampling experiment that will take n samples of size sample.size and
+# Develop a sampling experiment that takes n samples of size sample.size and
 # plot it on a histogram.
 do.experiment <- function(n, sample.size=30) {
   
@@ -25,13 +11,10 @@ do.experiment <- function(n, sample.size=30) {
     means[i] <- mean(sample(x, size=sample.size))
   }
   
-  hist(means, xlim=c(9, 12), ylim=c(0, 1), freq=FALSE,
-       col="steelblue3", border="steelblue4")
-  
-  # Add a normal distribution curve.
-  x <- seq(5, 16, by=0.1)
-  y <- dnorm(x, mean=mean(means), sd=sd(means))
-  lines(x, y, col="tomato2")
+  hist(means, freq=FALSE,
+       col="steelblue3", border="steelblue4",
+       main=paste("Distribution of Sample Means (", n, " samples)", sep=""),
+       xlab="Means")
   
   # Add a mean line.
   abline(v=mean(means), lty=3, col="tomato2")

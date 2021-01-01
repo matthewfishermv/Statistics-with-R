@@ -13,6 +13,7 @@
     - [Step 2: For each sample, compute the mean](#step-2-for-each-sample-compute-the-mean)
     - [Step 3: Consider the sampling means together](#step-3-consider-the-sampling-means-together)
   - [Normal Distribution](#normal-distribution)
+    - [Properties of the Normal Distribution](#properties-of-the-normal-distribution)
   - [Central Limit Theorem](#central-limit-theorem)
   - [Hypotheses](#hypotheses)
   - [References](#references)
@@ -25,7 +26,7 @@ This module begins with a discussion about samples, sampling, distributions, and
 
 ## Samples
 
-*Code for this section:* [Samples](/Hypothesis-Testing/Samples-and-Sampling.R)
+*Code for this section:* [Samples and Sampling](/Hypothesis-Testing/Samples-and-Sampling.R)
 
 In statistics, we are interested in making statements about a population, however data about the entire population are almost never available due to budget limitations, feasability of collecting or processing large amounts of data, and the like. Instead, we must take a reasonably sized sample from the entire population under study in a controlled manner, such that the characteristics of the sample are representative of the entire population. A **sample** is a "smaller, manageable version of a larger group. It is a subset containing the characteristics of a larger population" [[1]](#references).
 
@@ -100,7 +101,7 @@ We conclude this section by sharing this general rule of thumb:
 
 ## Sampling
 
-*Code for this section:* [Samples](/Hypothesis-Testing/Samples-and-Sampling.R)
+*Code for this section:* [Samples and Sampling](/Hypothesis-Testing/Samples-and-Sampling.R)
 
 Knowing that we rarely have access to an entire population, we concern ourselves next with the methods we can use to compensate for this fact.
 
@@ -189,9 +190,39 @@ The sampling data (the histogram on the right) follows a bell-shaped curve known
 
 ## Normal Distribution
 
+*Code for this section:* [Distributions](/Hypothesis-Testing/Distributions.R)
+
+One of the most used distributions in statistics is the **Normal Distribution**, sometimes referred to as the **Gaussian Distribution** [[4]](#references). The formula for the Normal Distribution is given by:
+
 ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png)
+
+You will not need to compute values under the Normal Distribution directly in this course, but notice that the function takes three parameters: *x*, the values from the data set, *μ*, the population mean, and *σ*, the population standard devation, and produces a bell-shaped curve that looks like this:
+
+![Curve of the Normal Distribution](/Course-Content/Images/normal-distribution.png)
+
+### Properties of the Normal Distribution
+
+This distribution is interesting in statistics because of the unique properties it has [[5]](#references):
+
+1. The mean and median are the same.
+2. The distribution is symmetrical about the mean. That is, half of the values fall below the mean and half above.
+3. The distribution is described by two parameters, the mean and standard deviation.
+
+The notation for a variable that is normally distributed is:
+
+![Notation for a normally distributed variable](/Course-Content/Images/Equations/normal-distribution-notation.png)
 `
 ## Central Limit Theorem
+
+*Code for this section:* [Central Limit Theorem](/Hypothesis-Testing/Central-Limit-Theorem.R)
+
+We have seen a sampling methodology of taking repeated samples from the original data and we have introduced the Normal Distribution. Now we unify these two ideas with the Central Limit Theorem. The **Central Limit Theorem** states:
+
+> Given a population with a finite mean μ and a finite non-zero variance σ<sup>2</sup>, the sampling distribution of the sample mean approaches X ~ N(μ, σ) with a mean of μ and a variance of σ<sup>2</sup>/2 as N, the sample size, increases [[3]](#references).
+
+This means that if we employ the sampling methodology discussed above and taking increasingly large samples, the distribution of the mean of the sample means will become approximately normal. In the plots below, observe how the distribution of the sample looks more and more like the normal distribution as the number of samples taken increases from 10 to 30 to 1,000 to 10,000:
+
+![Visualization of Central Limit Theorem](/Course-Content/Images/central-limit-theorem-samples.png)
 
 ## Hypotheses
 
@@ -199,4 +230,6 @@ The sampling data (the histogram on the right) follows a bell-shaped curve known
 1. https://www.investopedia.com/terms/s/sample.asp
 2. https://www.statisticssolutions.com/sample-size-formula/
 3. http://www.onlinestatbook.com/2/sampling_distributions/samp_dist_mean.html
-4. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 70-79.
+4. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, pp. 225-230.
+5. https://www.scribbr.com/statistics/normal-distribution/
+6. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 70-79.
