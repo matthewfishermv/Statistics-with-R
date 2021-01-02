@@ -19,6 +19,7 @@
     - [Quantiles](#quantiles)
     - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
     - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
+      - [Visualization](#visualization)
   - [Central Limit Theorem](#central-limit-theorem)
   - [Hypotheses](#hypotheses)
   - [References](#references)
@@ -333,6 +334,12 @@ qnorm(0.05, mean.birth.weight, sd.birth.weight, lower.tail=FALSE)
 The top 5% of infant weights are 4,149.7 grams and above. That is, the top 5% of infant weights fall between 4,149.7 grams and infinity.
 
 In this example, we are given the `p`-value, 5%, and are asked to find the associated quantile. Because we are interested in the *top* 5%, we look at the upper tail of the distribution.
+
+#### Visualization
+
+These three examples with infant birth weights are visualized below. Make sure that you understand the relationship between the questions, answers, and the graphics below.
+
+![Infant birth weights visualization](/Course-Content/Images/infant-birth-weight-examples-quantiles-and-probabilities.png)
 
 ## Central Limit Theorem
 
