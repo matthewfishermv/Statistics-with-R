@@ -15,6 +15,8 @@
   - [Normal Distribution](#normal-distribution)
     - [Properties of the Normal Distribution](#properties-of-the-normal-distribution)
     - [The 68-95-99.7 Rule](#the-68-95-997-rule)
+    - [Z-Scores](#z-scores)
+    - [Quantiles](#quantiles)
     - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
     - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
   - [Central Limit Theorem](#central-limit-theorem)
@@ -199,7 +201,7 @@ One of the most used distributions in statistics is the **Normal Distribution**,
 
 ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png)
 
-You will not need to compute values under the Normal Distribution directly in this course, but notice that the function takes three parameters: *x*, the values from the data set, *μ*, the population mean, and *σ*, the population standard devation, and produces a bell-shaped curve that looks like this:
+You will not need to compute values using this function directly in this course, but notice that the function takes three parameters: *x*, the values from the data set, *μ*, the population mean, and *σ*, the population standard devation, and produces a bell-shaped curve that looks like this:
 
 ![Curve of the Normal Distribution](/Course-Content/Images/normal-distribution.png)
 
@@ -217,6 +219,14 @@ The notation for a variable that is normally distributed is:
 
 ![Notation for a normally distributed variable](/Course-Content/Images/Equations/normal-distribution-notation.png)
 
+We will see below how to calculate different values on the Normal Distribution curve using R. For now, understand that the height of the curve at a given point is given by:
+
+![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png)
+
+and to compute the area under the curve below a point a, we would integrate the Normal Distribution function from -∞ to a to get the probability that a given number, or a smaller number, occurs [[4]](#references):
+
+![Formula for cumulative probability function](/Course-Content/Images/Equations/normal-distribution-cumulative.png)
+
 ### The 68-95-99.7 Rule
 
 An interesting feature of the Noraml Distribution that we can take advantage of for statistics is the 68%-95%-99.7% Rule:
@@ -224,6 +234,28 @@ An interesting feature of the Noraml Distribution that we can take advantage of 
 > For a normally distributed variable, approximately 68% of its values fall within one standard deviation of the mean, 95% fall within two standard deviations of the mean, and 99.7% fall within three standard deviations of the mean [[5]](#references).
 
 That, is 68% of values fall in the range (μ - σ, μ + σ), 95% of the values fall in the range (μ - 2σ, μ + 2σ), and 99.7% of the values fall in the range (μ - 3σ, μ + 3σ). This is visualized in the plot below:
+
+### Z-Scores
+
+In the previous module, we introduced the concepts of the arithmetic mean and standard deviation. We will use those concepts in combination with the Normal Distribution now to understand z-scores.
+
+A **z-score** is a numeric value that expresses the values of a variable in terms of standard deviation units. Essentially, it transforms the original values of a variable into measurements on the Normal Distribution curve to allow us to leverage the properties of the Normal Distribution. The formula for calculating the z-score is:
+
+![Formula for z-score](/Course-Content/Images/Equations/z-score.png)
+
+If we had a population of infant birth weights with a mean of 3,500 grams and a standard deviation of 363 grams, we could compute the z-score for an infant whose birth weight is 3,225 grams:
+
+![Calculation for infant birth weight z-score](/Course-Content/Images/Equations/z-score-example-infant-birth-weight.png)
+
+The interpretation of this z-score is that the infant whose birth weight is 3,225 is -0.76 standard deviations from the mean birth weight of 3,500 grams.
+
+### Quantiles
+
+A related concept to z-scores is quantiles. A **qauntile** is a cut point or division of a variable's values into equiprobable intervals. We saw in the previous module how a quartile divided a variable's value into four equally probably intervals. Quantiles do the same, but with any number of cut points.
+
+Quartiles are a special case of quantiles, where 3 cut points are used to create four intervals. **Percentiles** are another special case of quantiles, where 99 cut points are used to create 100 intervals.
+
+Quantiles are related to z-scores in that z-scores are the same as quantiles in the Normal Distribution. Take the example of infant birth weights, where we found that an infant's birth weight of 3,225 grams was -0.76 standard deviation units from the mean birth weight of 3,500 grams with a standard deviation of 363 grams. The z-score, -0.76, is a quantile in the Normal Distribution and we could use it to find the probability of observing such a birth weight by computing *f(3225; 3500; 363)*. We will see in the next section how to perform such calculations.
 
 ### Calculations in the Normal Distribution
 
@@ -233,13 +265,13 @@ When we work with the Normal Distribution, we are interested in converting betwe
 
 These values are:
 
-| Variable | Names | Description | Example |
-|----------|-------|-------------|---------|
-| `p` | `p`-value, cumulative probability | The probability of observing a value in the range (-∞, `q`) | `p` = P(X ≤ -1.96) = 0.024 |
-| `q` | quantile | The value, below wich `p`% of the values fall | `q` = 0.95 is the 95th percentile |
-| `d` | density | The probability of observing the quantile `q` | `d` = P(-1.96) = 0.06 |
+| Variable | Names | Description | Formula | Example |
+|----------|-------|-------------|---------|---------|
+| `p` | `p`-value, cumulative probability | The probability of observing a value in the range (-∞, `q`) | ![Formula for cumulative probability function](/Course-Content/Images/Equations/normal-distribution-cumulative.png) |`p` = P(X ≤ -1.96) = 0.024 |
+| `q` | quantile | The value, below wich `p`% of the values fall | ![Formula for quantile function](/Course-Content/Images/Equations/quantile-function.png) | `q` = 0.95 is the 95th percentile |
+| `d` | density | The probability of observing the quantile `q` | ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png) | `d` = P(-1.96) = 0.06 |
 
-Traditionally, these values are calculated by looking up `q` or `p` in a Z-Table like the one below:
+Traditionally, these values are calculated by looking up `q` or `p` in a z-table like the one below:
 
 [Z-Table](https://www.ztable.net/)
 
@@ -251,11 +283,13 @@ For the purpose of this course, we will use R to compute these values more preci
 | `qnorm()` | `p` - the `p`-value associated with `q`; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `q` - the quantile | `qnorm(0.382, mean=22, sd=1.67)` |
 | `dnorm()` | `q` - the quantile; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `d` - the probability of a specific event occurring | `dnorm(1.96)` |
 
+By default, R calcultes the lower tail of for each of these functions. By specifying `lower.tail=FALSE`, you can calculate the upper tail. Given the symmetrical nature of the Normal Distribution, this is equivalent to 1 minus the lower tail.
+
 ### Examples: Infant Birth Weights
 
-Suppose you have conducted a study on a population of infants at a particular hospital. It was found that the mean birth weight and 3,400 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed.
+Suppose you are conducting a study on a population of infants at a particular hospital. It was found that the mean birth weight of infants was 3,400 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed.
 
-We record the parameters for use in the later calculations:
+It is useful to record the parameters of such an experiment for use in calculations:
 
 ```R
 mean.birth.weight <- 3500
@@ -289,6 +323,16 @@ We find that 68.3% of infants weigh between 3,105 grams and 3,895 grams.
 
 You may notice that this question is really asking what percentage of infant weights fall within one standard deviation of the mean, (x̄ - s, x̄ + s) = (3105, 3895). Because of this fact, the 68-95-99.7 rule applies and we can conclude that about 68% of weights fall within one standard deviation of the mean.
 
+> 3. What is the weight, above which 5% of infants weights are observed (the top 5%)?
+
+```R
+qnorm(0.05, mean.birth.weight, sd.birth.weight, lower.tail=FALSE)
+[1] 4149.717
+```
+
+The top 5% of infant weights are 4,149.7 grams and above. That is, the top 5% of infant weights fall between 4,149.7 grams and infinity.
+
+In this example, we are given the `p`-value, 5%, and are asked to find the associated quantile. Because we are interested in the *top* 5%, we look at the upper tail of the distribution.
 
 ## Central Limit Theorem
 
