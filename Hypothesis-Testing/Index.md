@@ -14,6 +14,9 @@
     - [Step 3: Consider the sampling means together](#step-3-consider-the-sampling-means-together)
   - [Normal Distribution](#normal-distribution)
     - [Properties of the Normal Distribution](#properties-of-the-normal-distribution)
+    - [The 68-95-99.7 Rule](#the-68-95-997-rule)
+    - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
+    - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
   - [Central Limit Theorem](#central-limit-theorem)
   - [Hypotheses](#hypotheses)
   - [References](#references)
@@ -200,6 +203,8 @@ You will not need to compute values under the Normal Distribution directly in th
 
 ![Curve of the Normal Distribution](/Course-Content/Images/normal-distribution.png)
 
+Many variables taken from real-world data are normally distributed or approximately so. This distribution is used frequently in statistics for making inferential statements about a population. It is useful for the properties it has, allowing us to apply similar techniques to vastly different sets of data.
+
 ### Properties of the Normal Distribution
 
 This distribution is interesting in statistics because of the unique properties it has [[5]](#references):
@@ -211,7 +216,80 @@ This distribution is interesting in statistics because of the unique properties 
 The notation for a variable that is normally distributed is:
 
 ![Notation for a normally distributed variable](/Course-Content/Images/Equations/normal-distribution-notation.png)
-`
+
+### The 68-95-99.7 Rule
+
+An interesting feature of the Noraml Distribution that we can take advantage of for statistics is the 68%-95%-99.7% Rule:
+
+> For a normally distributed variable, approximately 68% of its values fall within one standard deviation of the mean, 95% fall within two standard deviations of the mean, and 99.7% fall within three standard deviations of the mean [[5]](#references).
+
+That, is 68% of values fall in the range (μ - σ, μ + σ), 95% of the values fall in the range (μ - 2σ, μ + 2σ), and 99.7% of the values fall in the range (μ - 3σ, μ + 3σ). This is visualized in the plot below:
+
+### Calculations in the Normal Distribution
+
+When we work with the Normal Distribution, we are interested in converting between known and unknown values of the curve. For example, if we want to know the percentage of values that fall below a given quantile, we need a function that takes the quantile `q` as input and returns the associated `p`-value. The following graphic shows the values of interest in the Normal Distribution:
+
+![Components of the Normal Distribution curve](/Course-Content/Images/normal-distribution-components.png)
+
+These values are:
+
+| Variable | Names | Description | Example |
+|----------|-------|-------------|---------|
+| `p` | `p`-value, cumulative probability | The probability of observing a value in the range (-∞, `q`) | `p` = P(X ≤ -1.96) = 0.024 |
+| `q` | quantile | The value, below wich `p`% of the values fall | `q` = 0.95 is the 95th percentile |
+| `d` | density | The probability of observing the quantile `q` | `d` = P(-1.96) = 0.06 |
+
+Traditionally, these values are calculated by looking up `q` or `p` in a Z-Table like the one below:
+
+[Z-Table](https://www.ztable.net/)
+
+For the purpose of this course, we will use R to compute these values more precisely. There are three functions of primary interest:
+
+| Function | Parameters | Returns | Example |
+|----------|------------|---------|---------|
+| `pnorm()` | `q` - the quantile; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `p` - the `p`-value associated with `q` | `pnorm(-1.96, mean=22, sd=1.67)` |
+| `qnorm()` | `p` - the `p`-value associated with `q`; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `q` - the quantile | `qnorm(0.382, mean=22, sd=1.67)` |
+| `dnorm()` | `q` - the quantile; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `d` - the probability of a specific event occurring | `dnorm(1.96)` |
+
+### Examples: Infant Birth Weights
+
+Suppose you have conducted a study on a population of infants at a particular hospital. It was found that the mean birth weight and 3,400 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed.
+
+We record the parameters for use in the later calculations:
+
+```R
+mean.birth.weight <- 3500
+sd.birth.weight <- 395
+```
+
+> 1. What percentage of infants born weigh more than 3,750 grams?
+
+```R
+1 - pnorm(3750, mean.birth.weight, sd.birth.weight)
+[1] 0.2633958
+```
+We find that 26.3% of infants born weigh more than 3,750 grams.
+
+Since we are interested in determining what percentage of values fall *above* a given quantile, we subtract the cumulative probability below the quantile from 1. We could equivalently specify the `lower.tail=FALSE` argument in the `pnorm()` function to compute the probability *above* the quantile:
+
+```R
+pnorm(3750, mean.birth.weight, sd.birth.weight, lower.tail=FALSE)
+[1] 0.2633958
+```
+
+> 2. What percentage of infants weigh between 3,105 grams and 3,895 grams?
+
+```R
+pnorm(3895, mean.birth.weight, sd.birth.weight) -
+  pnorm(3105, mean.birth.weight, sd.birth.weight)
+[1] 0.6826895
+```
+
+We find that 68.3% of infants weigh between 3,105 grams and 3,895 grams.
+
+You may notice that this question is really asking what percentage of infant weights fall within one standard deviation of the mean, (x̄ - s, x̄ + s) = (3105, 3895). Because of this fact, the 68-95-99.7 rule applies and we can conclude that about 68% of weights fall within one standard deviation of the mean.
+
+
 ## Central Limit Theorem
 
 *Code for this section:* [Central Limit Theorem](/Hypothesis-Testing/Central-Limit-Theorem.R)
@@ -225,6 +303,7 @@ This means that if we employ the sampling methodology discussed above and taking
 ![Visualization of Central Limit Theorem](/Course-Content/Images/central-limit-theorem-samples.png)
 
 ## Hypotheses
+
 
 ## References
 1. https://www.investopedia.com/terms/s/sample.asp
