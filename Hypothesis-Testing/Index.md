@@ -20,8 +20,16 @@
     - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
     - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
       - [Visualization](#visualization)
+  - [Confidence Intervals](#confidence-intervals)
+    - [Example: Infant Birth Weights](#example-infant-birth-weights)
   - [Central Limit Theorem](#central-limit-theorem)
   - [Hypotheses](#hypotheses)
+    - [Statistics](#statistics)
+    - [Hypotheses](#hypotheses-1)
+    - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
+      - [Step 1. State the hypotheses and significance level](#step-1-state-the-hypotheses-and-significance-level)
+      - [Step 2. Select test statistic](#step-2-select-test-statistic)
+      - [Step 3. State the decision rule](#step-3-state-the-decision-rule)
   - [References](#references)
 
 ## Introduction
@@ -252,11 +260,11 @@ The interpretation of this z-score is that the infant whose birth weight is 3,22
 
 ### Quantiles
 
-A related concept to z-scores is quantiles. A **qauntile** is a cut point or division of a variable's values into equiprobable intervals. We saw in the previous module how a quartile divided a variable's value into four equally probably intervals. Quantiles do the same, but with any number of cut points.
+A related concept to z-scores is quantiles. A **quantile** is a cut point or division of a variable's values into equiprobable intervals. We saw in the previous module how a quartile divided a variable's value into four groupings, each with 25% of the values. Quantiles do the same, but with any number of cut points.
 
 Quartiles are a special case of quantiles, where 3 cut points are used to create four intervals. **Percentiles** are another special case of quantiles, where 99 cut points are used to create 100 intervals.
 
-Quantiles are related to z-scores in that z-scores are the same as quantiles in the Normal Distribution. Take the example of infant birth weights, where we found that an infant's birth weight of 3,225 grams was -0.76 standard deviation units from the mean birth weight of 3,500 grams with a standard deviation of 363 grams. The z-score, -0.76, is a quantile in the Normal Distribution and we could use it to find the probability of observing such a birth weight by computing *f(3225; 3500; 363)*. We will see in the next section how to perform such calculations.
+Quantiles are related to z-scores in a z-score represents a quantile in the Normal Distribution. Take the example of infant birth weights, where we found that an infant's birth weight of 3,225 grams was -0.76 standard deviation units from the mean birth weight of 3,500 grams with a standard deviation of 363 grams. The z-score, -0.76, is a quantile in the Normal Distribution and we could use it to find the probability of observing such a birth weight by computing *f(3225; 3500; 363)*. We will see in the next section how to perform such calculations.
 
 ### Calculations in the Normal Distribution
 
@@ -269,7 +277,7 @@ These values are:
 | Variable | Names | Description | Formula | Example |
 |----------|-------|-------------|---------|---------|
 | `p` | `p`-value, cumulative probability | The probability of observing a value in the range (-∞, `q`) | ![Formula for cumulative probability function](/Course-Content/Images/Equations/normal-distribution-cumulative.png) |`p` = P(X ≤ -1.96) = 0.024 |
-| `q` | quantile | The value, below wich `p`% of the values fall | ![Formula for quantile function](/Course-Content/Images/Equations/quantile-function.png) | `q` = 0.95 is the 95th percentile |
+| `q` | quantile, critical value | The critical value, below wich `p`% of the values fall | ![Formula for quantile function](/Course-Content/Images/Equations/quantile-function.png) | `q` = 0.95 is the 95th percentile |
 | `d` | density | The probability of observing the quantile `q` | ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png) | `d` = P(-1.96) = 0.06 |
 
 Traditionally, these values are calculated by looking up `q` or `p` in a z-table like the one below:
@@ -341,6 +349,52 @@ These three examples with infant birth weights are visualized below. Make sure t
 
 ![Infant birth weights visualization](/Course-Content/Images/infant-birth-weight-examples-quantiles-and-probabilities.png)
 
+## Confidence Intervals
+
+A **confidence interval** is a likely range of values based on sample data that the population parameter is likely to fall in with a specified level of certainty if we repeat the sampling exercise. We can, for example, say that we are 95% confident that the true mean for infant birth weights falls in a range of weights.
+
+We select a **significance level**, which we denote α (Greek letter "alpha"). More often than not, we select α=0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
+
+The confidence interval is equal to the area central region of the Normal Distrubtion. The regions in the left and right tails of the distribution are each equal to half of the significance level. Check your understanding of these relationships by observing the plot below:
+
+![Confidence and significance in the Normal Distribution](/Course-Content/Images/normal-distribution-significance.png)
+
+The general formula for the construction of a confidence interval is:
+
+![General formula for confidence intervals](/Course-Content/Images/Equations/confidence-interval.png)
+
+In the case of confidence intervals for the mean, the formula is:
+
+![Formula for confidence intervals of the mean](/Course-Content/Images/Equations/confidence-interval-z.png)
+
+### Example: Infant Birth Weights
+
+Suppose you are conducting a study on a population of infants at a particular hospital. It was found that the mean birth weight of 150 infants was 3,400 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed. Construct a 95% confidence interval for the mean birth weight.
+
+We are given the mean (x̄ = 3400 grams), standard deviation (s = 395 grams), and sample size (n = 150). To construct a 95% confidence interval, we find the critical z-value that corresponds to the 95% confidence level. That is, we need to find a z-value in the Normal Distribution, such that *5 / 2 = 2.5%* of the values fall below -z the interval and 2.5% fall above z.
+
+The critical z-values are:
+
+```R
+qnorm(0.025)
+[1] -1.959964
+
+qnorm(0.025, lower.tail=FALSE)
+[1] 1.959964
+```
+
+Thus, the 95% confidence level for infant birth weights is:
+
+```R
+c(3400 - 1.96*(395/sqrt(150)),
+  3400 + 1.96*(395/sqrt(150)))
+[1] 3336.787 3463.213
+```
+
+We say that we are 95% confident that the true mean of infant birth weights is between 3,336.8 grams and 3,463.2 grams. This 95% confidence interval is shown graphically as the range between the solid black vertical lines about the mean:
+
+![Visualization of 95% confidence interval for infant birth weights](/Course-Content/Images/infant-birth-weight-example-95-confidence.png)
+
 ## Central Limit Theorem
 
 *Code for this section:* [Central Limit Theorem](/Hypothesis-Testing/Central-Limit-Theorem.R)
@@ -353,8 +407,68 @@ This means that if we employ the sampling methodology discussed above and taking
 
 ![Visualization of Central Limit Theorem](/Course-Content/Images/central-limit-theorem-samples.png)
 
+This is quite an amazing result and allows us to use the properties of the Normal Distribution to describe many populations, even if the variable of interest itself is not normally distributed. Using the Central Limit Theorem, we can construct a normally distributed variable from the original data and make statistical statements about the population.
+
 ## Hypotheses
 
+We now have the tools to learn about hypothesis testing. A **hypothesis** is a "statement about the nature of a population. It is often stated in terms of a population parameter" [[6]](#references).
+
+### Statistics
+
+When we compute the mean or standard deviation from a sample, we are building a model of the population. The mean and standard deviation of a sample are point estimates for the mean and standard deviation of the entire population. A **statistic** is exactly that; an estimate of a population parameter using available sample data. Note the key differences in notation and computation of population parameters versus sample statistics:
+
+| Measure | Population Parameter | Sample Statistic |
+|---------|----------------------|------------------|
+| Mean | ![Formula for population mean](/Course-Content/Images/Equations/population-mean.png) | ![Formula for sample mean](/Course-Content/Images/Equations/sample-mean.png)
+| Standard Deviation | ![Formula for population standard deviation](/Course-Content/Images/Equations/population-standard-deviation.png) | ![Formula for sample standard deviation](/Course-Content/Images/Equations/sample-standard-deviation.png)
+
+### Hypotheses
+
+We have said that a hypothesis is a statement about a population. An example would be "the mean test score for statistics students is 87.5". In statistics, we formulate a null hypothesis, assume that it is true, and test whether there is signficant evidence of it *not* being true. The **null hypothesis** is a statement of *no effect* or *no difference*. An example would be "the mean test score for statistics students is not 87.5". We assume that the null hypothesis is true and set out to prove that it is not true.
+
+The null hypothesis is denoted H<sub>0</sub>. We set out to show that the null hypothesis is not true and that, instead, an alternative is true. The statistical statement we are trying to make is captured in the **alternative hypothesis**, denoted H<sub>1</sub>. The objective for hypothesis testing is to show whether we can reject H<sub>0</sub> in favor of J<sub>1</sub>.
+
+### Procedure for Hypothesis Testing
+
+Let us now look at the general procedure for testing hypotheses. We will use this five-step procedure throughout the course:
+
+1. State the hypotheses and select a significance level.
+2. Select the test statistic.
+3. State the decision rule.
+4. Compute the test statistic.
+5. Draw a conclusion.
+
+We will discuss each of these steps in turn.
+
+#### Step 1. State the hypotheses and significance level
+
+The first step in formal tests of hypotheses is to state the null and alternative hypotheses and select a significance level. For example:
+
+> H<sub>0</sub>: μ = 123.5 (the mean is not different from 123.5).
+
+> H<sub>1</sub>: μ > 123.5 (the mean is greater than 123.5).
+
+> α = 0.05.
+
+To understand the significance level α ("alpha"), consider the following plot of the Normal Distribution:
+
+![Confidence and significance in the Normal Distribution](/Course-Content/Images/normal-distribution-significance.png)
+
+The area under the Normal Distribution curve between two values a, b is the probability of observing a z-score in the range (a, b). 
+
+#### Step 2. Select test statistic
+
+The next step is to select the statistic you will use to carry out the test. We have seen the z-score and will use a corresponding **z-statistic**, also known as a **z-test**:
+
+![Formula for z-statistic/z-test](/Course-Content/Images/Equations/z-test.png)
+
+This statistic compares the sample mean, x̄, with the population mean under the null hypothesis, μ<sub>0</sub>. The statistic is standardized and expressed in standard deviation units.
+
+#### Step 3. State the decision rule
+
+The **decision rule** sets the conditions for rejecting the null hypothesis. We state the rule that will be applied to the test. We compute a **critical z-value** under the Normal Distribution. If we observe a z-statistic that is as extreme or more extreme than the critical z-value, we reject the null hypothesis.
+
+The critical z-value is computed as the value from the Normal Distribution, below which 
 
 ## References
 1. https://www.investopedia.com/terms/s/sample.asp
@@ -362,4 +476,5 @@ This means that if we employ the sampling methodology discussed above and taking
 3. http://www.onlinestatbook.com/2/sampling_distributions/samp_dist_mean.html
 4. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, pp. 225-230.
 5. https://www.scribbr.com/statistics/normal-distribution/
-6. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 70-79.
+6. https://www.sciencedirect.com/topics/mathematics/statistical-hypothesis
+7. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
