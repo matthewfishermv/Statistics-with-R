@@ -53,11 +53,11 @@ In a statistical setting, we are concerned with the collection, analysis, and pr
 
 The computational tool that will be used throughout this course is R. It is a "language and environment for statistical computing and graphics" [[3]](#references). To get started, it is recommended that you download and install the latest version of RStudio, an integrated development environment for R that will be used in this course:
 
-[Download R Studio](https://rstudio.com/products/rstudio/download/#download)
+[Download RStudio](https://rstudio.com/products/rstudio/download/#download)
 
-If you choose to use R Studio, these are the four primary areas of the application you will need to be concerned with:
+If you choose to use RStudio, these are the four primary areas of the application you will need to be concerned with:
 
-![Layout of R Studio](../Course-Content/Images/rstudio-layout.png)
+![Layout of RStudio](../Course-Content/Images/rstudio-layout.png)
 
 | # | Name | Description |
 |--|------|-------------|
@@ -221,7 +221,7 @@ length(grades[grades >= 90])
 [1] 12
 ```
 
-If we divide this by the length of all students grades, we get the same 34.3% that we calculated above:
+If we divide this by the length of all students' grades, we get the same 34.3% that we calculated above:
 
 ```R
 length(grades[grades >= 90]) / length(grades)

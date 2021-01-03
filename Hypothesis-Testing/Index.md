@@ -126,7 +126,7 @@ Let us consider a sampling procedure used frequently in statistics that allows u
 0. Summarize the available data.
 1. Take repeated samples from the available data.
 2. For each sample, compute the arithmetic mean.
-3. Consider all of the computed means together as a new data set for analysis.
+3. Consider all the computed means together as a new data set for analysis.
 
 Using R, we can carry out this sampling methodology to see what happens. First, suppose we have a random sample of temperatures (in Fahrenheit) taken from a sensor mounted to the top of a radio tower during the summer. The sample data are below:
 
@@ -284,7 +284,7 @@ Traditionally, these values are calculated by looking up `q` or `p` in a z-table
 
 [Z-Table](https://www.ztable.net/)
 
-For the purpose of this course, we will use R to compute these values more precisely. There are three functions of primary interest:
+For this course, we will use R to compute these values more precisely. There are three functions of primary interest:
 
 | Function | Parameters | Returns | Example |
 |----------|------------|---------|---------|
@@ -332,7 +332,7 @@ We find that 68.3% of infants weigh between 3,105 grams and 3,895 grams.
 
 You may notice that this question is really asking what percentage of infant weights fall within one standard deviation of the mean, (x̄ - s, x̄ + s) = (3105, 3895). Because of this fact, the 68-95-99.7 rule applies and we can conclude that about 68% of weights fall within one standard deviation of the mean.
 
-> 3. What is the weight, above which 5% of infants weights are observed (the top 5%)?
+> 3. What is the weight, above which 5% of infants' weights are observed (the top 5%)?
 
 ```R
 qnorm(0.05, mean.birth.weight, sd.birth.weight, lower.tail=FALSE)
@@ -353,9 +353,9 @@ These three examples with infant birth weights are visualized below. Make sure t
 
 A **confidence interval** is a likely range of values based on sample data that the population parameter is likely to fall in with a specified level of certainty if we repeat the sampling exercise. We can, for example, say that we are 95% confident that the true mean for infant birth weights falls in a range of weights.
 
-We select a **significance level**, which we denote α (Greek letter "alpha"). More often than not, we select α=0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
+We select a **significance level**, which we denote α (Greek letter "alpha"). Statisticians frequently select α=0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
 
-The confidence interval is equal to the area central region of the Normal Distrubtion. The regions in the left and right tails of the distribution are each equal to half of the significance level. Check your understanding of these relationships by observing the plot below:
+The confidence interval is equal to the area in the central region of the Normal Distribution. The regions under the left and right tails of the distribution are each equal to half of the significance level. Check your understanding of these relationships by observing the plot below:
 
 ![Confidence and significance in the Normal Distribution](/Course-Content/Images/normal-distribution-significance.png)
 
