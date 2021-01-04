@@ -28,6 +28,7 @@
   - [Graphical Summaries](#graphical-summaries)
     - [Histograms](#histograms-1)
     - [Boxplots](#boxplots)
+  - [Summary](#summary)
   - [References](#references)
 
 ## Introduction
@@ -485,6 +486,24 @@ boxplot(y, horizontal=TRUE)
 ```
 
 ![Boxplot with outlier](/Course-Content/Images/boxplot-with-outlier.png)
+
+## Summary
+
+We will end each module in this course with a summary of the key concepts that were covered. The table below summarizes the fundamental math and R programming concepts you should understand for use in later modules.
+
+| Concept | Discussion | Formula | R Code | Examples |
+|---------|------------|---------|--------|----------|
+| Operators | Operators allow you to perform mathematical computations and store the results of evaluating expressions into named variables | N/A | `+`, `-`, `*`, `/`, `^`, `<-` | `my.result <- (4 + 5) / (2 * 7)` |
+| Functions | Named variables that perform one or more defined computational actions | N/A | `function.name(argument1=value.1, argument2=value.2, ...)` | `sqrt()`, `c()`, `print()`, `summary()`, `length()` |
+| Vectors | Vectors are used to store multiple values of the same type | N/A | `variable.name <- c(values)` | `prices <- c(4.95, 8.75, 9.99)` |
+| Arithmetic mean | The average or expected value; it is a measure of centrality | ![Formula for arithmetic mean](/Course-Content/Images/Equations/arithmetic-mean.png) | `mean(x)` | `mean(grades)` |
+| Median | The middle of all values of a variable; it is a measure of centrality often used when outliers are present | ![Formula for median](/Course-Content/Images/Equations/median.png) | `median(x)` | `median(grades)` |
+| Interquartile range (IQR) | The range of the middle 50% of the data; it is a measure of variability often used when outliers are present | ![Formula for interquantile range](/Course-Content/Images/Equations/interquartile-range.png) | `IQR(x)` | `IQR(grades)` |
+| Variance | A measure of how much the data tend to vary from the mean of the data; it is a measure of variability | ![Formula for variance](/Course-Content/Images/Equations/variance.png) | `var(x)` | `var(grades)` |
+| Standard deviation | A measure of how much the data tend to vary from the mean of the data, expressed in the same units as the data | ![Formula for standard deviation](/Course-Content/Images/Equations/standard-deviation.png) | `sd(x)` | `sd(grades)` |
+| Histogram | A graphical summary similar to a column chart that shows the frequency of observations occurring in bins of a certain width | N/A | `hist(x)` | `hist(grades)` |
+| Stem and leaf plot | A text-based summary of the data showing the frequency of observations occurring; similar to a histogram | N/A | `stem(x)` | `stem(grades`) |
+| Box and whisker diagram | A graphical summary that depicts the five-number summary along with outliers | N/A | `boxplot(x)` | `boxplot(grades)` |
 
 ## References
 1. https://statanalytica.com/blog/importance-of-statistics/
