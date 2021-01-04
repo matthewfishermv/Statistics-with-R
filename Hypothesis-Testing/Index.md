@@ -20,9 +20,9 @@
     - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
     - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
       - [Visualization](#visualization)
+  - [Central Limit Theorem](#central-limit-theorem)
   - [Confidence Intervals](#confidence-intervals)
     - [Example: Infant Birth Weights](#example-infant-birth-weights)
-  - [Central Limit Theorem](#central-limit-theorem)
   - [Hypotheses](#hypotheses)
     - [Statistics](#statistics)
     - [Hypotheses](#hypotheses-1)
@@ -30,6 +30,8 @@
       - [Step 1. State the hypotheses and significance level](#step-1-state-the-hypotheses-and-significance-level)
       - [Step 2. Select test statistic](#step-2-select-test-statistic)
       - [Step 3. State the decision rule](#step-3-state-the-decision-rule)
+      - [Step 4. Compute the test statistic](#step-4-compute-the-test-statistic)
+      - [Step 5. Draw a conclusion](#step-5-draw-a-conclusion)
   - [References](#references)
 
 ## Introduction
@@ -349,6 +351,20 @@ These three examples with infant birth weights are visualized below. Make sure t
 
 ![Infant birth weights visualization](/Course-Content/Images/infant-birth-weight-examples-quantiles-and-probabilities.png)
 
+## Central Limit Theorem
+
+*Code for this section:* [Central Limit Theorem](/Hypothesis-Testing/Central-Limit-Theorem.R)
+
+We have seen a sampling methodology of taking repeated samples from the original data and we have introduced the Normal Distribution. Now we unify these two ideas with the Central Limit Theorem. The **Central Limit Theorem** states:
+
+> Given a population with a finite mean μ and a finite non-zero variance σ<sup>2</sup>, the sampling distribution of the sample mean approaches X ~ N(μ, σ) with a mean of μ and a variance of σ<sup>2</sup>/2 as N, the sample size, increases [[3]](#references).
+
+This means that if we employ the sampling methodology discussed above and taking increasingly large samples, the distribution of the mean of the sample means will become approximately normal. In the plots below, observe how the distribution of the sample looks more and more like the normal distribution as the number of samples taken increases from 10 to 30 to 1,000 to 10,000:
+
+![Visualization of Central Limit Theorem](/Course-Content/Images/central-limit-theorem-samples.png)
+
+This is quite an amazing result and allows us to use the properties of the Normal Distribution to describe many populations, even if the variable of interest itself is not normally distributed. Using the Central Limit Theorem, we can construct a normally distributed variable from the original data and make statistical statements about the population.
+
 ## Confidence Intervals
 
 A **confidence interval** is a likely range of values based on sample data that the population parameter is likely to fall in with a specified level of certainty if we repeat the sampling exercise. We can, for example, say that we are 95% confident that the true mean for infant birth weights falls in a range of weights.
@@ -391,23 +407,9 @@ c(3400 - 1.96*(395/sqrt(150)),
 [1] 3336.787 3463.213
 ```
 
-We say that we are 95% confident that the true mean of infant birth weights is between 3,336.8 grams and 3,463.2 grams. This 95% confidence interval is shown graphically as the range between the solid black vertical lines about the mean:
+We say that we are 95% confident that the true mean of infant birth weights is between 3,336.8 grams and 3,463.2 grams. This 95% confidence interval is shown graphically as the range between the blue lines:
 
 ![Visualization of 95% confidence interval for infant birth weights](/Course-Content/Images/infant-birth-weight-example-95-confidence.png)
-
-## Central Limit Theorem
-
-*Code for this section:* [Central Limit Theorem](/Hypothesis-Testing/Central-Limit-Theorem.R)
-
-We have seen a sampling methodology of taking repeated samples from the original data and we have introduced the Normal Distribution. Now we unify these two ideas with the Central Limit Theorem. The **Central Limit Theorem** states:
-
-> Given a population with a finite mean μ and a finite non-zero variance σ<sup>2</sup>, the sampling distribution of the sample mean approaches X ~ N(μ, σ) with a mean of μ and a variance of σ<sup>2</sup>/2 as N, the sample size, increases [[3]](#references).
-
-This means that if we employ the sampling methodology discussed above and taking increasingly large samples, the distribution of the mean of the sample means will become approximately normal. In the plots below, observe how the distribution of the sample looks more and more like the normal distribution as the number of samples taken increases from 10 to 30 to 1,000 to 10,000:
-
-![Visualization of Central Limit Theorem](/Course-Content/Images/central-limit-theorem-samples.png)
-
-This is quite an amazing result and allows us to use the properties of the Normal Distribution to describe many populations, even if the variable of interest itself is not normally distributed. Using the Central Limit Theorem, we can construct a normally distributed variable from the original data and make statistical statements about the population.
 
 ## Hypotheses
 
@@ -415,30 +417,30 @@ We now have the tools to learn about hypothesis testing. A **hypothesis** is a "
 
 ### Statistics
 
-When we compute the mean or standard deviation from a sample, we are building a model of the population. The mean and standard deviation of a sample are point estimates for the mean and standard deviation of the entire population. A **statistic** is exactly that; an estimate of a population parameter using available sample data. Note the key differences in notation and computation of population parameters versus sample statistics:
+When we compute the mean or standard deviation from a sample, we are building a model of the population. The mean and standard deviation of a sample are point estimates for the mean and standard deviation of the entire population. A **statistic** is the same; it is an estimate of a population parameter using available sample data. Note the key differences in notation and computation of population parameters versus sample statistics:
 
 | Measure | Population Parameter | Sample Statistic |
 |---------|----------------------|------------------|
 | Mean | ![Formula for population mean](/Course-Content/Images/Equations/population-mean.png) | ![Formula for sample mean](/Course-Content/Images/Equations/sample-mean.png)
 | Standard Deviation | ![Formula for population standard deviation](/Course-Content/Images/Equations/population-standard-deviation.png) | ![Formula for sample standard deviation](/Course-Content/Images/Equations/sample-standard-deviation.png)
 
+To drive the point home, we rarely have the population available for study, so we must rely on samples. We can compute a sample statistic such as the mean or standard deviation, but they are not precise; they are estimates of the true population parameters. By testing a hypothesis about the true population parameters, we put forth evidence to support (or not support) a fact about the population parameter, which we make with some level of confidence.
+
 ### Hypotheses
 
-We have said that a hypothesis is a statement about a population. An example would be "the mean test score for statistics students is 87.5". In statistics, we formulate a null hypothesis, assume that it is true, and test whether there is signficant evidence of it *not* being true. The **null hypothesis** is a statement of *no effect* or *no difference*. An example would be "the mean test score for statistics students is not 87.5". We assume that the null hypothesis is true and set out to prove that it is not true.
+We have said that a hypothesis is a statement about a population. An example would be "the mean test score for statistics students is 87.5". In statistics, rather than test such a statement directly, we formulate a null hypothesis. The **null hypothesis** is a statement of *no effect* or *no difference*. An example of a null hypothesis would be "the mean test score for statistics students is not 87.5". We assume that the null hypothesis is true and set out to prove otherwise.
 
-The null hypothesis is denoted H<sub>0</sub>. We set out to show that the null hypothesis is not true and that, instead, an alternative is true. The statistical statement we are trying to make is captured in the **alternative hypothesis**, denoted H<sub>1</sub>. The objective for hypothesis testing is to show whether we can reject H<sub>0</sub> in favor of J<sub>1</sub>.
+The null hypothesis is denoted H<sub>0</sub>. We set out to show that the null hypothesis is not true and that, instead, an alternative is true. The statistical statement we are interested in making is captured in the **alternative hypothesis**, denoted H<sub>1</sub>. The objective for hypothesis testing is to show whether we can reject H<sub>0</sub> in favor of H<sub>1</sub> with a selected level of confidence.
 
 ### Procedure for Hypothesis Testing
 
-Let us now look at the general procedure for testing hypotheses. We will use this five-step procedure throughout the course:
+Let us now look at the general procedure for testing hypotheses. We will use this same five-step procedure throughout the course. Focus on the concepts and then review the examples that follow.
 
 1. State the hypotheses and select a significance level.
 2. Select the test statistic.
 3. State the decision rule.
 4. Compute the test statistic.
 5. Draw a conclusion.
-
-We will discuss each of these steps in turn.
 
 #### Step 1. State the hypotheses and significance level
 
@@ -448,13 +450,7 @@ The first step in formal tests of hypotheses is to state the null and alternativ
 
 > H<sub>1</sub>: μ > 123.5 (the mean is greater than 123.5).
 
-> α = 0.05.
-
-To understand the significance level α ("alpha"), consider the following plot of the Normal Distribution:
-
-![Confidence and significance in the Normal Distribution](/Course-Content/Images/normal-distribution-significance.png)
-
-The area under the Normal Distribution curve between two values a, b is the probability of observing a z-score in the range (a, b). 
+> α = 0.05 (confidence level is 95%).
 
 #### Step 2. Select test statistic
 
@@ -466,9 +462,47 @@ This statistic compares the sample mean, x̄, with the population mean under the
 
 #### Step 3. State the decision rule
 
-The **decision rule** sets the conditions for rejecting the null hypothesis. We state the rule that will be applied to the test. We compute a **critical z-value** under the Normal Distribution. If we observe a z-statistic that is as extreme or more extreme than the critical z-value, we reject the null hypothesis.
+The **decision rule** sets forth the conditions under which we can reject the null hypothesis. We compute a **critical z-value** from the Normal Distribution corresponding to the stated significance level α. If we observe a z-statistic that is as extreme or more extreme than the critical z-value, we reject the null hypothesis.
 
-The critical z-value is computed as the value from the Normal Distribution, below which 
+The critical z-value is a value from the Normal Distribution, beyond which an observation is so unlikely to occur by chance alone that we call it a **statistically significant** result. If the z-statistic falls outside of the central region of the distribution, then we can reject the null hypothesis in favor of the alternative hypothesis. Depending on the scenario, the critical z-value may be z<sub>α</sub> or z<sub>α/2</sub>.
+
+There are three scenarios we can test:
+
+![Hypothesis testing scenarios - tailed tests](/Course-Content/Images/tailed-tests.png)
+
+**Scenario 1 - Not Equal**
+
+> H<sub>0</sub>: μ = μ<sub>0</sub> (the mean is equal to the mean under the null hypothesis)
+> 
+> H<sub>1</sub>: μ ≠ μ<sub>0</sub> (the mean is not equal to the mean under the null hypothesis)
+
+When we are testing whether the mean is *not equal to* the mean under the null hypothesis, we perform a **two-tailed test**. We reject H<sub>0</sub> if the value of the z-statistic falls in either of the regions in the tails of the distribution, below the critical z-value for a significance level of α/2 or above the critical z-value for a significance level of α/2.
+
+**Scenario 2 - Less Than**
+
+> H<sub>0</sub>: μ = μ<sub>0</sub>
+> 
+> H<sub>1</sub>: μ < μ<sub>0</sub> (the mean is less than the mean under the null hypothesis)
+
+When we are testing whether the mean is *less than* the mean under the null hypothesis, we perform a **left-tailed test**. We reject H<sub>0</sub> if the value of the z-statistic falls in the lower tail of the distribution, below the critical z-value for a significance level of α.
+
+**Scenario 3 - Greater Than**
+
+> H<sub>0</sub>: μ = μ<sub>0</sub>
+> 
+> H<sub>1</sub>: μ > μ<sub>0</sub> (the mean is greater than the mean under the null hypothesis)
+
+When we are testing whether the mean is *greater than* the mean under the null hypothesis, we perform a **right-tailed test**. We reject H<sub>0</sub> if the value of the z-statistic falls in the upper tail of the distribution, above the critical z-value for a significance level of α.
+
+#### Step 4. Compute the test statistic
+
+In this step, we simply calculate the value of the test statistic.
+
+#### Step 5. Draw a conclusion
+
+In the final step, we draw a conclusion based on the results of the test. The decision rule set out the conditions that allow us to reject or fail to reject the null hypothesis. We compare the computed statistic with the critical z-value and reject the null hypothesis if the evidence is significant.
+
+If we reject the null hypothesis, then we say we have significant evidence at the α level of significance that the true mean differs from the mean under the null hypothesis. Another way we can state this is that we are *[(1-α) x 100]%* confident that the true mean differs from the mean under the null hypothesis.
 
 ## References
 1. https://www.investopedia.com/terms/s/sample.asp
