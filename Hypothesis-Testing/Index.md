@@ -35,7 +35,7 @@
     - [Examples](#examples)
       - [Example 1: Infant birth weights](#example-1-infant-birth-weights)
       - [Example 2: Fluoride levels in water](#example-2-fluoride-levels-in-water)
-    - [P-Values](#p-values)
+    - [p-Values](#p-values)
   - [References](#references)
 
 ## Introduction
@@ -590,9 +590,42 @@ print(test.z)
 
 We fail to reject the null hypothesis because *1.58 < 1.96*. We do not have significant evidence at the α=0.05 level of significance that the fluoride level in the county's water is different from 0.7 milligrams per liter.
 
-### P-Values
+### p-Values
 
-The final topic for this module is p-values. A **p-value** is the probability associated 
+The final topic for this module is p-values. A **p-value** is the probability associated with observing the test statistic, or one that is more extreme, given the null hypothesis. It is called a significance test and tells us "whether differences in the test statistic from the null hypothesis are attributable to chance or sampling variation, or to a failure of the null hypothesis [[7]](#references).
+
+A p-value is sufficiently small if it is less than the selected level of significance α. Such a p-value would indicate a statistically significant result. To the contrary, a p-value that is larger than α is not statistically significant. Thus, we can use the p-value to define decision rules:
+
+> Reject H<sub>0</sub> if p < α.
+
+Using the p-value in this manner is often preferred, as it allows others who interpret the results of your test to select a different level of significance and infer whether the result is still significant.
+
+To calculate the p-value in R, pass the computed z-statistic to the `pnorm()` function, selecting the appropriate tail of the distribution. For example, we computed a z-statistic of -2.33 in Example 1 above. The corresponding left-tailed p-value is:
+
+```R
+pnorm(-2.33, lower.tail=TRUE)
+[1] 0.009903076
+```
+
+If we had applied the decision rule to reject H<sub>0</sub> if p < 0.05, you can see that the conclusion would still have been the same since 0.01 < 0.05.
+
+For example 2 (fluoride in water), the probability of observing a test statistic as extreme or more than the critical z-value given the null hypothesis is equal to the sum of the areas in both tails:
+
+```R
+pnorm(-1.58, lower.tail=TRUE) + pnorm(1.58, lower.tail=FALSE)
+[1] 0.1141069
+```
+
+Or, given the symmetry of the Normal Distribution:
+
+```R
+2 * pnorm(-1.58, lower.tail=TRUE)
+[1] 0.1141069
+```
+
+You can visualize the p-values in the graphic below:
+
+![p-values depending on tailed tests](/Course-Content/Images/tailed-tests-p-values.png)
 
 ## References
 1. https://www.investopedia.com/terms/s/sample.asp

@@ -95,3 +95,40 @@ print(critical.z)
 
 test.z <- (0.8 - 0.7) / (0.4 / sqrt(40))
 print(test.z)
+
+####
+# p-values
+####
+
+# Example 1.
+pnorm(-2.33, lower.tail=TRUE)
+
+# Example 2.
+pnorm(-1.58, lower.tail=TRUE) + pnorm(1.58, lower.tail=FALSE)
+
+# Add p-values to visualization of tailed tests.
+# Two-tailed test.
+plot(x, y, type="l", main="Two-Tailed Test", xaxt="n", yaxt="n", xlab="", ylab="", lwd=2)
+lines(c(qnorm(0.05), qnorm(0.05)), c(0, 0.1), lty=3, col="steelblue", lwd=2)
+lines(c(qnorm(0.05, lower.tail=FALSE), qnorm(0.05, lower.tail=FALSE)), c(0, 0.1),
+      lty=3, col="steelblue", lwd=2)
+
+text(-2.2, 0.2, expression(P(z <= -z[alpha/2])), col="steelblue", cex=1.5)
+text(2.2, 0.2, expression(P(z >= z[alpha/2])), col="steelblue", cex=1.5)
+lines(c(-1.8, -2.2), c(0.05, 0.18), col="steelblue")
+lines(c(1.8, 2.2), c(0.05, 0.18), col="steelblue")
+
+# Left-tailed test.
+plot(x, y, type="l", main="Left-Tailed Test", xaxt="n", yaxt="n", xlab="", ylab="", lwd=2)
+lines(c(qnorm(0.05), qnorm(0.05)), c(0, 0.1), lty=3, col="steelblue", lwd=2)
+
+text(-2.2, 0.2, expression(P(z <= -z[alpha])), col="steelblue", cex=1.5)
+lines(c(-1.8, -2.2), c(0.05, 0.18), col="steelblue")
+
+# Right-tailed test.
+plot(x, y, type="l", main="Right-Tailed Test", xaxt="n", yaxt="n", xlab="", ylab="", lwd=2)
+lines(c(qnorm(0.05, lower.tail=FALSE), qnorm(0.05, lower.tail=FALSE)), c(0, 0.1),
+      lty=3, col="steelblue", lwd=2)
+
+text(2.2, 0.2, expression(P(z >= z[alpha])), col="steelblue", cex=1.5)
+lines(c(1.8, 2.2), c(0.05, 0.18), col="steelblue")
