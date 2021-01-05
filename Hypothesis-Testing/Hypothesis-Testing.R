@@ -105,6 +105,7 @@ pnorm(-2.33, lower.tail=TRUE)
 
 # Example 2.
 pnorm(-1.58, lower.tail=TRUE) + pnorm(1.58, lower.tail=FALSE)
+2 * pnorm(-1.58, lower.tail=TRUE)
 
 # Add p-values to visualization of tailed tests.
 # Two-tailed test.
