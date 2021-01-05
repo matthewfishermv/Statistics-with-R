@@ -28,10 +28,14 @@
     - [Hypotheses](#hypotheses-1)
     - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
       - [Step 1. State the hypotheses and significance level](#step-1-state-the-hypotheses-and-significance-level)
-      - [Step 2. Select test statistic](#step-2-select-test-statistic)
+      - [Step 2. Select the test statistic](#step-2-select-the-test-statistic)
       - [Step 3. State the decision rule](#step-3-state-the-decision-rule)
       - [Step 4. Compute the test statistic](#step-4-compute-the-test-statistic)
       - [Step 5. Draw a conclusion](#step-5-draw-a-conclusion)
+    - [Examples](#examples)
+      - [Example 1: Infant birth weights](#example-1-infant-birth-weights)
+      - [Example 2: Fluoride levels in water](#example-2-fluoride-levels-in-water)
+    - [P-Values](#p-values)
   - [References](#references)
 
 ## Introduction
@@ -413,7 +417,7 @@ We say that we are 95% confident that the true mean of infant birth weights is b
 
 ## Hypotheses
 
-We now have the tools to learn about hypothesis testing. A **hypothesis** is a "statement about the nature of a population. It is often stated in terms of a population parameter" [[6]](#references).
+We now have the tools to learn about hypothesis testing. A **hypothesis** is a "statement about the nature of a population. It is often stated in terms of a population parameter" [[6]](#references). A hypothesis test is a **significance test**, in which we assume the value for a population parameter and find a probability based on that assumption and a sample [[7]](#references)
 
 ### Statistics
 
@@ -430,7 +434,7 @@ To drive the point home, we rarely have the population available for study, so w
 
 We have said that a hypothesis is a statement about a population. An example would be "the mean test score for statistics students is 87.5". In statistics, rather than test such a statement directly, we formulate a null hypothesis. The **null hypothesis** is a statement of *no effect* or *no difference*. An example of a null hypothesis would be "the mean test score for statistics students is not 87.5". We assume that the null hypothesis is true and set out to prove otherwise.
 
-The null hypothesis is denoted H<sub>0</sub>. We set out to show that the null hypothesis is not true and that, instead, an alternative is true. The statistical statement we are interested in making is captured in the **alternative hypothesis**, denoted H<sub>1</sub>. The objective for hypothesis testing is to show whether we can reject H<sub>0</sub> in favor of H<sub>1</sub> with a selected level of confidence.
+The null hypothesis is denoted H<sub>0</sub>. We set out to show that the null hypothesis is not true and that, instead, an alternative is true. The statistical statement we are interested in making is captured in the **alternative hypothesis**, denoted H<sub>1</sub>. The objective for hypothesis testing is to show whether we can reject H<sub>0</sub> in favor of H<sub>1</sub> with a selected level of confidence. In short, we determine whether the null hypothesis is reasonable given the available data [[7]](#references).
 
 ### Procedure for Hypothesis Testing
 
@@ -447,12 +451,12 @@ Let us now look at the general procedure for testing hypotheses. We will use thi
 The first step in formal tests of hypotheses is to state the null and alternative hypotheses and select a significance level. For example:
 
 > H<sub>0</sub>: μ = 123.5 (the mean is not different from 123.5).
-
+>
 > H<sub>1</sub>: μ > 123.5 (the mean is greater than 123.5).
-
+>
 > α = 0.05 (confidence level is 95%).
 
-#### Step 2. Select test statistic
+#### Step 2. Select the test statistic
 
 The next step is to select the statistic you will use to carry out the test. We have seen the z-score and will use a corresponding **z-statistic**, also known as a **z-test**:
 
@@ -504,6 +508,92 @@ In the final step, we draw a conclusion based on the results of the test. The de
 
 If we reject the null hypothesis, then we say we have significant evidence at the α level of significance that the true mean differs from the mean under the null hypothesis. Another way we can state this is that we are *[(1-α) x 100]%* confident that the true mean differs from the mean under the null hypothesis.
 
+### Examples
+
+#### Example 1: Infant birth weights
+
+Suppose you are conducting a study on a population of infants at a particular hospital. It was found that the mean birth weight of 150 infants was 3,325 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed. Formally test at the α=0.05 level of significance whether this mean is significantly less than the mean birth weight suggested by literature on the subject (3,400 grams).
+
+**State the hypotheses and significance level**
+
+> H<sub>0</sub>: μ = 3400 (the mean is equal to 3400)
+> 
+> H<sub>1</sub>: μ < 3400 (the mean is less than 3400)
+> 
+> α = 0.05
+
+**Select the test statistic**
+
+![Formula for z-statistic/z-test](/Course-Content/Images/Equations/z-test.png)
+
+**State the decision rule**
+
+We find a critical value from the Normal Distribution with a left-hand tail probability of α, z<sub>0.05</sub>:
+
+```R
+critical.z <- qnorm(0.05, lower.tail=TRUE)
+print(critical.z)
+[1] -1.644854
+```
+
+We reject H<sub>0</sub> if the z-statistic is less than -1.64. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+test.z <- (3325 - 3400) / (395 / sqrt(150))
+print(test.z)
+[1] -2.325465
+```
+
+**Draw a conclusion**
+
+We reject the null hypothesis because *-2.33 < -1.64*. We have significant evidence at the α=0.05 level of significance that the mean birth weight of infants is less than 3,400.
+
+#### Example 2: Fluoride levels in water
+
+A county is investigating fluoride levels in its water. The county wishes to keep the level of fluoride at 0.7 milligrams of fluoride per liter of water [[8]](#references). Any variation from this level is considered bad by the county. 40 samples were taken of the county's water and tested for the level of fluoride they contain. A mean fluoride level of 0.8 milligrams per liter of water was found with a standard deviation of 0.4. Is there significant evidence at the α=0.05 level of significance that the mean fluoride level in the county's water is different from 0.7 milligrams per liter?
+
+**State the hypotheses and significance level**
+
+> H<sub>0</sub>: μ = 0.7 (the mean is equal to 0.7)
+> 
+> H<sub>1</sub>: μ ≠ 0.7 (the mean is not equal to 0.7)
+> 
+> α = 0.05
+
+**Select the test statistic**
+
+![Formula for z-statistic/z-test](/Course-Content/Images/Equations/z-test.png)
+
+**State the decision rule**
+
+We find a critical value from the Normal Distribution with a left-hand tail probability of α/2, z<sub>0.025</sub>:
+
+```R
+critical.z <- qnorm(0.025, lower.tail=FALSE)
+print(critical.z)
+[1] 1.959964
+```
+
+We reject H<sub>0</sub> if the z-statistic is less than -1.96 or greater than 1.96. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+test.z <- (0.8 - 0.7) / (0.4 / sqrt(40))
+print(test.z)
+[1] 1.581139
+```
+
+**Draw a conclusion**
+
+We fail to reject the null hypothesis because *1.58 < 1.96*. We do not have significant evidence at the α=0.05 level of significance that the fluoride level in the county's water is different from 0.7 milligrams per liter.
+
+### P-Values
+
+The final topic for this module is p-values. A **p-value** is the probability associated 
+
 ## References
 1. https://www.investopedia.com/terms/s/sample.asp
 2. https://www.statisticssolutions.com/sample-size-formula/
@@ -511,4 +601,6 @@ If we reject the null hypothesis, then we say we have significant evidence at th
 4. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, pp. 225-230.
 5. https://www.scribbr.com/statistics/normal-distribution/
 6. https://www.sciencedirect.com/topics/mathematics/statistical-hypothesis
-7. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
+7. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 294-299.
+8. https://www.webmd.com/oral-health/news/20150427/us-lowers-recommended-fluoride-levels-in-drinking-water#1
+9. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.

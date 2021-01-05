@@ -76,3 +76,22 @@ lines(c(qnorm(0.05, lower.tail=FALSE), qnorm(0.05, lower.tail=FALSE)), c(0, 0.1)
 
 text(0, 0.1, expression(alpha), col="steelblue", cex=1.5)
 lines(c(1.8, 0.3), c(0.05, 0.1), col="steelblue")
+
+
+####
+# Examples
+####
+
+# Example 1: Infant birth weights.
+critical.z <- qnorm(0.05, lower.tail=TRUE)
+print(critical.z)
+
+test.z <- (3325 - 3400) / (395 / sqrt(150))
+print(test.z)
+
+# Example 2: Fluoride levels in water.
+critical.z <- qnorm(0.025, lower.tail=FALSE)
+print(critical.z)
+
+test.z <- (0.8 - 0.7) / (0.4 / sqrt(40))
+print(test.z)
