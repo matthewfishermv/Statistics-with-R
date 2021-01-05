@@ -636,4 +636,3 @@ You can visualize the p-values in the graphic below:
 6. https://www.sciencedirect.com/topics/mathematics/statistical-hypothesis
 7. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 294-299.
 8. https://www.webmd.com/oral-health/news/20150427/us-lowers-recommended-fluoride-levels-in-drinking-water#1
-9. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.

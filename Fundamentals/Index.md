@@ -39,10 +39,10 @@
 
 The aim of this course is to develop your understanding of the science and practice of statistics using principles of mathematics and computation. You will learn how to:
 
-1. design experiments to collect data;
-1. perform statistical analyses;
-2. build and interpret mathematical models of data; and
-3. produce and interpret graphics like the one above.
+1. Design experiments to collect data;
+1. Perform statistical analyses;
+2. Build and interpret mathematical models of data; and
+3. Produce and interpret graphics like the one above.
 
 It is likely that you have come across statistics in one form or another, whether you were aware of it or not. Statistics is used to gain an understanding of data and make predictions about the future. It allows weather reporters to predict what a storm might do and doctors to understand the health of their patients or the prognosis of an illness. Statistics is applied in a wide range of areas: mathematics, economics, social sciences, trade, research, programming, Big Data, data science, health, business, government, and education [[1]](#references). And this list is far from exhaustive.
 
