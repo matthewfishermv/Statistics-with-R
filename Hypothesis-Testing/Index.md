@@ -298,7 +298,7 @@ For this course, we will use R to compute these values more precisely. There are
 | `qnorm()` | `p` - the `p`-value associated with `q`; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `q` - the quantile | `qnorm(0.382, mean=22, sd=1.67)` |
 | `dnorm()` | `q` - the quantile; `mean` (optional) - the mean; `sd` (optional) - the standard deviation | `d` - the probability of a specific event occurring | `dnorm(1.96)` |
 
-By default, R calcultes the lower tail of for each of these functions. By specifying `lower.tail=FALSE`, you can calculate the upper tail. Given the symmetrical nature of the Normal Distribution, this is equivalent to 1 minus the lower tail.
+By default, R calculates the lower tail for each of these functions. By specifying `lower.tail=FALSE`, you can calculate the upper tail. Given the symmetrical nature of the Normal Distribution, this is equivalent to 1 minus the lower tail.
 
 ### Examples: Infant Birth Weights
 

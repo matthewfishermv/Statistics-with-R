@@ -36,3 +36,8 @@ text(0, 0.3, "Normal", cex=1.25)
 text(0, 0.25, "T with 25 d.f.", cex=1.25, col="tomato2")
 text(0, 0.2, "T with 10 d.f.", cex=1.25, col="seagreen4")
 text(0, 0.15, "T with 5 d.f.", cex=1.25, col="steelblue2")
+
+# Calculations in the t-distribution.
+pt(-1.96, df=9)
+qt(0.041, df=9)
+dt(1.96, df=9)

@@ -11,6 +11,7 @@
     - [One-Sample Z-Test](#one-sample-z-test)
       - [Example: Weight loss program](#example-weight-loss-program)
     - [One-Sample T-Tests](#one-sample-t-tests)
+      - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
   - [References](#references)
 
 ## Introduction
@@ -174,6 +175,42 @@ Notice how the t-distribution compares with the Normal Distribution as the degre
 ![Normal distribution versus t distribution](../Course-Content/Images/normal-distribution-t-distribution.png)
 
 The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[3]](#references).
+
+The procedure for carrying out a one-sample t-test is identical to a one-sample z-test:
+
+> 1. State the hypotheses and select a significance level.
+> 2. Select the test statistic.
+> 3. State the decision rule.
+> 4. Compute the test statistic.
+> 5. Draw a conclusion.
+
+Instead of a z-statistic, we use a **t-statistic**:
+
+![Formula for t-test](/Course-Content/Images/Equations/t-test.png)
+
+with *n - 1* degrees of freedom.
+
+You will notice that the formula for a t-test is nearly identical to the formula for a z-test.
+
+The assumptions that must be met for a one-sample t-test are [[4]](#references):
+
+1. The data come from a single sample.
+2. The mean and variance of the population are not known.
+3. The test statistic follows a Normal Distribution.
+
+A t-test can also be used in place of a z-test when *n < 30*.
+
+#### Calculations in the T Distribution
+
+The R functions used to carry out t-procedures follow the same form as those for z-procedures, exchanging "norm" for "t":
+
+| Function | Parameters | Returns | Example |
+|----------|------------|---------|---------|
+| `pt()` | `q` - the quantile; `df` - the degrees of freedom | `p` - the `p`-value associated with `q` | `pt(-1.96, df=9)` |
+| `qt()` | `p` - the `p`-value associated with `q`; `df` - the degrees of freedom | `q` - the quantile | `qt(0.041, df=9)` |
+| `dt()` | `q` - the quantile; `df` the degrees of freedom | `d` - the probability of a specific event occurring | `dt(1.96, df=9)` |
+
+By default, R calculates the lower tail for each of these functions. By specifying `lower.tail=FALSE`, you can calculate the upper tail. Given the symmetrical nature of the T Distribution, this is equivalent to 1 minus the lower tail.
 
 ## References
 
