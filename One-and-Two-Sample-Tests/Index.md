@@ -9,7 +9,8 @@
   - [Standard Error](#standard-error)
   - [One-Sample Tests](#one-sample-tests)
     - [One-Sample Z-Test](#one-sample-z-test)
-    - [Example: Weight loss program](#example-weight-loss-program)
+      - [Example: Weight loss program](#example-weight-loss-program)
+    - [One-Sample T-Tests](#one-sample-t-tests)
   - [References](#references)
 
 ## Introduction
@@ -111,7 +112,7 @@ We can test three possible alternative hypotheses with a one-sample z-test:
 
 When we carry out the steps outlined in the hypothesis testing procedure above, we find that the test statistic falls in the middle region of the Normal Distribution, in which case we fail to reject H<sub>0</sub>, or it falls outside the middle region (in the rejection region), in which case we reject H<sub>0</sub>. Since the null hypothesis asserts *no difference* or *no change*, we are interested in rejecting H<sub>0</sub> because it means there *is* a difference or change between the mean we observed in the sample (x̅) and the established mean (µ<sub>0</sub>).
 
-### Example: Weight loss program
+#### Example: Weight loss program
 
 A sample of 42 people who participated in a weight loss program was taken. The participants' change in weight was measured upon completion of the program. A change of -2 means the participant lost two pounds, and a change of 1 means the participant gained one pound, and so on. The mean weight change for all participants in the program was found to be -2.26 with a standard deviation of 6.58. Formally test whether there is significant evidence of weight loss among program participants.
 
@@ -162,7 +163,21 @@ The visualization below shows the results of this test. The dotted blue line is 
 
 ![Visualization of weight loss program test](/Course-Content/Images/weight-loss-program-example.png)
 
+### One-Sample T-Tests
+
+Situations arise where the assumptions required for a one-sample z-test do not hold. In fact, it is frequently the case that we do not have access to an entire population. In these situations, we cannot use a z-test. In these cases, we instead use a t-test. The concepts are the same, but we use a different distribution.
+
+The **T-distribution** is a bell-shaped distribution that is used to carry out hypothesis tests when the population mean and standard deviation are not known. It has wider tails than the Normal Distribution. Since we do not know the mean, we need to estimate it from the sample data, and thus we are concerned with *n - 1* degrees of freedom. The heaviness of the tails in a t-distribution are a function of the degrees of freedom in the sample, with smaller values producing a heavier tail [[3]](#references).
+
+Notice how the t-distribution compares with the Normal Distribution as the degrees of freedom vary:
+
+![Normal distribution versus t distribution](../Course-Content/Images/normal-distribution-t-distribution.png)
+
+The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[3]](#references).
+
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
 2. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
+3. https://www.investopedia.com/terms/t/tdistribution.asp
+4. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
