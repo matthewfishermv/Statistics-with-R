@@ -373,7 +373,7 @@ This is quite an amazing result and allows us to use the properties of the Norma
 
 A **confidence interval** is a likely range of values based on sample data that the population parameter is likely to fall in with a specified level of certainty if we repeat the sampling exercise. We can, for example, say that we are 95% confident that the true mean for infant birth weights falls in a range of weights.
 
-We select a **significance level**, which we denote α (Greek letter "alpha"). Statisticians frequently select α=0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
+We select a **significance level**, which we denote α (Greek letter "alpha"). Statisticians frequently select α = 0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
 
 The confidence interval is equal to the area in the central region of the Normal Distribution. The regions under the left and right tails of the distribution are each equal to half of the significance level. Check your understanding of these relationships by observing the plot below:
 
@@ -512,7 +512,7 @@ If we reject the null hypothesis, then we say we have significant evidence at th
 
 #### Example 1: Infant birth weights
 
-Suppose you are conducting a study on a population of infants at a particular hospital. It was found that the mean birth weight of 150 infants was 3,325 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed. Formally test at the α=0.05 level of significance whether this mean is significantly less than the mean birth weight suggested by literature on the subject (3,400 grams).
+Suppose you are conducting a study on a population of infants at a particular hospital. It was found that the mean birth weight of 150 infants was 3,325 grams with a standard deviation of 395 grams. Assume that infant birth weights are normally distributed. Formally test at the α = 0.05 level of significance whether this mean is significantly less than the mean birth weight suggested by literature on the subject (3,400 grams).
 
 **State the hypotheses and significance level**
 
@@ -548,11 +548,11 @@ print(test.z)
 
 **Draw a conclusion**
 
-We reject the null hypothesis because *-2.33 < -1.64*. We have significant evidence at the α=0.05 level of significance that the mean birth weight of infants is less than 3,400.
+We reject the null hypothesis because *-2.33 < -1.64*. We have significant evidence at the α = 0.05 level of significance that the mean birth weight of infants is less than 3,400.
 
 #### Example 2: Fluoride levels in water
 
-A county is investigating fluoride levels in its water. The county wishes to keep the level of fluoride at 0.7 milligrams of fluoride per liter of water [[8]](#references). Any variation from this level is considered bad by the county. 40 samples were taken of the county's water and tested for the level of fluoride they contain. A mean fluoride level of 0.8 milligrams per liter of water was found with a standard deviation of 0.4. Is there significant evidence at the α=0.05 level of significance that the mean fluoride level in the county's water is different from 0.7 milligrams per liter?
+A county is investigating fluoride levels in its water. The county wishes to keep the level of fluoride at 0.7 milligrams of fluoride per liter of water [[8]](#references). Any variation from this level is considered bad by the county. 40 samples were taken of the county's water and tested for the level of fluoride they contain. A mean fluoride level of 0.8 milligrams per liter of water was found with a standard deviation of 0.4. Is there significant evidence at the α = 0.05 level of significance that the mean fluoride level in the county's water is different from 0.7 milligrams per liter?
 
 **State the hypotheses and significance level**
 
@@ -588,7 +588,7 @@ print(test.z)
 
 **Draw a conclusion**
 
-We fail to reject the null hypothesis because *1.58 < 1.96*. We do not have significant evidence at the α=0.05 level of significance that the fluoride level in the county's water is different from 0.7 milligrams per liter.
+We fail to reject the null hypothesis because *1.58 < 1.96*. We do not have significant evidence at the α = 0.05 level of significance that the fluoride level in the county's water is different from 0.7 milligrams per liter.
 
 ### p-Values
 
