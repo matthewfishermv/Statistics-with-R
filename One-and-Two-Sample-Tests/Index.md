@@ -45,9 +45,9 @@ In step 3, we state the decision rule that would allow us to reject H<sub>0</sub
 
 or:
 
-> Reject H<sub>0</sub> if the p-value associated with the test statistic is less than or equal to α. Fail to reject H<sub>0</sib> otherwise.
+> Reject H<sub>0</sub> if the p-value associated with the test statistic is less than or equal to α. Fail to reject H<sub>0</sub> otherwise.
 
-Both forms of the decision rule yield the same conclusion, but using the p-value allows readers of the study to select their own significance level and determine whether the result is still significant.
+Both forms of the decision rule yield the same conclusion but using the p-value allows readers of the study to select their own significance level and determine whether the result is still significant.
 
 In step 4, we carry out the test by computing the test statistic we selected in step 2.
 
