@@ -2,17 +2,16 @@
 
 ## Contents
 
-- [One- and Two-Sample Tests of the Mean](#one--and-two-sample-tests-of-the-mean)
-  - [Contents](#contents)
-  - [Introduction](#introduction)
-  - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
-  - [Standard Error](#standard-error)
-  - [One-Sample Tests](#one-sample-tests)
-    - [One-Sample Z-Test](#one-sample-z-test)
-      - [Example: Weight loss program](#example-weight-loss-program)
-    - [One-Sample T-Tests](#one-sample-t-tests)
-      - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
-  - [References](#references)
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
+- [Standard Error](#standard-error)
+- [One-Sample Tests](#one-sample-tests)
+  - [One-Sample Z-Test](#one-sample-z-test)
+    - [Example: Weight loss program](#example-weight-loss-program)
+  - [One-Sample T-Tests](#one-sample-t-tests)
+    - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
+- [References](#references)
 
 ## Introduction
 
@@ -84,6 +83,8 @@ We will expand this table in the sections that follow. Using this understanding 
 That is, the test statistic is the difference between the observed statistic and the one we expect, divided by a measure of uncertainty.
 
 ## One-Sample Tests
+
+*Code for this section:* [One-Sample Tests](/One-and-Two-Sample-Tests/One-Sample-Tests.R)
 
 ### One-Sample Z-Test
 
@@ -211,6 +212,10 @@ The R functions used to carry out t-procedures follow the same form as those for
 | `dt()` | `q` - the quantile; `df` the degrees of freedom | `d` - the probability of a specific event occurring | `dt(1.96, df=9)` |
 
 By default, R calculates the lower tail for each of these functions. By specifying `lower.tail=FALSE`, you can calculate the upper tail. Given the symmetrical nature of the T Distribution, this is equivalent to 1 minus the lower tail.
+
+Just as we could look up the z-statistic in a z-table, we can look up a z-statistic in a t-table like the one below:
+
+[T-Table](http://www.ttable.org)
 
 ## References
 

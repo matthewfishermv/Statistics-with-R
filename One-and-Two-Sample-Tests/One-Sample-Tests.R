@@ -11,11 +11,11 @@ pnorm(test.z, lower.tail=TRUE)
 x <- seq(-4, 4, by=0.1)
 y <- dnorm(x)
 plot(x, y, type="n", xlab="", ylab="")
-lines(c(critical.z, critical.z), c(0, dnorm(critical.z)), col="steelblue", lty=3)
+lines(c(critical.z, critical.z), c(0, dnorm(critical.z)), col="steelblue", lty=3, lwd=2)
 polygon(c(-4, seq(-4, test.z, by=0.001), test.z),
         c(0, dnorm(seq(-4, test.z, by=0.001)), 0),
         col="tomato2", border=0)
-lines(c(test.z, test.z), c(0, 0.1), col="steelblue")
+lines(c(test.z, test.z), c(0, 0.1), col="steelblue", lwd=2)
 lines(x, y, lwd=2)
 
 # Compare normal distribution with t-distribution.

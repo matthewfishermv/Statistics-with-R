@@ -2,42 +2,41 @@
 
 ## Contents
 
-- [Hypothesis Testing](#hypothesis-testing)
-  - [Contents](#contents)
-  - [Introduction](#introduction)
-  - [Samples](#samples)
-    - [Rule of Thumb: Sample Size](#rule-of-thumb-sample-size)
-  - [Sampling](#sampling)
-    - [Step 0: Summarize the available data](#step-0-summarize-the-available-data)
-    - [Step 1: Take repeated samples](#step-1-take-repeated-samples)
-    - [Step 2: For each sample, compute the mean](#step-2-for-each-sample-compute-the-mean)
-    - [Step 3: Consider the sampling means together](#step-3-consider-the-sampling-means-together)
-  - [Normal Distribution](#normal-distribution)
-    - [Properties of the Normal Distribution](#properties-of-the-normal-distribution)
-    - [The 68-95-99.7 Rule](#the-68-95-997-rule)
-    - [Z-Scores](#z-scores)
-    - [Quantiles](#quantiles)
-    - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
-    - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
-      - [Visualization](#visualization)
-  - [Central Limit Theorem](#central-limit-theorem)
-  - [Confidence Intervals](#confidence-intervals)
-    - [Example: Infant Birth Weights](#example-infant-birth-weights)
-  - [Hypotheses](#hypotheses)
-    - [Statistics](#statistics)
-    - [Hypotheses](#hypotheses-1)
-    - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
-      - [Step 1. State the hypotheses and significance level](#step-1-state-the-hypotheses-and-significance-level)
-      - [Step 2. Select the test statistic](#step-2-select-the-test-statistic)
-      - [Step 3. State the decision rule](#step-3-state-the-decision-rule)
-      - [Step 4. Compute the test statistic](#step-4-compute-the-test-statistic)
-      - [Step 5. Draw a conclusion](#step-5-draw-a-conclusion)
-    - [Examples](#examples)
-      - [Example 1: Infant birth weights](#example-1-infant-birth-weights)
-      - [Example 2: Fluoride levels in water](#example-2-fluoride-levels-in-water)
-    - [p-Values](#p-values)
-  - [Summary](#summary)
-  - [References](#references)
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [Samples](#samples)
+  - [Rule of Thumb: Sample Size](#rule-of-thumb-sample-size)
+- [Sampling](#sampling)
+  - [Step 0: Summarize the available data](#step-0-summarize-the-available-data)
+  - [Step 1: Take repeated samples](#step-1-take-repeated-samples)
+  - [Step 2: For each sample, compute the mean](#step-2-for-each-sample-compute-the-mean)
+  - [Step 3: Consider the sampling means together](#step-3-consider-the-sampling-means-together)
+- [Normal Distribution](#normal-distribution)
+  - [Properties of the Normal Distribution](#properties-of-the-normal-distribution)
+  - [The 68-95-99.7 Rule](#the-68-95-997-rule)
+  - [Z-Scores](#z-scores)
+  - [Quantiles](#quantiles)
+  - [Calculations in the Normal Distribution](#calculations-in-the-normal-distribution)
+  - [Examples: Infant Birth Weights](#examples-infant-birth-weights)
+    - [Visualization](#visualization)
+- [Central Limit Theorem](#central-limit-theorem)
+- [Confidence Intervals](#confidence-intervals)
+  - [Example: Infant Birth Weights](#example-infant-birth-weights)
+- [Hypotheses](#hypotheses)
+  - [Statistics](#statistics)
+  - [Hypotheses](#hypotheses-1)
+  - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
+    - [Step 1. State the hypotheses and significance level](#step-1-state-the-hypotheses-and-significance-level)
+    - [Step 2. Select the test statistic](#step-2-select-the-test-statistic)
+    - [Step 3. State the decision rule](#step-3-state-the-decision-rule)
+    - [Step 4. Compute the test statistic](#step-4-compute-the-test-statistic)
+    - [Step 5. Draw a conclusion](#step-5-draw-a-conclusion)
+  - [Examples](#examples)
+    - [Example 1: Infant birth weights](#example-1-infant-birth-weights)
+    - [Example 2: Fluoride levels in water](#example-2-fluoride-levels-in-water)
+  - [p-Values](#p-values)
+- [Summary](#summary)
+- [References](#references)
 
 ## Introduction
 
@@ -51,7 +50,7 @@ This module begins with a discussion about samples, sampling, distributions, and
 
 In statistics, we are interested in making statements about a population, however data about the entire population are almost never available due to budget limitations, feasability of collecting or processing large amounts of data, and the like. Instead, we must take a reasonably sized sample from the entire population under study in a controlled manner, such that the characteristics of the sample are representative of the entire population. A **sample** is a "smaller, manageable version of a larger group. It is a subset containing the characteristics of a larger population" [[1]](#references).
 
-R provides the function `sample()`, which allows us to take a sample from any larger set of data. The code below randomly generates the ages of 500 people to simulate a population, then takes three separate samples of size n=10. Graphical summaries (using histograms) of the overall population and each of the samples are then plotted.
+R provides the function `sample()`, which allows us to take a sample from any larger set of data. The code below randomly generates the ages of 500 people to simulate a population, then takes three separate samples of size *n = 10*. Graphical summaries (using histograms) of the overall population and each of the samples are then plotted.
 
 ```R
 # Generate a set of random data points.
@@ -86,7 +85,7 @@ print(c(sd(ages), sd(sample.1), sd(sample.2), sd(sample.3)))
 
 We see that the means differ and that there is a different amount of varaiability in each sample relative to the population. This is an important characteristic of samples - the mean and standard deviation of any sample may be different from those of the underlying population. That is, each sample is unique and will not exactly match the characteristics of the population. Thus, you can never be 100% certain that a sample is representative of the population. We will discuss this point shortly in the context of confidence intervals. For now, notice what occurs what we increase the sample size.
 
-The code below repeats the sampling methodology used above, but with different sample sizes. Here, sample sizes of n=15, n=30, and n=100 are used.
+The code below repeats the sampling methodology used above, but with different sample sizes. Here, sample sizes of *n = 15*, *n = 30*, and *n = 100* are used.
 
 ```R
 # Take three samples of n=15, n=30, n=100.
@@ -104,7 +103,7 @@ hist(sample.6, main="Sample 6 (n=100)")
 
 ![Histograms of population ages and 3 samples of sizes 15, 30, 100](/Course-Content/Images/histograms-of-ages-and-size-15-30-100-samples.png)
 
-Notice that we take large samples and the variability decreases. That is, the distribution of values in the sample become a better approximate of the distribution of the population as the sample size increases. You can convince yourself that this is true by imagining what a sample of size n=500 would look like from this population of N=500 ages. Using numerical summaries, we can also observe the decreasing varaibility:
+Notice that we take large samples and the variability decreases. That is, the distribution of values in the sample become a better approximate of the distribution of the population as the sample size increases. You can convince yourself that this is true by imagining what a sample of size *n = 500* would look like from this population of *N = 500* ages. Using numerical summaries, we can also observe the decreasing varaibility:
 
 ```R
 print(c(mean(ages), mean(sample.4), mean(sample.5), mean(sample.6)))
@@ -126,7 +125,7 @@ We conclude this section by sharing this general rule of thumb:
 
 Knowing that we rarely have access to an entire population, we concern ourselves next with the methods we can use to compensate for this fact.
 
-Whereas a sample is a single subset of a population, **sampling** refers to the procedure for taking samples. In the section above, our sampling procedure was first to take three repeated samples of size n=10, then to take three samples of sizes n=15, n=30, n=100.
+Whereas a sample is a single subset of a population, **sampling** refers to the procedure for taking samples. In the section above, our sampling procedure was first to take three repeated samples of size *n = 10*, then to take three samples of sizes *n = 15*, *n = 30*, *n = 100*.
 
 Let us consider a sampling procedure used frequently in statistics that allows us to compensate for the fact that we do not have access to an entire population's data:
 
@@ -183,12 +182,20 @@ The mean and standard deviation of the original data and those of the sampling d
 
 ### Step 2: For each sample, compute the mean
 
-We take this one step further by computing the mean each time we take a sample. Instead of using n=1 as our sample size, let us use n=30 and we can modify the `for` loop to take the mean before storing the results in `outcomes`:
+We take this one step further by computing the mean each time we take a sample. Instead of using n=1 as our sample size, let us use *n = 30* and we can modify the `for` loop to take the mean before storing the results in `outcomes`:
 
 ```R
 # Take 10,000 samples of size n=30 from the temperature data.
 outcomes <- numeric(10000)
 for (i in 1:10000) outcomes[i] <- mean(sample(temps, 30))
+```
+
+Multiple actions can be performed in a `for` loop. To do so, enclose the body of the `for` loop in curly braces. Here is the same `for` loop with a single statement in its body:
+
+```R
+for (i in 1:10000) {
+  outcomes[i] <- mean(sample(temps, 30))
+}
 ```
 
 ### Step 3: Consider the sampling means together

@@ -2,34 +2,33 @@
 
 ## Contents
 
-- [Fundamentals](#fundamentals)
-  - [Contents](#contents)
-  - [Introduction](#introduction)
-  - [Getting Started with R](#getting-started-with-r)
-    - [Operators](#operators)
-    - [Expressions](#expressions)
-    - [Variables](#variables)
-    - [Functions](#functions)
-  - [Data and Statistics](#data-and-statistics)
-    - [Example: Student Grades](#example-student-grades)
-    - [Histograms](#histograms)
-    - [Try it Yourself](#try-it-yourself)
-    - [Stem and Leaf Plots](#stem-and-leaf-plots)
-  - [Numerical Summaries](#numerical-summaries)
-    - [Measures of Central Tendency](#measures-of-central-tendency)
-      - [Arithmetic Mean](#arithmetic-mean)
-      - [Median](#median)
-      - [Mean vs. Median](#mean-vs-median)
-      - [Five-Number Summary](#five-number-summary)
-    - [Measures of Variability](#measures-of-variability)
-      - [Range, Interquartile Range, and Outliers](#range-interquartile-range-and-outliers)
-      - [Variance](#variance)
-      - [Standard Deviation](#standard-deviation)
-  - [Graphical Summaries](#graphical-summaries)
-    - [Histograms](#histograms-1)
-    - [Boxplots](#boxplots)
-  - [Summary](#summary)
-  - [References](#references)
+- [Contents](#contents)
+- [Introduction](#introduction)
+- [Getting Started with R](#getting-started-with-r)
+  - [Operators](#operators)
+  - [Expressions](#expressions)
+  - [Variables](#variables)
+  - [Functions](#functions)
+- [Data and Statistics](#data-and-statistics)
+  - [Example: Student Grades](#example-student-grades)
+  - [Histograms](#histograms)
+  - [Try it Yourself](#try-it-yourself)
+  - [Stem and Leaf Plots](#stem-and-leaf-plots)
+- [Numerical Summaries](#numerical-summaries)
+  - [Measures of Central Tendency](#measures-of-central-tendency)
+    - [Arithmetic Mean](#arithmetic-mean)
+    - [Median](#median)
+    - [Mean vs. Median](#mean-vs-median)
+    - [Five-Number Summary](#five-number-summary)
+  - [Measures of Variability](#measures-of-variability)
+    - [Range, Interquartile Range, and Outliers](#range-interquartile-range-and-outliers)
+    - [Variance](#variance)
+    - [Standard Deviation](#standard-deviation)
+- [Graphical Summaries](#graphical-summaries)
+  - [Histograms](#histograms-1)
+  - [Boxplots](#boxplots)
+- [Summary](#summary)
+- [References](#references)
 
 ## Introduction
 
@@ -46,7 +45,7 @@ The aim of this course is to develop your understanding of the science and pract
 
 It is likely that you have come across statistics in one form or another, whether you were aware of it or not. Statistics is used to gain an understanding of data and make predictions about the future. It allows weather reporters to predict what a storm might do and doctors to understand the health of their patients or the prognosis of an illness. Statistics is applied in a wide range of areas: mathematics, economics, social sciences, trade, research, programming, Big Data, data science, health, business, government, and education [[1]](#references). And this list is far from exhaustive.
 
-In a statistical setting, we are concerned with the collection, analysis, and presentation of empirical data using statistical methods [[2]](#references). Inherent to this setting are two key concepts of **uncertainty** and **variation** [[2]](#references). In this course, you will learn to make statistical statements about populations of interest while accounting for uncertainty and variation in the analytical techniques and/or underlying data.
+In a statistical setting, we are concerned with the collection, analysis, and presentation of empirical data using statistical methods [[2]](#references). Inherent to this setting are two key concepts of <ins>uncertainty</ins> and <ins>variation</ins> [[2]](#references). In this course, you will learn to make statistical statements about populations of interest while accounting for uncertainty and variation in the analytical techniques and/or underlying data.
 
 ## Getting Started with R
 
@@ -75,11 +74,11 @@ To begin, the table below summarizes common operators you will use.
 
 | Operator | Purpose | Example | Example Output |
 |----------|---------|---------|----------------|
-| + | Add | 4 + 2 | 6 |
-| - | Subtract | 4 - 2 | 2 |
-| * | Multiply | 4 * 2 | 8 |
-| / | Divide | 4 / 2 | 2 |
-| ^ | Raise to a power | 4 ^ 2 | 16 |
+| `+` | Add | 4 + 2 | 6 |
+| `-` | Subtract | 4 - 2 | 2 |
+| `*` | Multiply | 4 * 2 | 8 |
+| `/` | Divide | 4 / 2 | 2 |
+| `^` | Raise to a power | 4 ^ 2 | 16 |
 
 ### Expressions
 
@@ -149,11 +148,12 @@ This is the general form of functions in R - they have a name followed by parent
 
 | Function | Description | Arguments | Example |
 |----------|-------------|-----------|---------|
-| help(topic) | Retrieve helpful information about a topic in R | topic - the topic, for which help is sought | help(print) |
-| c() | Combines items into a vector | A comma-separated list of values, all the same type | c(1, 2, 3, 4, 5) |
-| print(x) | Prints output to the console | x - the object to print | print("This is an example.") |
-| sqrt(x) | Take the square root | x - the value to take the square root of | area <- 81; sqrt(area) |
-| log(x, b) | Compute a logarithm | x - the number to take the log of; b - the base of the log | log(16, 2) |
+| `help(topic)` | Retrieve helpful information about a topic in R | topic - the topic, for which help is sought | `help(print)` |
+| `c()` | Combines items into a vector | A comma-separated list of values, all the same type | `c(1, 2, 3, 4, 5)` |
+| `print(x)` | Prints output to the console | x - the object to print | `print("This is an example.")` |
+| `sqrt(x)` | Take the square root | x - the value to take the square root of | `area <- 81; sqrt(area)` |
+| `sum(x)` | Sum the values in x | x - a vector of values to sum | `sum(c(1, 2, 30))` |
+| `log(x, b)` | Compute a logarithm | x - the number to take the log of; b - the base of the log | `log(16, 2)` |
 
 Functions can be vectorized in R. That is, you can pass a vector of values into many R functions and they will be perform their actions for *each* value in the vector. Consider the following example and its output, showing how we could find the length of the sides of squares from their areas:
 
@@ -402,19 +402,19 @@ Recall that we are concerned with uncertainty and variability in statistics. For
 
 Before we can understand variance, we need to understand the concept of degrees of freedom. **Degrees of freedom** are the number of values that are free to vary. Suppose we had a sample of 4 numbers and their arithmetic mean was 4. We pick numbers for our sample set one by one and observe the overall set at each step:
 
-{1, _, _, _}
+`{1, _, _, _}`
 
 We have added one number. We can pick any value for the next element. Let us pick 5:
 
-{1, 5, _, _}
+`{1, 5, _, _}`
 
 We have added another number. We can pick any value for the next element. Let us pick 3:
 
-{1, 5, 3, _}
+`{1, 5, 3, _}`
 
-We have added another number, but we cannot pick any value for the next element. Because the mean for the sample set is 4, the only possible value for the last element is 3 since (1 + 5 + 3 + 3) / 4 = 4.
+We have added another number, but we cannot pick any value for the next element. Because the mean for the sample set is 4, the only possible value for the last element is 3 since *(1 + 5 + 3 + 3) / 4 = 4*.
 
-In this example, we had a variable with n=4 observations and n-1=3 of them could vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
+In this example, we had a variable with *n = 4* observations and *n - 1 = 3* of them could vary. This is generally the case that when we estimate one parameter from a variable, we lose a degree of freedom. In the case of means, we are estimating a single parameter, and so the degrees of freedom are:
 
 ![Formula for degrees of freedom with one parameter](/Course-Content/Images/Equations/degrees-of-freedom-1param.png)
 

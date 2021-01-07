@@ -60,6 +60,10 @@ sd(temps)
 outcomes <- numeric(10000)
 for (i in 1:10000) outcomes[i] <- sample(temps, 1)
 
+for (i in 1:10000) {
+  outcomes[i] <- mean(sample(temps, 30))
+}
+
 # Compare the mean of this sampling with the mean of the original data.
 cat(mean(temps), mean(outcomes))
 cat(sd(temps), sd(outcomes))

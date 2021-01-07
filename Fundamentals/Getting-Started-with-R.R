@@ -34,6 +34,7 @@ help(print)
 c(1, 2, 3, 4, 5)
 print("This is an example.")
 area <- 81; sqrt(area)
+sum(c(1, 2, 3))
 log(16, 2)
 
 areas <- c(25, 64, 81, 49, 36)
