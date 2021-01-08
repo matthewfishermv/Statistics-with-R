@@ -298,6 +298,10 @@ Traditionally, these values are calculated by looking up `q` or `p` in a z-table
 
 [Z-Table](https://www.ztable.net/)
 
+For example, we can find the percentage of values that fall below a z-score of 0.85:
+
+![Z-Table example](/Course-Content/Images/z-table-example.png)
+
 For this course, we will use R to compute these values more precisely. There are three functions of primary interest:
 
 | Function | Parameters | Returns | Example |

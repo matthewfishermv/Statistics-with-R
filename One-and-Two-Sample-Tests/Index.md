@@ -217,6 +217,17 @@ Just as we could look up the z-statistic in a z-table, we can look up a z-statis
 
 [T-Table](http://www.ttable.org)
 
+For example, we can find the t-value associated with a one-tailed test with a 5% level of siginficance and 9 degrees of freedom:
+
+![T-Table example](/Course-Content/Images/t-table-example.png)
+
+Equivalently, in R:
+
+```R
+qt(0.05, df=9, lower.tail=FALSE)
+[1] 1.833113
+```
+
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
