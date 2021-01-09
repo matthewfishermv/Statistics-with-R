@@ -306,6 +306,8 @@ This code produces the follow plot. Note that the mean (red line) is pulled righ
 
 ![Histogram of data skewed by an outlier](/Course-Content/Images/histogram-of-skewed-data.png)
 
+In this course, we will use x̅ and y̅ interchangeably to refer to the arithmetic mean.
+
 #### Median
 
 The shortcomings of the mean are overcome by the **median**, which is far more resistant to outliers. The median is the middle value in the data set when the data are written in order. The formula for median is:
@@ -369,7 +371,7 @@ range(grades)
 
 The second range we can calculate is known as the **interquartile range** and it is the difference between Q3 (the third quartile) and Q1 (the first quartile):
 
-![Formula for interquantile range](/Course-Content/Images/Equations/interquartile-range.png)
+![Formula for interquartile range](/Course-Content/Images/Equations/interquartile-range.png)
 
 In our student grades data, we can calculate the interquartile range by subtracting Q1 from Q3 or by using the `IQR()` function:
 
@@ -498,7 +500,7 @@ We will end each module in this course with a summary of the key concepts that w
 | Vectors | Vectors are used to store multiple values of the same type | N/A | `variable.name <- c(values)` | `prices <- c(4.95, 8.75, 9.99)` |
 | Arithmetic mean | The average or expected value; it is a measure of centrality | ![Formula for arithmetic mean](/Course-Content/Images/Equations/arithmetic-mean.png) | `mean(x)` | `mean(grades)` |
 | Median | The middle of all values of a variable; it is a measure of centrality often used when outliers are present | ![Formula for median](/Course-Content/Images/Equations/median.png) | `median(x)` | `median(grades)` |
-| Interquartile range (IQR) | The range of the middle 50% of the data; it is a measure of variability often used when outliers are present | ![Formula for interquantile range](/Course-Content/Images/Equations/interquartile-range.png) | `IQR(x)` | `IQR(grades)` |
+| Interquartile range (IQR) | The range of the middle 50% of the data; it is a measure of variability often used when outliers are present | ![Formula for interquartile range](/Course-Content/Images/Equations/interquartile-range.png) | `IQR(x)` | `IQR(grades)` |
 | Variance | A measure of how much the data tend to vary from the mean of the data; it is a measure of variability | ![Formula for variance](/Course-Content/Images/Equations/variance.png) | `var(x)` | `var(grades)` |
 | Standard deviation | A measure of how much the data tend to vary from the mean of the data, expressed in the same units as the data | ![Formula for standard deviation](/Course-Content/Images/Equations/standard-deviation.png) | `sd(x)` | `sd(grades)` |
 | Histogram | A graphical summary similar to a column chart that shows the frequency of observations occurring in bins of a certain width | N/A | `hist(x)` | `hist(grades)` |

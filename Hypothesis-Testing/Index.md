@@ -48,7 +48,7 @@ This module begins with a discussion about samples, sampling, distributions, and
 
 *Code for this section:* [Samples and Sampling](/Hypothesis-Testing/Samples-and-Sampling.R)
 
-In statistics, we are interested in making statements about a population, however data about the entire population are almost never available due to budget limitations, feasability of collecting or processing large amounts of data, and the like. Instead, we must take a reasonably sized sample from the entire population under study in a controlled manner, such that the characteristics of the sample are representative of the entire population. A **sample** is a "smaller, manageable version of a larger group. It is a subset containing the characteristics of a larger population" [[1]](#references).
+In statistics, we are interested in making statements about a population, however data about the entire population are almost never available due to budget limitations, feasibility of collecting or processing large amounts of data, and the like. Instead, we must take a reasonably sized sample from the entire population under study in a controlled manner, such that the characteristics of the sample are representative of the entire population. A **sample** is a "smaller, manageable version of a larger group. It is a subset containing the characteristics of a larger population" [[1]](#references).
 
 R provides the function `sample()`, which allows us to take a sample from any larger set of data. The code below randomly generates the ages of 500 people to simulate a population, then takes three separate samples of size *n = 10*. Graphical summaries (using histograms) of the overall population and each of the samples are then plotted.
 
@@ -83,7 +83,7 @@ print(c(sd(ages), sd(sample.1), sd(sample.2), sd(sample.3)))
 [1] 8.229684 6.751736 7.968278 9.085657
 ```
 
-We see that the means differ and that there is a different amount of varaiability in each sample relative to the population. This is an important characteristic of samples - the mean and standard deviation of any sample may be different from those of the underlying population. That is, each sample is unique and will not exactly match the characteristics of the population. Thus, you can never be 100% certain that a sample is representative of the population. We will discuss this point shortly in the context of confidence intervals. For now, notice what occurs what we increase the sample size.
+We see that the means differ and that there is a different amount of variability in each sample relative to the population. This is an important characteristic of samples - the mean and standard deviation of any sample may be different from those of the underlying population. That is, each sample is unique and will not exactly match the characteristics of the population. Thus, you can never be 100% certain that a sample is representative of the population. We will discuss this point shortly in the context of confidence intervals. For now, notice what occurs what we increase the sample size.
 
 The code below repeats the sampling methodology used above, but with different sample sizes. Here, sample sizes of *n = 15*, *n = 30*, and *n = 100* are used.
 
@@ -103,7 +103,7 @@ hist(sample.6, main="Sample 6 (n=100)")
 
 ![Histograms of population ages and 3 samples of sizes 15, 30, 100](/Course-Content/Images/histograms-of-ages-and-size-15-30-100-samples.png)
 
-Notice that we take large samples and the variability decreases. That is, the distribution of values in the sample become a better approximate of the distribution of the population as the sample size increases. You can convince yourself that this is true by imagining what a sample of size *n = 500* would look like from this population of *N = 500* ages. Using numerical summaries, we can also observe the decreasing varaibility:
+Notice that we take large samples and the variability decreases. That is, the distribution of values in the sample become a better approximate of the distribution of the population as the sample size increases. You can convince yourself that this is true by imagining what a sample of size *n = 500* would look like from this population of *N = 500* ages. Using numerical summaries, we can also observe the decreasing variability:
 
 ```R
 print(c(mean(ages), mean(sample.4), mean(sample.5), mean(sample.6)))
@@ -224,7 +224,7 @@ One of the most used distributions in statistics is the **Normal Distribution**,
 
 ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png)
 
-You will not need to compute values using this function directly in this course, but notice that the function takes three parameters: *x*, the values from the data set, *μ*, the population mean, and *σ*, the population standard devation, and produces a bell-shaped curve that looks like this:
+You will not need to compute values using this function directly in this course, but notice that the function takes three parameters: *x*, the values from the data set, *μ*, the population mean, and *σ*, the population standard deviation, and produces a bell-shaped curve that looks like this:
 
 ![Curve of the Normal Distribution](/Course-Content/Images/normal-distribution.png)
 
@@ -252,7 +252,7 @@ and to compute the area under the curve below a point a, we would integrate the 
 
 ### The 68-95-99.7 Rule
 
-An interesting feature of the Noraml Distribution that we can take advantage of for statistics is the 68%-95%-99.7% Rule:
+An interesting feature of the Normal Distribution that we can take advantage of for statistics is the 68%-95%-99.7% Rule:
 
 > For a normally distributed variable, approximately 68% of its values fall within one standard deviation of the mean, 95% fall within two standard deviations of the mean, and 99.7% fall within three standard deviations of the mean [[5]](#references).
 
@@ -291,7 +291,7 @@ These values are:
 | Variable | Names | Description | Formula | Example |
 |----------|-------|-------------|---------|---------|
 | `p` | `p`-value, cumulative probability | The probability of observing a value in the range (-∞, `q`) | ![Formula for cumulative probability function](/Course-Content/Images/Equations/normal-distribution-cumulative.png) |`p` = P(X ≤ -1.96) = 0.024 |
-| `q` | quantile, critical value | The critical value, below wich `p`% of the values fall | ![Formula for quantile function](/Course-Content/Images/Equations/quantile-function.png) | `q` = 0.95 is the 95th percentile |
+| `q` | quantile, critical value | The critical value, below which `p`% of the values fall | ![Formula for quantile function](/Course-Content/Images/Equations/quantile-function.png) | `q` = 0.95 is the 95th percentile |
 | `d` | density | The probability of observing the quantile `q` | ![Formula for Normal Distribution](/Course-Content/Images/Equations/normal-distribution.png) | `d` = P(-1.96) = 0.06 |
 
 Traditionally, these values are calculated by looking up `q` or `p` in a z-table like the one below:
@@ -385,7 +385,7 @@ This is quite an amazing result and allows us to use the properties of the Norma
 
 A **confidence interval** is a likely range of values based on sample data that the population parameter is likely to fall in with a specified level of certainty if we repeat the sampling exercise. We can, for example, say that we are 95% confident that the true mean for infant birth weights falls in a range of weights.
 
-We select a **significance level**, which we denote α (Greek letter "alpha"). Statisticians frequently select α = 0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a signficance level of *α = 0.10*.
+We select a **significance level**, which we denote α (Greek letter "alpha"). Statisticians frequently select α = 0.05 in order to construct a 95% confidence interval. The confidence level and significance level are related as *CI = 1 - α*. For a confidence level of 90%, we would select a significance level of *α = 0.10*.
 
 The confidence interval is equal to the area in the central region of the Normal Distribution. The regions under the left and right tails of the distribution are each equal to half of the significance level. Check your understanding of these relationships by observing the plot below:
 
@@ -457,6 +457,8 @@ Let us now look at the general procedure for testing hypotheses. We will use thi
 3. State the decision rule.
 4. Compute the test statistic.
 5. Draw a conclusion.
+
+![Hypothesis testing procedure](/Course-Content/Images/hypothesis-testing-procedure.png)
 
 #### Step 1. State the hypotheses and significance level
 

@@ -14,6 +14,7 @@
     - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
     - [Example: Customer transaction time](#example-customer-transaction-time)
     - [Example: Student ages](#example-student-ages)
+- [Two-Sample Tests](#two-sample-tests)
 - [References](#references)
 
 ## Introduction
@@ -59,7 +60,7 @@ In step 5, we draw a conclusion based on the value of the test statistic from st
 
 *Code for this section:* [Significance Tests and Confidence Intervals](/One-and-Two-Sample-Tests/Significance-Tests-and-Confidence-Intervals.R)
 
-You have seen how to carry out a formal test of significance. This five-step procedure will apply to all of the formal tests we examine in this course. In this section, we point out the relationship between significance tests and confidence interal.
+You have seen how to carry out a formal test of significance. This five-step procedure will apply to all of the formal tests we examine in this course. In this section, we point out the relationship between significance tests and confidence interval.
 
 In the five-step procedure for testing hypotheses, we stated two different forms of the decision rule:
 
@@ -71,9 +72,9 @@ In the five-step procedure for testing hypotheses, we stated two different forms
 > <ins>2. Based on the p-value:</ins>
 > - **Left-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is less than the significance level α.
 > - **Right-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is greater than the significance level α.
-> - **Two-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is more extreme than the signifiance level α.
+> - **Two-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is more extreme than the significance level α.
 
-These two decision rules are mathematically equivalent and result in the same conclusion. There is a third way to conduct the test and that is based on the confidence interval. A two-sided test will reject the null hypothesis if the *(1 - α)* confidence interval around the sample mean does not contain th mean under the null hypothesis [[2]](#references). That is, we can reject H<sub>0</sub>: µ = µ<sub>0</sub> if the *(1 - α)* confidence level around x̄ does not contain µ<sub>0</sub>.
+These two decision rules are mathematically equivalent and result in the same conclusion. There is a third way to conduct the test and that is based on the confidence interval. A two-sided test will reject the null hypothesis if the *(1 - α)* confidence interval around the sample mean does not contain the mean under the null hypothesis [[2]](#references). That is, we can reject H<sub>0</sub>: µ = µ<sub>0</sub> if the *(1 - α)* confidence level around x̄ does not contain µ<sub>0</sub>.
 
 Let us visualize this relationship:
 
@@ -255,7 +256,7 @@ Just as we could look up the z-statistic in a z-table, we can look up a z-statis
 
 [T-Table](http://www.ttable.org)
 
-For example, we can find the t-value associated with a one-tailed test with a 5% level of siginficance and 9 degrees of freedom:
+For example, we can find the t-value associated with a one-tailed test with a 5% level of significance and 9 degrees of freedom:
 
 ![T-Table example](/Course-Content/Images/t-table-example.png)
 
@@ -272,7 +273,7 @@ R also has a built-in function for carrying out a one-sample t-test, `t.test()`.
 |----------|-------------|---------|
 | `x` | A vector of values | `x = c(1, 2, 3, 4, 5)` |
 | `mu` | The mean under the null hypothesis, µ<sub>0</sub> | `mu = 3` |
-| `alternative` | "less" for a left-tailed test, "greater" for a right-taled test, or "two.sided" for a two-sided test | `alternative = "greater"` |
+| `alternative` | "less" for a left-tailed test, "greater" for a right-tailed test, or "two.sided" for a two-sided test | `alternative = "greater"` |
 
 Suppose you have a variable from a sample *X = {1, 2, 3, 4, 5}*. You can use the `t.test()` function to test whether the mean value in the sample is greater than 2.5:
 
@@ -426,10 +427,24 @@ mean of x
 
 We fail to reject the null hypothesis since *p > α*. There is not significant evidence that the mean age of students is different from 16.9. The 95% confidence interval for the mean age of students is *(14.89, 18.91)*.
 
+## Two-Sample Tests
+
+There are many situations in which it is useful to compare the means of two populations. The efficacy of a medication may be assessed by measuring the effect in two groups, one that receives the medication and one that does not. A retail business may compare the price of its products across two different stores. A government agency may be interested in the cost of living across two different cities. In all of these cases, we can boil the question down to a comparison of the mean in each of two different populations [[2]](#references).
+
+As with one-sample tests, certain assumptions must be met to ensure the applicability of a two-sample test [[6]](#references):
+
+1. The data are normally distribution, or approximately so.
+2. The variances of the two populations are equal.
+3. The two samples are independent (that is, the values in one sample do not depend on the values of the other).
+4. Both samples are constructed through a process of random sampling, whereby each observation is equally likely to be included in the sample.
+
+
+
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
-2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 310-312.
+2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 310-312, 321-322.
 3. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
 4. https://www.investopedia.com/terms/t/tdistribution.asp
 5. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
+6. https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Two-Sample_T-Test.pdf
