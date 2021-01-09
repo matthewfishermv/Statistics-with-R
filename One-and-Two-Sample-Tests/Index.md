@@ -5,6 +5,7 @@
 - [Contents](#contents)
 - [Introduction](#introduction)
 - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
+- [Significance Tests and Confidence Intervals](#significance-tests-and-confidence-intervals)
 - [Standard Error](#standard-error)
 - [One-Sample Tests](#one-sample-tests)
   - [One-Sample Z-Test](#one-sample-z-test)
@@ -54,15 +55,50 @@ In step 4, we carry out the test by computing the test statistic we selected in 
 
 In step 5, we draw a conclusion based on the value of the test statistic from step 4, applying the decision rule from step 3.
 
+## Significance Tests and Confidence Intervals
+
+*Code for this section:* [Significance Tests and Confidence Intervals](/One-and-Two-Sample-Tests/Significance-Tests-and-Confidence-Intervals.R)
+
+You have seen how to carry out a formal test of significance. This five-step procedure will apply to all of the formal tests we examine in this course. In this section, we point out the relationship between significance tests and confidence interal.
+
+In the five-step procedure for testing hypotheses, we stated two different forms of the decision rule:
+
+> <ins>1. Based on the test statistic:</ins>
+> - **Left-tailed test**: Reject H<sub>0</sub> if z (test) is less than or equal to z (critical).
+> - **Right-tailed test**: Reject H<sub>0</sub> if z (test) is greater than or equal to z (critical).
+> - **Two-tailed test**: Reject H<sub>0</sub> if z (test) is as extreme or more extreme than z (critical).
+> 
+> <ins>2. Based on the p-value:</ins>
+> - **Left-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is less than the significance level α.
+> - **Right-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is greater than the significance level α.
+> - **Two-tailed test**: Reject H<sub>0</sub> if the p-value associated with the z-statistic is more extreme than the signifiance level α.
+
+These two decision rules are mathematically equivalent and result in the same conclusion. There is a third way to conduct the test and that is based on the confidence interval. A two-sided test will reject the null hypothesis if the *(1 - α)* confidence interval around the sample mean does not contain th mean under the null hypothesis [[2]](#references). That is, we can reject H<sub>0</sub>: µ = µ<sub>0</sub> if the *(1 - α)* confidence level around x̄ does not contain µ<sub>0</sub>.
+
+Let us visualize this relationship:
+
+![Visualization of decision rule based on confidence interval](Course-Content/images/../../../Course-Content/Images/hypothesis-testing-confidence-intervals.png)
+
+To understand this setting, suppose you have a sample with mean x̄ and a known population mean of µ. To test whether the sample mean x̄ is significantly different from a population mean µ<sub>0</sub>, you construct a 95% confidence level around x̄: *(x̄ - z • SE<sub>x̄</sub>, x̄ - z • SE<sub>x̄</sub>)*. If µ<sub>0</sub> falls inside this 95% confidence interval, you fail to reject H<sub>0</sub>. If µ<sub>0</sub> falls outside of this 95% confidence interval, you reject H</sub>0</sub>.
+
+Thus, you can assert that any value outside of the 95% confidence interval for the sample mean x̄ is significantly different. In other words, you can determine whether the sample mean x̄ is significantly different from any mean of interest µ<sub>0</sub> simply by determining whether µ<sub>0</sub> falls within the (1 - α) confidence interval of x̄.
+
+To state this decision rule formally:
+
+> <ins>3. Based on a confidence interval:</ins>
+> - **Two-tailed test**: Reject H<sub>0</sub> if *µ<sub>0</sub> ∈ (x̄ - z • SE<sub>x̄</sub>, x̄ - z • SE<sub>x̄</sub>)*.
+
+This form of the decision rule is often preferred 
+
 ## Standard Error
 
-We glossed over the denominator of the one-sample z-test *σ/√(n)* when we first looked at it, but it deserves some discussion. When estimating a population parameter using sample data, there is some unreliability, given that the sample size is smaller than the population size and may not be completely representative. The **standard error** is a measure of the unreliability of an estimate we make of a population parameter, expressed in the same terms as the parameter we are estimating [[2]](#references).
+We glossed over the denominator of the one-sample z-test *σ/√(n)* when we first looked at it, but it deserves some discussion. When estimating a population parameter using sample data, there is some unreliability, given that the sample size is smaller than the population size and may not be completely representative. The **standard error** is a measure of the unreliability of an estimate we make of a population parameter, expressed in the same terms as the parameter we are estimating [[3]](#references).
 
-Recall that variance is a measure of the variability of data points in a sample with respect to the mean. It tells us how much the values in the sample differ from the mean on average. When the variance increases (i.e., there is more variability in the data), the unreliability also increases. When the variance decreases (i.e., there is less variability in the data), the unreliability also decreases. This means that unreliability is proportional to the variance [[2]](#references):
+Recall that variance is a measure of the variability of data points in a sample with respect to the mean. It tells us how much the values in the sample differ from the mean on average. When the variance increases (i.e., there is more variability in the data), the unreliability also increases. When the variance decreases (i.e., there is less variability in the data), the unreliability also decreases. This means that unreliability is proportional to the variance [[3]](#references):
 
 ![Unreliability proportional to variance](/Course-Content/Images/Equations/unreliability-proportional-variance.png)
 
-With larger sample sizes, unreliability decreases, so unreliability is inversely proportional to the sample size [[2]](#references):
+With larger sample sizes, unreliability decreases, so unreliability is inversely proportional to the sample size [[3]](#references):
 
 ![Unreliability proportional to variance and inversely to sample size](/Course-Content/Images/Equations/unreliability-proportional-variance-inversely-n.png)
 
@@ -171,13 +207,13 @@ The visualization below shows the results of this test. The dotted blue line is 
 
 Situations arise where the assumptions required for a one-sample z-test do not hold. In fact, it is frequently the case that we do not have access to an entire population. In these situations, we cannot use a z-test. In these cases, we instead use a t-test. The concepts are the same, but we use a different distribution.
 
-The **T-distribution** is a bell-shaped distribution that is used to carry out hypothesis tests when the population mean and standard deviation are not known. It has wider tails than the Normal Distribution. Since we do not know the mean, we need to estimate it from the sample data, and thus we are concerned with *n - 1* degrees of freedom. The heaviness of the tails in a t-distribution are a function of the degrees of freedom in the sample, with smaller values producing a heavier tail [[3]](#references).
+The **T-distribution** is a bell-shaped distribution that is used to carry out hypothesis tests when the population mean and standard deviation are not known. It has wider tails than the Normal Distribution. Since we do not know the mean, we need to estimate it from the sample data, and thus we are concerned with *n - 1* degrees of freedom. The heaviness of the tails in a t-distribution are a function of the degrees of freedom in the sample, with smaller values producing a heavier tail [[4]](#references).
 
 Notice how the t-distribution compares with the Normal Distribution as the degrees of freedom vary:
 
 ![Normal distribution versus t distribution](../Course-Content/Images/normal-distribution-t-distribution.png)
 
-The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[3]](#references).
+The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[4]](#references).
 
 The procedure for carrying out a one-sample t-test is identical to a one-sample z-test:
 
@@ -195,7 +231,7 @@ with *n - 1* degrees of freedom.
 
 You will notice that the formula for a t-test is nearly identical to the formula for a z-test.
 
-The assumptions that must be met for a one-sample t-test are [[4]](#references):
+The assumptions that must be met for a one-sample t-test are [[5]](#references):
 
 1. The data come from a single sample.
 2. The mean and variance of the population are not known.
@@ -393,6 +429,7 @@ We fail to reject the null hypothesis since *p > α*. There is not significant e
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
-2. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
-3. https://www.investopedia.com/terms/t/tdistribution.asp
-4. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
+2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 310-312.
+3. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
+4. https://www.investopedia.com/terms/t/tdistribution.asp
+5. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
