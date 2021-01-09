@@ -12,6 +12,7 @@
   - [One-Sample T-Tests](#one-sample-t-tests)
     - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
     - [Example: Customer transaction time](#example-customer-transaction-time)
+    - [Example: Student ages](#example-student-ages)
 - [References](#references)
 
 ## Introduction
@@ -229,9 +230,41 @@ qt(0.05, df=9, lower.tail=FALSE)
 [1] 1.833113
 ```
 
+R also has a built-in function for carrying out a one-sample t-test, `t.test()`. The sample data must be stored in a variable and passed into the function. The function takes three arguments:
+
+| Argument | Description | Example |
+|----------|-------------|---------|
+| `x` | A vector of values | `x = c(1, 2, 3, 4, 5)` |
+| `mu` | The mean under the null hypothesis, µ<sub>0</sub> | `mu = 3` |
+| `alternative` | "less" for a left-tailed test, "greater" for a right-taled test, or "two.sided" for a two-sided test | `alternative = "greater"` |
+
+Suppose you have a variable from a sample *X = {1, 2, 3, 4, 5}*. You can use the `t.test()` function to test whether the mean value in the sample is greater than 2.5:
+
+```R
+t.test(x = c(1, 2, 3, 4, 5), mu = 2.5, alternative = "greater")
+
+	One Sample t-test
+
+data:  c(1, 2, 3, 4, 5)
+t = 0.70711, df = 4, p-value = 0.2593
+alternative hypothesis: true mean is greater than 2.5
+95 percent confidence interval:
+ 1.492557      Inf
+sample estimates:
+mean of x 
+```
+
+From the output, you can see that the t-statistic is 0.70711 on 4 degrees of freedom and the associated p-value is 0.2593.
+
 The standard error for a one-sample t-test is:
 
 ![Standard error for a one-sample t-test](/Course-Content/Images/Equations/standard-error.png)
+
+The confidence interval for a one-sample t-test is:
+
+![Formula for one-sample t-test confidence interval](/Course-Content/Images/Equations/confidence-interval-t.png)
+
+The confidence interval can be calculated for you by conducting a two-sided test using the `t.test()` function. The "95 percent confidence interval" section of the output shows the interval. For a valid confidence interval to be constructed, you must use a two-sided test.
 
 #### Example: Customer transaction time
 
@@ -283,6 +316,79 @@ We fail to reject H<sub>0</sub>: µ = 3.02 since 0.12 > 0.05. We do not have sig
 The visualization below shows the results of this test. The dotted blue line is the critical t-value (-1.71). The solid blue line is the z-statistic (-1.20). The t-statistic fell outside of the rejection region, so we were unable to reject the null hypothesis. The p-value associated with the t-statistic is the shaded red region.
 
 ![Visualization of customer transaction time test](/Course-Content/Images/customer-transaction-time-example.png)
+
+#### Example: Student ages
+
+10 students of all ages were selected at random to participate in a study. Their ages are given below. Informally test the following three hypotheses (assume a 0.05 significance level):
+
+> 1. The mean age of students is less than 20.
+> 2. The mean age of students is at least 16.
+> 3. The mean age of students is different from 16.9.
+
+> <ins>Student Ages:</ins>
+> 
+> 12, 14, 15, 16, 16, 18, 18, 19, 20, 21
+
+**Solution**
+
+We can use R's built-in `t.test()` function to carry out the tests.
+
+<ins>Hypothesis 1: mean age < 20</ins>
+
+```R
+t.test(ages, mu=20, alternative="less")
+
+	One Sample t-test
+
+data:  ages
+t = -3.4927, df = 9, p-value = 0.003401
+alternative hypothesis: true mean is less than 20
+95 percent confidence interval:
+     -Inf 18.52701
+sample estimates:
+mean of x 
+     16.9 
+```
+
+We reject the null hypothesis since *p = 0.003* is less than *α = 0.05*. There is significant evidence that the mean age of students is less than 20.
+
+<ins>Hypothesis 2: mean age ≥ 16</ins>
+
+```R
+t.test(ages, mu=16, alternative="greater")
+
+	One Sample t-test
+
+data:  ages
+t = 1.014, df = 9, p-value = 0.1685
+alternative hypothesis: true mean is greater than 16
+95 percent confidence interval:
+ 15.27299      Inf
+sample estimates:
+mean of x 
+     16.9
+```
+
+We fail to reject the null hypothesis since *p > α*. There is not significant evidence that the mean age of students is at least 16.
+
+<ins>Hypothesis 3: mean age ≠ 16.9 </ins>
+
+```R
+t.test(ages, mu=16.9, alternative="two.sided")
+
+	One Sample t-test
+
+data:  ages
+t = 0, df = 9, p-value = 1
+alternative hypothesis: true mean is not equal to 16.9
+95 percent confidence interval:
+ 14.89218 18.90782
+sample estimates:
+mean of x 
+     16.9 
+```
+
+We fail to reject the null hypothesis since *p > α*. There is not significant evidence that the mean age of students is different from 16.9. The 95% confidence interval for the mean age of students is *(14.89, 18.91)*.
 
 ## References
 
