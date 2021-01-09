@@ -1,3 +1,7 @@
+####
+# One-Sample Z-Tests
+####
+
 # Example: Weight loss program.
 critical.z <- qnorm(0.05, lower.tail=TRUE)
 print(critical.z)
@@ -15,8 +19,12 @@ lines(c(critical.z, critical.z), c(0, dnorm(critical.z)), col="steelblue", lty=3
 polygon(c(-4, seq(-4, test.z, by=0.001), test.z),
         c(0, dnorm(seq(-4, test.z, by=0.001)), 0),
         col="tomato2", border=0)
-lines(c(test.z, test.z), c(0, 0.1), col="steelblue", lwd=2)
+lines(c(test.z, test.z), c(0, 0.033), col="steelblue", lwd=2)
 lines(x, y, lwd=2)
+
+####
+# One-Sample T-Tests
+####
 
 # Compare normal distribution with t-distribution.
 x <- seq(-4, 4, by=0.1)
@@ -42,6 +50,7 @@ pt(-1.96, df=9)
 qt(0.041, df=9)
 dt(1.96, df=9)
 qt(0.05, df=9, lower.tail=FALSE)
+t.test(x = c(1, 2, 3, 4, 5), mu = 2.5, alternative = "greater")
 
 # Example: Customer transaction time.
 critical.t <- qt(0.05, df=24)
@@ -62,3 +71,10 @@ polygon(c(-4, seq(-4, test.t, by=0.001), test.t),
 lines(c(critical.t, critical.t), c(0, dt(critical.t, df=24)), col="steelblue", lty=3, lwd=2)
 lines(c(test.t, test.t), c(0, 0.189), col="steelblue", lwd=2)
 lines(x, y, lwd=2)
+
+# Example: Ages.
+ages <- c(12, 14, 15, 16, 16, 18, 18, 19, 20, 21)
+
+t.test(ages, mu=20, alternative="less")
+t.test(ages, mu=16, alternative="greater")
+t.test(ages, mu=16.9, alternative="two.sided")
