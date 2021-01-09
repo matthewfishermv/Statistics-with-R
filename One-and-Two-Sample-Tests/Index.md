@@ -11,6 +11,7 @@
     - [Example: Weight loss program](#example-weight-loss-program)
   - [One-Sample T-Tests](#one-sample-t-tests)
     - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
+    - [Example: Customer transaction time](#example-customer-transaction-time)
 - [References](#references)
 
 ## Introduction
@@ -227,6 +228,61 @@ Equivalently, in R:
 qt(0.05, df=9, lower.tail=FALSE)
 [1] 1.833113
 ```
+
+The standard error for a one-sample t-test is:
+
+![Standard error for a one-sample t-test](/Course-Content/Images/Equations/standard-error.png)
+
+#### Example: Customer transaction time
+
+A retail business is interested in decreasing the amount of time customers spend during checkout transactions. A sample of *n = 25* customer transactions is taken and the mean transaction time is found to be *2.89* minutes with a standard deviation of *s = 0.54*. Previous transaction data show that the mean transaction time was *µ = 3.02 minutes* per transaction with an unknown standard deviation. Did the business succeed in decreasing customer transaction time?
+
+**State the hypotheses and significance level**
+
+> H<sub>0</sub>: μ = 3.02 (transaction time did not change)
+> 
+> H<sub>1</sub>: μ < 3.02 (transaction time decreased)
+> 
+> α = 0.05
+
+**Select the test statistic**
+
+![Formula for t-statistic/t-test](/Course-Content/Images/Equations/t-test.png)
+
+**State the decision rule**
+
+We find a critical value from the t-distribution with *25 - 1 = 24* degrees of freedom a left-hand tail probability of α, t<sub>0.05</sub>:
+
+```R
+critical.t <- qt(0.05, df=24)
+print(critical.t)
+[1] -1.710882
+```
+
+We reject H<sub>0</sub> if the p-value associated with the t-statistic is less than α. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+test.t <- (2.89 - 3.02) / (0.54 / sqrt(25))
+print(test.t)
+[1] -1.203704
+```
+
+The p-value associated with this t-statistic is:
+
+```R
+pt(test.t, df=24)
+[1] 0.1202214
+```
+
+**Draw a conclusion**
+
+We fail to reject H<sub>0</sub>: µ = 3.02 since 0.12 > 0.05. We do not have significant evidence at the α = 0.05 level that the retail business decreased customer transaction time.
+
+The visualization below shows the results of this test. The dotted blue line is the critical t-value (-1.71). The solid blue line is the z-statistic (-1.20). The t-statistic fell outside of the rejection region, so we were unable to reject the null hypothesis. The p-value associated with the t-statistic is the shaded red region.
+
+![Visualization of customer transaction time test](/Course-Content/Images/customer-transaction-time-example.png)
 
 ## References
 

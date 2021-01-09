@@ -41,4 +41,24 @@ text(0, 0.15, "T with 5 d.f.", cex=1.25, col="steelblue2")
 pt(-1.96, df=9)
 qt(0.041, df=9)
 dt(1.96, df=9)
-qt(0.025, df=9, lower.tail=FALSE)
+qt(0.05, df=9, lower.tail=FALSE)
+
+# Example: Customer transaction time.
+critical.t <- qt(0.05, df=24)
+print(critical.t)
+
+test.t <- (2.89 - 3.02) / (0.54 / sqrt(25))
+print(test.t)
+
+pt(test.t, df=24)
+
+# Visualize this example.
+x <- seq(-4, 4, by=0.1)
+y <- dt(x, df=24)
+plot(x, y, type="n", xlab="", ylab="")
+polygon(c(-4, seq(-4, test.t, by=0.001), test.t),
+        c(0, dt(seq(-4, test.t, by=0.001), df=24), 0),
+        col="tomato2", border=0)
+lines(c(critical.t, critical.t), c(0, dt(critical.t, df=24)), col="steelblue", lty=3, lwd=2)
+lines(c(test.t, test.t), c(0, 0.189), col="steelblue", lwd=2)
+lines(x, y, lwd=2)
