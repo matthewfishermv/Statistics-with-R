@@ -476,9 +476,11 @@ As with all significance tests, we can construct a confidence interval:
 
 ![Formula for confidence interval in two-sample t-setting](/Course-Content/Images/Equations/confidence-interval-t-2-sample.png)
 
+Finally, we want to point out that the R function `t.test()` can be used in the two-sample setting by supplying the values from both samples: `t.test(sample.1.values, sample.2.values)`.
+
 #### Example: Medical treatment
 
-Medical researchers are testing a treatment they believe could reduce fevers in patients in certain situations. They measure the change in temperature for 18 patients (in Fahrenheit) 30 minutes after applying the therapy. They measure the change in temperature for another 17 patients (in Fahrenheit) who did not receive the treatment in the same 30 minutes. The data for each group of patients are shown below, where a *-a* indicates a patients temperature decreased by *a*. Is there significance evidence at the *α = 0.10* level that the treatment was successful in reducing fevers?
+Medical researchers are testing a treatment they believe could reduce fevers in patients in certain situations. They measure the change in temperature for 36 patients (in Fahrenheit) 30 minutes after applying the therapy. They measure the change in temperature for another 36 patients (in Fahrenheit) who did not receive the treatment in the same 30 minutes. The data for each group of patients are shown below, where a *-a* indicates a patients temperature decreased by *a*. Is there significance evidence at the *α = 0.10* level that the treatment was successful in reducing fevers?
 
 > <ins>Treatment Group</ins>
 > 
@@ -540,6 +542,27 @@ pt(test.t, df=df)
 **Draw a conclusion**
 
 We fail to reject the null hypothesis H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> since 0.239 > 0.10. We do not have significance evidence at the *α = 0.10* level that there is a significance difference in the mean temperature of the treatment and control groups. We cannot infer that the treatment was successful in reducing fevers in patients.
+
+**Alternate method**
+
+We could have carried out this test using the `t.test()` function in R. Note that this function uses a more conservative value for degrees of freedom, so the results vary slightly:
+
+```R
+t.test(treatment, control, alternative="less")
+
+	Welch Two Sample t-test
+
+data:  treatment and control
+t = -1.054, df = 68.168, p-value = 0.1478
+alternative hypothesis: true difference in means is less than 0
+95 percent confidence interval:
+      -Inf 0.4462299
+sample estimates:
+mean of x mean of y 
+ 97.11667  97.88333 
+```
+
+From this result, we draw the same conclusion because *p = 0.148* > *α = 0.10*.
 
 ## References
 
