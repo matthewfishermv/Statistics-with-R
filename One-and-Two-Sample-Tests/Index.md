@@ -433,12 +433,34 @@ There are many situations in which it is useful to compare the means of two popu
 
 As with one-sample tests, certain assumptions must be met to ensure the applicability of a two-sample test [[6]](#references):
 
-1. The data are normally distribution, or approximately so.
+1. The data are normally distributed, or approximately so.
 2. The variances of the two populations are equal.
 3. The two samples are independent (that is, the values in one sample do not depend on the values of the other).
 4. Both samples are constructed through a process of random sampling, whereby each observation is equally likely to be included in the sample.
 
+The two-sample t-test is similar in form to the one-sample t-test, except that it compares the *difference* in means across the two samples:
 
+![Formula for two-sample t-test](/Course-Content/Images/Equations/t-test-2-sample.png)
+
+In this test, the two samples are assigned numbers *1, 2* such that x̅<sub>1</sub> is the observed mean of sample 1, µ<sub>2</sub> is the hypothesized mean of sample 2, and so on. The standard error for this test is:
+
+![Formula for standard error in a two-sample t-test](/Course-Content/Images/Equations/standard-error-t-2-sample.png)
+
+The null hypothesis in the two-sample t-setting is:
+
+> H<sub>0</sub>: µ<sub>1</sub> = µ<sub>2</sub> (the mean of the samples is equal)
+
+The alternative hypotheses we can test are:
+
+> **Left-tailed test**: H<sub>1</sub>: µ<sub>1</sub> > µ<sub>2</sub> (the mean of the sample 1 is greater)
+> 
+> **Right-tailed test**: H<sub>1</sub>: µ<sub>1</sub> < µ<sub>2</sub> (the mean of the sample 2 is greater)
+> 
+> **Two-tailed test**: H<sub>1</sub>: µ<sub>1</sub> ≠ µ<sub>2</sub> (the means are different)
+
+As with all significance tests, we can construct a confidence interval:
+
+![Formula for confidence interval in two-sample t-setting](/Course-Content/Images/Equations/confidence-interval-t-2-sample.png)
 
 ## References
 
