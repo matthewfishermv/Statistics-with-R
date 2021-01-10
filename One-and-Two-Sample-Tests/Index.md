@@ -5,16 +5,18 @@
 - [Contents](#contents)
 - [Introduction](#introduction)
 - [Procedure for Hypothesis Testing](#procedure-for-hypothesis-testing)
-- [Significance Tests and Confidence Intervals](#significance-tests-and-confidence-intervals)
 - [Standard Error](#standard-error)
+- [Significance Tests and Confidence Intervals](#significance-tests-and-confidence-intervals)
 - [One-Sample Tests](#one-sample-tests)
   - [One-Sample Z-Test](#one-sample-z-test)
     - [Example: Weight loss program](#example-weight-loss-program)
-  - [One-Sample T-Tests](#one-sample-t-tests)
+  - [One-Sample T-Test](#one-sample-t-test)
     - [Calculations in the T Distribution](#calculations-in-the-t-distribution)
     - [Example: Customer transaction time](#example-customer-transaction-time)
     - [Example: Student ages](#example-student-ages)
 - [Two-Sample Tests](#two-sample-tests)
+  - [Two-Sample T-Test](#two-sample-t-test)
+    - [Example: Medical treatment](#example-medical-treatment)
 - [References](#references)
 
 ## Introduction
@@ -56,6 +58,36 @@ In step 4, we carry out the test by computing the test statistic we selected in 
 
 In step 5, we draw a conclusion based on the value of the test statistic from step 4, applying the decision rule from step 3.
 
+## Standard Error
+
+We glossed over the denominator of the one-sample z-test *σ/√(n)* when we first looked at it, but it deserves some discussion. When estimating a population parameter using sample data, there is some unreliability, given that the sample size is smaller than the population size and may not be completely representative. The **standard error** is a measure of the unreliability of an estimate we make of a population parameter, expressed in the same terms as the parameter we are estimating [[3]](#references).
+
+Recall that variance is a measure of the variability of data points in a sample with respect to the mean. It tells us how much the values in the sample differ from the mean on average. When the variance increases (i.e., there is more variability in the data), the unreliability also increases. When the variance decreases (i.e., there is less variability in the data), the unreliability also decreases. This means that unreliability is proportional to the variance [[3]](#references):
+
+![Unreliability proportional to variance](/Course-Content/Images/Equations/unreliability-proportional-variance.png)
+
+With larger sample sizes, unreliability decreases, so unreliability is inversely proportional to the sample size [[3]](#references):
+
+![Unreliability proportional to variance and inversely to sample size](/Course-Content/Images/Equations/unreliability-proportional-variance-inversely-n.png)
+
+Just like we take the square root of the variance to get the standard deviation, we can take the square root of the unreliability measure to get the standard error. It is denoted SE<sub>y̅</sub> and known as the **standard error of the mean**:
+
+![Formula for standard error](/Course-Content/Images/Equations/standard-error.png)
+
+You will see that estimating different parameters from sample data produces different standard error values. It may be useful to recognize that the standard error is to sample data as the standard deviation is to population data - a measure of variability or unreliability.
+
+Thus, we can summarize the variability measures we have seen so far as follows:
+
+| Parameter (Population) | Standard Deviation (Population) | Statistic (Sample) | Standard Error (Sample) |
+|------------------------|---------------------------------|--------------------|-------------------------|
+| µ | σ/√(N) | x̅ | s/√(n) |
+
+We will expand this table in the sections that follow. Using this understanding of standard error as a measure of uncertainty in a sample statistic, we can generalize the test statistic as:
+
+![General formula for test statistics](/Course-Content/Images/Equations/test-statistic-general.png)
+
+That is, the test statistic is the difference between the observed statistic and the one we expect, divided by a measure of uncertainty.
+
 ## Significance Tests and Confidence Intervals
 
 *Code for this section:* [Significance Tests and Confidence Intervals](/One-and-Two-Sample-Tests/Significance-Tests-and-Confidence-Intervals.R)
@@ -89,37 +121,7 @@ To state this decision rule formally:
 > <ins>3. Based on a confidence interval:</ins>
 > - **Two-tailed test**: Reject H<sub>0</sub> if *µ<sub>0</sub> ∈ (x̄ - z • SE<sub>x̄</sub>, x̄ - z • SE<sub>x̄</sub>)*.
 
-This form of the decision rule is often preferred 
-
-## Standard Error
-
-We glossed over the denominator of the one-sample z-test *σ/√(n)* when we first looked at it, but it deserves some discussion. When estimating a population parameter using sample data, there is some unreliability, given that the sample size is smaller than the population size and may not be completely representative. The **standard error** is a measure of the unreliability of an estimate we make of a population parameter, expressed in the same terms as the parameter we are estimating [[3]](#references).
-
-Recall that variance is a measure of the variability of data points in a sample with respect to the mean. It tells us how much the values in the sample differ from the mean on average. When the variance increases (i.e., there is more variability in the data), the unreliability also increases. When the variance decreases (i.e., there is less variability in the data), the unreliability also decreases. This means that unreliability is proportional to the variance [[3]](#references):
-
-![Unreliability proportional to variance](/Course-Content/Images/Equations/unreliability-proportional-variance.png)
-
-With larger sample sizes, unreliability decreases, so unreliability is inversely proportional to the sample size [[3]](#references):
-
-![Unreliability proportional to variance and inversely to sample size](/Course-Content/Images/Equations/unreliability-proportional-variance-inversely-n.png)
-
-Just like we take the square root of the variance to get the standard deviation, we can take the square root of the unreliability measure to get the standard error. It is denoted SE<sub>y̅</sub> and known as the **standard error of the mean**:
-
-![Formula for standard error](/Course-Content/Images/Equations/standard-error.png)
-
-You will see that estimating different parameters from sample data produces different standard error values. It may be useful to recognize that the standard error is to sample data as the standard deviation is to population data - a measure of variability or unreliability.
-
-Thus, we can summarize the variability measures we have seen so far as follows:
-
-| Parameter (Population) | Standard Deviation (Population) | Statistic (Sample) | Standard Error (Sample) |
-|------------------------|---------------------------------|--------------------|-------------------------|
-| µ | σ/√(N) | x̅ | s/√(n) |
-
-We will expand this table in the sections that follow. Using this understanding of standard error as a measure of uncertainty in a sample statistic, we can generalize the test statistic as:
-
-![General formula for test statistics](/Course-Content/Images/Equations/test-statistic-general.png)
-
-That is, the test statistic is the difference between the observed statistic and the one we expect, divided by a measure of uncertainty.
+This form of the decision rule is often preferred over using p-values since it gives information about statistical significance and the strength of the effect [[4]](#references).
 
 ## One-Sample Tests
 
@@ -204,17 +206,17 @@ The visualization below shows the results of this test. The dotted blue line is 
 
 ![Visualization of weight loss program test](/Course-Content/Images/weight-loss-program-example.png)
 
-### One-Sample T-Tests
+### One-Sample T-Test
 
 Situations arise where the assumptions required for a one-sample z-test do not hold. In fact, it is frequently the case that we do not have access to an entire population. In these situations, we cannot use a z-test. In these cases, we instead use a t-test. The concepts are the same, but we use a different distribution.
 
-The **T-distribution** is a bell-shaped distribution that is used to carry out hypothesis tests when the population mean and standard deviation are not known. It has wider tails than the Normal Distribution. Since we do not know the mean, we need to estimate it from the sample data, and thus we are concerned with *n - 1* degrees of freedom. The heaviness of the tails in a t-distribution are a function of the degrees of freedom in the sample, with smaller values producing a heavier tail [[4]](#references).
+The **T-distribution** is a bell-shaped distribution that is used to carry out hypothesis tests when the population mean and standard deviation are not known. It has wider tails than the Normal Distribution. Since we do not know the mean, we need to estimate it from the sample data, and thus we are concerned with *n - 1* degrees of freedom. The heaviness of the tails in a t-distribution are a function of the degrees of freedom in the sample, with smaller values producing a heavier tail [[5]](#references).
 
 Notice how the t-distribution compares with the Normal Distribution as the degrees of freedom vary:
 
 ![Normal distribution versus t distribution](../Course-Content/Images/normal-distribution-t-distribution.png)
 
-The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[4]](#references).
+The higher the degrees of freedom (and the closer the sample size is to 30), the more the t-distribution looks like the Normal Distribution. For lower degrees of freedom (and therefore smaller sample sizes), the fatter the tails of the t-distribution. The probability getting extreme values (values that are far from the mean) is higher in the t-distribution than in the Normal Distribution [[5]](#references).
 
 The procedure for carrying out a one-sample t-test is identical to a one-sample z-test:
 
@@ -232,7 +234,7 @@ with *n - 1* degrees of freedom.
 
 You will notice that the formula for a t-test is nearly identical to the formula for a z-test.
 
-The assumptions that must be met for a one-sample t-test are [[5]](#references):
+The assumptions that must be met for a one-sample t-test are [[6]](#references):
 
 1. The data come from a single sample.
 2. The mean and variance of the population are not known.
@@ -266,6 +268,8 @@ Equivalently, in R:
 qt(0.05, df=9, lower.tail=FALSE)
 [1] 1.833113
 ```
+
+We use the notation t<sub>α,df</sub> to refer to the critical t-value with a left- or right-hand tail probability of α (or both, in the case of a two-tailed test) and *df* degrees of freedom. This would be t<sub>0.05,9</sub> for the example above.
 
 R also has a built-in function for carrying out a one-sample t-test, `t.test()`. The sample data must be stored in a variable and passed into the function. The function takes three arguments:
 
@@ -321,7 +325,7 @@ A retail business is interested in decreasing the amount of time customers spend
 
 **State the decision rule**
 
-We find a critical value from the t-distribution with *25 - 1 = 24* degrees of freedom a left-hand tail probability of α, t<sub>0.05</sub>:
+We find a critical value from the t-distribution with *25 - 1 = 24* degrees of freedom a left-hand tail probability of α, t<sub>0.05, 24</sub>:
 
 ```R
 critical.t <- qt(0.05, df=24)
@@ -431,18 +435,28 @@ We fail to reject the null hypothesis since *p > α*. There is not significant e
 
 There are many situations in which it is useful to compare the means of two populations. The efficacy of a medication may be assessed by measuring the effect in two groups, one that receives the medication and one that does not. A retail business may compare the price of its products across two different stores. A government agency may be interested in the cost of living across two different cities. In all of these cases, we can boil the question down to a comparison of the mean in each of two different populations [[2]](#references).
 
-As with one-sample tests, certain assumptions must be met to ensure the applicability of a two-sample test [[6]](#references):
+As with one-sample tests, certain assumptions must be met to ensure the applicability of a two-sample test [[7]](#references):
 
 1. The data are normally distributed, or approximately so.
 2. The variances of the two populations are equal.
 3. The two samples are independent (that is, the values in one sample do not depend on the values of the other).
 4. Both samples are constructed through a process of random sampling, whereby each observation is equally likely to be included in the sample.
 
+### Two-Sample T-Test
+
 The two-sample t-test is similar in form to the one-sample t-test, except that it compares the *difference* in means across the two samples:
 
 ![Formula for two-sample t-test](/Course-Content/Images/Equations/t-test-2-sample.png)
 
-In this test, the two samples are assigned numbers *1, 2* such that x̅<sub>1</sub> is the observed mean of sample 1, µ<sub>2</sub> is the hypothesized mean of sample 2, and so on. The standard error for this test is:
+In this test, the two samples are assigned numbers *1, 2* such that x̅<sub>1</sub> is the observed mean of sample 1, µ<sub>2</sub> is the hypothesized mean of sample 2, and so on. The degrees of freedom in a two-sample t-setting can be calculated using the formula below:
+
+![Formula for two-sample t-test degrees of freedom](/Course-Content/Images/Equations/degrees-of-freedom-two-sample-t.png)
+
+This formula is cumbersome, so a less conservative estimate is frequently used:
+
+![Formula for less conservative two-sample t-test degrees of freedom](/Course-Content/Images/Equations/degrees-of-freedom-two-sample-t-heuristic.png)
+
+The standard error for this test is:
 
 ![Formula for standard error in a two-sample t-test](/Course-Content/Images/Equations/standard-error-t-2-sample.png)
 
@@ -462,11 +476,77 @@ As with all significance tests, we can construct a confidence interval:
 
 ![Formula for confidence interval in two-sample t-setting](/Course-Content/Images/Equations/confidence-interval-t-2-sample.png)
 
+#### Example: Medical treatment
+
+Medical researchers are testing a treatment they believe could reduce fevers in patients in certain situations. They measure the change in temperature for 18 patients (in Fahrenheit) 30 minutes after applying the therapy. They measure the change in temperature for another 17 patients (in Fahrenheit) who did not receive the treatment in the same 30 minutes. The data for each group of patients are shown below, where a *-a* indicates a patients temperature decreased by *a*. Is there significance evidence at the *α = 0.10* level that the treatment was successful in reducing fevers?
+
+> <ins>Treatment Group</ins>
+> 
+> 98.2, 96.7, 93.0, 91.0, 98.5, 93.1, 99.7, 99.7, 93.9,
+> 99.1, 95.8, 100.7, 104.3, 100.0, 96.2, 98.2, 99.5, 101.4,
+> 96.4, 99.2, 90.9, 97.4, 94.9, 96.8, 96.9, 96.8, 89.1,
+> 97.2, 96.9, 98.6, 101.3, 102.7, 95.4, 97.7, 92.9, 96.1
+> 
+> <ins>Control Group (No Treatment)</ins>
+> 
+> 100.0, 96.8, 101.0, 100.0, 98.7, 96.1, 95.3, 101.7, 93.3,
+> 99.6, 96.8, 90.1, 97.1, 104.2, 97.1, 99.3, 100.4, 95.1,
+> 96.9, 92.3, 101.0, 96.8, 95.5, 97.8, 97.5, 98.8, 100.9,
+> 98.6, 96.8, 101.3, 95.1, 96.9, 99.0, 96.8, 98.7, 100.5
+
+For this test we set the treatment group as sample 1 and the control group as sample 2.
+
+**State the hypotheses and significance level**
+
+> H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> (the mean temperature is the same for both groups)
+> 
+> H<sub>1</sub>: μ<sub>1</sub> < μ<sub>2</sub> (the mean temperature is lower for the treatment group)
+> 
+> α = 0.10
+
+**Select the test statistic**
+
+![Formula for t-statistic/t-test](/Course-Content/Images/Equations/t-test-2-sample.png)
+
+**State the decision rule**
+
+We find a critical value from the t-distribution with *min(n<sub>1</sub>, n<sub>2</sub>) - 1 = 35* degrees of freedom a left-hand tail probability of α, t<sub>0.10, 35</sub>:
+
+```R
+df <- min(length(treatment), length(control)) - 1
+critical.t <- qt(0.1, df=df)
+print(critical.t)
+[1] -1.306212
+```
+
+We reject H<sub>0</sub> if the p-value associated with the t-statistic is less than α. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+test.t <- (mean.treatment - mean.control) /
+  sqrt((var.treatment / length(treatment)) + (var.control / length(control)))
+print(test.t)
+[1] -0.71814
+```
+
+The p-value associated with this t-statistic is:
+
+```R
+pt(test.t, df=df)
+[1] 0.2387173
+```
+
+**Draw a conclusion**
+
+We fail to reject the null hypothesis H<sub>0</sub>: μ<sub>1</sub> = μ<sub>2</sub> since 0.239 > 0.10. We do not have significance evidence at the *α = 0.10* level that there is a significance difference in the mean temperature of the treatment and control groups. We cannot infer that the treatment was successful in reducing fevers in patients.
+
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
 2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 310-312, 321-322.
 3. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 60-62.
-4. https://www.investopedia.com/terms/t/tdistribution.asp
-5. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
-6. https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Two-Sample_T-Test.pdf
+4. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2689604/.
+5. https://www.investopedia.com/terms/t/tdistribution.asp
+6. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
+7. https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Two-Sample_T-Test.pdf
