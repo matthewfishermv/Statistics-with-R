@@ -5,5 +5,5 @@ A math and statistics course using the R programming language.
 
 1. [Fundamentals](/Fundamentals/Index.md)
 2. [Hypothesis Testing](/Hypothesis-Testing/Index.md)
-3. [One- and Two-Sample Tests of the Mean](/One-and-Two-Sample-Tests/Index.md)
+3. [Tests of the Mean](/Tests-of-the-Mean/Index.md)
 4. [Linear Regression](/Linear-Regression/Index.md)

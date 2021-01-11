@@ -1,4 +1,4 @@
-# One- and Two-Sample Tests of the Mean
+# Tests of the Mean
 
 ## Contents
 
@@ -17,6 +17,7 @@
 - [Two-Sample Tests](#two-sample-tests)
   - [Two-Sample T-Test](#two-sample-t-test)
     - [Example: Medical treatment](#example-medical-treatment)
+- [Matched Pair Tests](#matched-pair-tests)
 - [References](#references)
 
 ## Introduction
@@ -564,6 +565,86 @@ mean of x mean of y
 
 From this result, we draw the same conclusion because *p = 0.148* > *α = 0.10*.
 
+## Matched Pair Tests
+
+In addition to one-sample tests and two-sample tests of the mean, we can consider at a **matched pair design**, or tests involving the difference in between two variables for the same subject [[8]](#references). These could be before- and after-treatment variables in a clinical setting, measurements on twins, measurements from the same location, or variables that are otherwise correlated. Such tests are called **matched pair tests** and the process for carrying them out is identical to that of a one-sample test, but with slightly different notation.
+
+Suppose you have two variables, *X* and *Y* that are paired, for example the amount a pain physical therapy patients feel in their legs before and after treatment, measured on a scale of 1-10 (10 being the worst pain) and reported by the patients. A sample data set is shown below:
+
+| X | Y |
+|---|---|
+| 6 | 4 |
+| 6 | 5 |
+| 4 | 2 |
+| 5 | 5 |
+| 8 | 5 |
+| 7 | 1 |
+
+```R
+# Load the data into R.
+x <- c(6, 6, 4, 5, 8, 7)
+y <- c(4, 5, 2, 5, 5, 1)
+```
+
+In matched pair design, the procedure is to create a new variable *d* that is the difference between the variables, that is *d = x - y* for each *x, y*:
+
+| X | Y | D = X - Y |
+|---|---|-----------|
+| 6 | 4 | 2 |
+| 6 | 5 | 1 |
+| 4 | 2 | 2 |
+| 5 | 5 | 0 |
+| 8 | 5 | 3 |
+| 7 | 1 | 6 |
+
+Then we can take the mean of D, which we call the **mean of the differences**:
+
+![Formula for arithmetic mean in matched pairs](/Course-Content/Images/Equations/arithmetic-mean-matched-pairs.png)
+
+```R
+mean.difference <- sum(d)/length(d)
+print(mean.difference)
+[1] 2.333333
+```
+Using the mean difference, we can construct a t-test:
+
+![Formula for t-test in matched pairs](/Course-Content/Images/Equations/t-test-matched-pairs.png)
+
+You will notice this test is identical in form to a one-sample t-test, except that it uses different notation. The hypotheses are the same as in the one-sample setting:
+
+> H<sub>1</sub>: µ > µ<sub>0</sub> (right-tailed test)
+> 
+> H<sub>1</sub>: µ < µ<sub>0</sub> (left-tailed test)
+> 
+> H<sub>1</sub>: µ < µ<sub>0</sub> or µ > µ<sub>0</sub> (two-tailed test)
+
+We can construct a confidence interval in the matched pairs setting:
+
+![Formula for confidence level in matched pairs t-test](/Course-Content/Images/Equations/confidence-interval-t-matched-pairs.png)
+
+The standard error in this setting is:
+
+![Formula for standard error in matched pairs t-test](/Course-Content/Images/Equations/standard-error-t-matched-paris.png)
+
+To carry out a matched pairs t-test in R, you can use the `t.test()` function and specify `paired = TRUE`:
+
+```R
+t.test(x, y, paired = TRUE)
+
+	Paired t-test
+
+data:  x and y
+t = 2.767, df = 5, p-value = 0.03951
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.1656284 4.5010383
+sample estimates:
+mean of the differences 
+               2.333333 
+```
+
+Carrying out the test in this manner produces the t-statistic, degrees of freedom, p-value, associated confidence interval (assuming a two-sided test), and mean of the differences.
+
 ## References
 
 1. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_z-test.html
@@ -573,3 +654,4 @@ From this result, we draw the same conclusion because *p = 0.148* > *α = 0.10*.
 5. https://www.investopedia.com/terms/t/tdistribution.asp
 6. http://www.analystsoft.com/en/products/statplus/content/help/analysis_basic_statistics_one_sample_t-test.html
 7. https://ncss-wpengine.netdna-ssl.com/wp-content/themes/ncss/pdf/Procedures/NCSS/Two-Sample_T-Test.pdf
+8. https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/SAS/SAS4-OneSampleTtest/SAS4-OneSampleTtest7.html
