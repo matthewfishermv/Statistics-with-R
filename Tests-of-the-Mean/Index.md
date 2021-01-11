@@ -18,6 +18,7 @@
   - [Two-Sample T-Test](#two-sample-t-test)
     - [Example: Medical treatment](#example-medical-treatment)
 - [Matched Pair Tests](#matched-pair-tests)
+- [Summary](#summary)
 - [References](#references)
 
 ## Introduction
@@ -618,13 +619,13 @@ You will notice this test is identical in form to a one-sample t-test, except th
 > 
 > H<sub>1</sub>: µ < µ<sub>0</sub> or µ > µ<sub>0</sub> (two-tailed test)
 
-We can construct a confidence interval in the matched pairs setting:
-
-![Formula for confidence level in matched pairs t-test](/Course-Content/Images/Equations/confidence-interval-t-matched-pairs.png)
-
 The standard error in this setting is:
 
 ![Formula for standard error in matched pairs t-test](/Course-Content/Images/Equations/standard-error-t-matched-paris.png)
+
+Confidence intervals in the matched pairs setting are:
+
+![Formula for confidence level in matched pairs t-test](/Course-Content/Images/Equations/confidence-interval-t-matched-pairs.png)
 
 To carry out a matched pairs t-test in R, you can use the `t.test()` function and specify `paired = TRUE`:
 
@@ -642,8 +643,16 @@ sample estimates:
 mean of the differences 
                2.333333 
 ```
-
 Carrying out the test in this manner produces the t-statistic, degrees of freedom, p-value, associated confidence interval (assuming a two-sided test), and mean of the differences.
+
+## Summary
+
+| Concept | Discussion | Formula | R Code | Examples |
+|---------|------------|---------|--------|----------|
+| Standard error | A measure of unreliability of an estimated population parameter | [depends on test] | N/A | N/A |
+| One-sample t-test | A test used when z-test assumptions do not hold, population standard deviation is not known, and/or *n < 30* | ![Formula for t-test](/Course-Content/Images/Equations/t-test.png)<br>![Formula for standard error](/Course-Content/Images/Equations/standard-error.png)<br>![Formula for one-sample t-test confidence interval](/Course-Content/Images/Equations/confidence-interval-t.png) | `t.test()` | `t.test(x)` |
+| Two-sample t-test | A t-test used with two samples from different populations | ![Formula for t-statistic/t-test](/Course-Content/Images/Equations/t-test-2-sample.png)<br>![Formula for standard error in a two-sample t-test](/Course-Content/Images/Equations/standard-error-t-2-sample.png)<br>![Formula for confidence interval in two-sample t-setting](/Course-Content/Images/Equations/confidence-interval-t-2-sample.png) | `t.test()` | `t.test(x, y)` |
+| Matched pairs t-test | A t-test used with two variables related to the same subject, location, etc. | ![Formula for t-test in matched pairs](/Course-Content/Images/Equations/t-test-matched-pairs.png)<br>![Formula for standard error in matched pairs t-test](/Course-Content/Images/Equations/standard-error-t-matched-paris.png)<br>![Formula for confidence level in matched pairs t-test](/Course-Content/Images/Equations/confidence-interval-t-matched-pairs.png) | `t.test()` | `t.test(x, y, paired = TRUE)` |
 
 ## References
 
