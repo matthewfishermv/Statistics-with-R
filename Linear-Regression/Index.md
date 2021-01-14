@@ -8,6 +8,7 @@
   - [Form](#form)
   - [Direction](#direction)
   - [Strength](#strength)
+- [Covariance](#covariance)
 - [References](#references)
 
 ## Introduction
@@ -63,6 +64,18 @@ In this module, we are concerned primarily with a linear pattern. In such scatte
 If a linear association appears to exist, its **strength** can be assessed in terms of how closely clustered around the perceived line the data points appear to be. A **strong association** is one in which data points fall close to the line and a **weak association** is one in which data points do not fall close to the line. An example of each is shown below:
 
 ![Strong and weak association in a scatterplot](/Course-Content/Images/scatterplot-strength.png)
+
+## Covariance
+
+Imagine drawing a line through the center of the data points on a scatterplot. Doing so, you construct a model of the data - a line, whose formula roughly describes the overall shape of the data. You could hypothesize multiple lines, all of which model the data. Consider the three lines below in the scatterplot below:
+
+![Approximate models in a scatterplot](/Course-Content/Images/scatterplot-lines.png)
+
+All three lines roughly capture the shape and direction of the data. We begin to formalize the process of linear regression, which establishes a more precise model of the data by looking at covariance. **Covariance** is a measure of how much two variables differ from their respective means on average. The formula for the covariance of two variables is:
+
+![Formula for covariance](/Course-Content/Images/Equations/covariance.png)
+
+This measure summarizes the entire data set in terms of how the independent and dependent variable vary jointly from their respective means.
 
 ## References
 
