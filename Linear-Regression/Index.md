@@ -9,6 +9,7 @@
   - [Direction](#direction)
   - [Strength](#strength)
 - [Covariance](#covariance)
+- [Correlation](#correlation)
 - [References](#references)
 
 ## Introduction
@@ -76,6 +77,12 @@ All three lines roughly capture the shape and direction of the data. We begin to
 ![Formula for covariance](/Course-Content/Images/Equations/covariance.png)
 
 This measure summarizes the entire data set in terms of how the independent and dependent variable vary jointly from their respective means.
+
+## Correlation
+
+Extending the concept of covariance, we can standardize the (x - ) and (y - ) terms by dividing by the standard deviation of the variable. This new quantity is known as the **correlation coefficient** and it measures linear dependence between two variables:
+
+![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png)
 
 ## References
 
