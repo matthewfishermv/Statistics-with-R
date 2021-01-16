@@ -11,6 +11,7 @@
 - [Covariance](#covariance)
 - [Correlation](#correlation)
 - [Example: Heights and Ages](#example-heights-and-ages)
+- [Data Frames in R](#data-frames-in-r)
 - [References](#references)
 
 ## Introduction
@@ -116,9 +117,11 @@ In your interpretation of correlation, it is absolutely critical to note that <i
 The heights (in inches) and ages (in years) of 30 people randomly sampled from a larger population are given below. Is there a correlation between a person's height and a person's age? Interpret the result.
 
 > <ins>Heights<ins>
+> 
 > 66.9, 52.2, 56.5, 56.0, 62.3, 72.1, 68.3, 66.1, 69.1, 63.1, 70.2, 56.2, 75.2, 61.9, 72.7, 65.7, 54.1, 56.4, 49.5, 57.9, 53.8, 58.4, 63.8, 67.7, 86.3, 54.5, 59.4, 69.3, 50.3, 64.6
 > 
 > <ins>Ages</ins>
+> 
 > 55, 36, 71, 43, 10, 28, 46, 39, 59, 40, 49, 4, 34, 31, 40, 36, 50, 26, 32, 21, 29, 18, 28, 35, 47, 39, 27, 25, 75, 33
 
 First, we load the data into R:
@@ -151,8 +154,115 @@ The interpretation of this correlation coefficient is that only 5% of the variab
 
 ![Scatterplot of heights and ages showing random association](/Course-Content/Images/scatterplot-heights-ages-example.png)
 
+## Data Frames in R
+
+At this point, it will be useful to introduce a new data structure in R: data frames. A **data frame** is "a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column" [[4]](#references). This is beneficial for working with data sets that have more than one variable.
+
+You have already seen how to create vectors using the `c()` function. Vectors of related data can be combined into a data frame using the `data.frame()` function. Consider the variables below and we will show how to combine them into a data frame.
+
+> <ins>Names</ins>
+> 
+> "Mark", "Sally", "Greg", "Patti", "Linda"
+
+> <ins>Ages</ins>
+> 
+> 43, 37, 39, 48, 33
+
+> <ins>Annual Salary</ins>
+> 
+> 74325, 49500, 50000, 84380, 34095
+
+The variables are loaded into R as follows:
+
+```R
+names <- c("Mark", "Sally", "Greg", "Patti", "Linda")
+ages <- c(43, 37, 39, 48, 33)
+salary <- c(74325, 49500, 50000, 84380, 34095)
+```
+
+Using the `data.frame()` function, we can combine individual variables into a single table. In the example, we call this new variable `employees`:
+
+```R
+employees <- data.frame(name=names, age=ages, salary=salary)
+```
+
+Note that we give each column a name (name, age, salary) and attach the values (`names`, `ages`, `salary`).
+
+Now if we print the variable, we can see the data frame:
+
+```R
+print(employees)
+   name age salary
+1  Mark  43  74325
+2 Sally  37  49500
+3  Greg  39  50000
+4 Patti  48  84380
+5 Linda  33  34095
+```
+
+We can now begin to slice and dice the data frame, looking for attributes of interest. Using the `$` notation, we can reference a specific column in the general form `variable$column`:
+
+```R
+employees$name
+[1] "Mark"  "Sally" "Greg"  "Patti" "Linda"
+
+employees$salary
+[1] 74325 49500 50000 84380 34095
+```
+
+Using the `[]` notation, we can reference a specific cell or range of cells. The general form is `variable[row.number, column.number]`. We can find the age of the first employee (row 1, column 2) as follows:
+
+```R
+employees[1, 2]
+[1] 43
+```
+
+By leaving out either the row number, we retrieve all rows. By leaving out the column number, we retrieve all columns. For example, we can retrieve all columns for the first employee as follows:
+
+```R
+employees[3, ]
+  name age salary
+3 Greg  39  50000
+```
+
+The other way to use the `[]` notation is by referencing column names. Single column names can be referenced in quotes, or multiple can be combined with the `c()` function:
+
+```R
+ employees[, 'salary']
+[1] 74325 49500 50000 84380 34095
+
+employees[, c('age', 'salary')]
+  age salary
+1  43  74325
+2  37  49500
+3  39  50000
+4  48  84380
+5  33  34095
+```
+
+We can apply conditional statements to slice and dice the data frame. For example, we can find out which employees are older than 35:
+
+```R
+employees$age > 35
+[1]  TRUE  TRUE  TRUE  TRUE FALSE
+```
+
+And we can use this to retrieve the names salaries where the condition is met:
+
+```R
+employees[employees$age > 35, c('name','salary')]
+   name salary
+1  Mark  74325
+2 Sally  49500
+3  Greg  50000
+4 Patti  84380
+```
+
+The flexibility of data frames makes working with data sets very easy in R. Many functions, such as those that import data from external sources, natively create data frames for you. Before continuing, make sure you are comfortable with the basics of data frames.
+
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
 2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 105-109.
 3. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, p. 252.
+4. https://www.tutorialspoint.com/r/r_data_frames.htm
