@@ -80,9 +80,19 @@ This measure summarizes the entire data set in terms of how the independent and 
 
 ## Correlation
 
-Extending the concept of covariance, we can standardize the (x - ) and (y - ) terms by dividing by the standard deviation of the variable. This new quantity is known as the **correlation coefficient** and it measures linear dependence between two variables:
+Extending the concept of covariance, we can standardize the (x - x̄) and (y - y̅) terms by dividing by the standard deviation of the variable. This new quantity is known as the **correlation coefficient** and it measures linear dependence between two variables:
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png)
+
+The correlation coefficient or **Pearson's correlation coefficient** is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example of each of these values of *r* are shown below:
+
+![Correlation coefficient extreme values](/Course-Content/Images/correlation-coefficients.png)
+
+R provides a convenient function for calculating the correlation coefficient, `cor()`. If you have two variables `x`, `y`, R will return the correlation coefficient if you pass the variables into the function:
+
+```R
+cor(x, y)
+```
 
 ## References
 
