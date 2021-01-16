@@ -79,9 +79,17 @@ All three lines roughly capture the shape and direction of the data. We begin to
 
 This measure summarizes the entire data set in terms of how the independent and dependent variable vary jointly from their respective means.
 
+R provides a convenient function for calculating covariance, `cov()`. Given two variables `x`, `y`, their covariance can be calculated as:
+
+```R
+cov(x, y)
+```
+
+The covariance is the same whether `x` is the dependent variable or `y` is. That is, *cov(x, y) = cov(y ,x)*.
+
 ## Correlation
 
-Extending the concept of covariance, we can standardize the (x - x̄) and (y - y̅) terms by dividing by the standard deviation of the variable. This new quantity is known as the **correlation coefficient** and it measures linear dependence between two variables:
+Extending the concept of covariance, we can standardize the (x - x̄) and (y - y̅) terms by dividing by the standard deviation of the variable. Recall that x - x̄ and y - y̅ are called errors. You may notice that by dividing the errors by their standard deviations, you are computing z-scores [[2]](#references). The standardized quantity is known as the **correlation coefficient** or **Pearson's correlation** and it measures linear dependence between two variables:
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png)
 
@@ -89,7 +97,7 @@ Note that this is calculated as the covariance of the two variables divided by t
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient-simplified.png)
 
-The correlation coefficient or **Pearson's correlation coefficient** is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example of each of these values of *r* are shown below:
+Correlation measures how closely related two numeric variables are in a linear relationship [[2]](#references). The measure is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example of each of these values of *r* are shown below:
 
 ![Correlation coefficient extreme values](/Course-Content/Images/correlation-coefficients.png)
 
@@ -98,6 +106,10 @@ R provides a convenient function for calculating the correlation coefficient, `c
 ```R
 cor(x, y)
 ```
+
+The correlation coefficient can be interpreted as the percentage of variability in one variable that is explained by the variability in the other. The correlation is the same no matter which variable you select as the dependent variable. That is, *r<sub>xy</sub> = r<sub>yx</sub>*.
+
+In your interpretation of correlation, it is absolutely critical to note that <ins>correlation does not imply causation</ins>. In other words, you cannot assume that one variable has an effect on the other just because a correlation exists [[3]](#references).
 
 ## Example: Heights and Ages
 
@@ -135,8 +147,12 @@ r.text <- paste("r=", round(cor(heights, ages), 2), sep="")
 mtext(r.text, col="tomato2")
 ```
 
+The interpretation of this correlation coefficient is that only 5% of the variability in heights is explained by the variability in ages.
+
 ![Scatterplot of heights and ages showing random association](/Course-Content/Images/scatterplot-heights-ages-example.png)
 
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
+2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 105-109.
+3. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, p. 252.
