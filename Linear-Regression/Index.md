@@ -108,7 +108,7 @@ R provides a convenient function for calculating the correlation coefficient, `c
 cor(x, y)
 ```
 
-The correlation coefficient can be interpreted as the percentage of variability in one variable that is explained by the variability in the other. The correlation is the same no matter which variable you select as the dependent variable. That is, *r<sub>xy</sub> = r<sub>yx</sub>*.
+The correlation coefficient can be interpreted as the strength of a linear relationship between two numeric variables. The correlation is the same no matter which variable you select as the dependent variable. That is, *r<sub>xy</sub> = r<sub>yx</sub>*.
 
 In your interpretation of correlation, it is absolutely critical to note that <ins>correlation does not imply causation</ins>. In other words, you cannot assume that one variable has an effect on the other just because a correlation exists [[3]](#references).
 
@@ -150,7 +150,7 @@ r.text <- paste("r=", round(cor(heights, ages), 2), sep="")
 mtext(r.text, col="tomato2")
 ```
 
-The interpretation of this correlation coefficient is that only 5% of the variability in heights is explained by the variability in ages.
+The interpretation of this correlation coefficient is that a near-zero correlation exists, so there is not a strong linear association between age and height.
 
 ![Scatterplot of heights and ages showing random association](/Course-Content/Images/scatterplot-heights-ages-example.png)
 
@@ -257,6 +257,15 @@ employees[employees$age > 35, c('name','salary')]
 3  Greg  50000
 4 Patti  84380
 ```
+
+Using the concept of correlation, we could examine whether an employee's salary is associated with the employee's age:
+
+```R
+cor(employees$salary, employees$age)
+[1] 0.9818334
+```
+
+The high correlation coefficient of 0.98 suggests a strong correlation between an employee's salary and age.
 
 The flexibility of data frames makes working with data sets very easy in R. Many functions, such as those that import data from external sources, natively create data frames for you. Before continuing, make sure you are comfortable with the basics of data frames.
 
