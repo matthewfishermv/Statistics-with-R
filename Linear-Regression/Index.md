@@ -10,6 +10,7 @@
   - [Strength](#strength)
 - [Covariance](#covariance)
 - [Correlation](#correlation)
+- [Example: Heights and Ages](#example-heights-and-ages)
 - [References](#references)
 
 ## Introduction
@@ -84,6 +85,10 @@ Extending the concept of covariance, we can standardize the (x - x̄) and (y - y
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png)
 
+Note that this is calculated as the covariance of the two variables divided by the product of the standard deviations of both variables. Thus the equation can also be stated as follows:
+
+![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient-simplified.png)
+
 The correlation coefficient or **Pearson's correlation coefficient** is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example of each of these values of *r* are shown below:
 
 ![Correlation coefficient extreme values](/Course-Content/Images/correlation-coefficients.png)
@@ -93,6 +98,44 @@ R provides a convenient function for calculating the correlation coefficient, `c
 ```R
 cor(x, y)
 ```
+
+## Example: Heights and Ages
+
+The heights (in inches) and ages (in years) of 30 people randomly sampled from a larger population are given below. Is there a correlation between a person's height and a person's age? Interpret the result.
+
+> <ins>Heights<ins>
+> 66.9, 52.2, 56.5, 56.0, 62.3, 72.1, 68.3, 66.1, 69.1, 63.1, 70.2, 56.2, 75.2, 61.9, 72.7, 65.7, 54.1, 56.4, 49.5, 57.9, 53.8, 58.4, 63.8, 67.7, 86.3, 54.5, 59.4, 69.3, 50.3, 64.6
+> 
+> <ins>Ages</ins>
+> 55, 36, 71, 43, 10, 28, 46, 39, 59, 40, 49, 4, 34, 31, 40, 36, 50, 26, 32, 21, 29, 18, 28, 35, 47, 39, 27, 25, 75, 33
+
+First, we load the data into R:
+
+```R
+heights <- c(66.9, 52.2, 56.5, 56.0, 62.3, 72.1, 68.3, 66.1, 69.1, 63.1,
+             70.2,56.2, 75.2, 61.9, 72.7, 65.7, 54.1, 56.4, 49.5, 57.9,
+             53.8, 58.4, 63.8, 67.7, 86.3, 54.5, 59.4, 69.3, 50.3, 64.6)
+ages <- c(55, 36, 71, 43, 10, 28, 46, 39, 59, 40,
+          49, 4, 34, 31, 40, 36, 50, 26, 32, 21,
+          29, 18, 28, 35, 47, 39, 27, 25, 75, 33)
+```
+
+Next, we compute the correlation coefficient:
+
+```R
+cor(heights, ages)
+[1] 0.04949018
+```
+
+We see that the correlation is close to zero, indicating that there is not a strong correlation between height and age in the population. We would expect a plot of heights and ages to appear random. Indeed, it does:
+
+```R
+plot(ages, heights, main="Heights and Ages", xlab="Age", ylab="Height")
+r.text <- paste("r=", round(cor(heights, ages), 2), sep="")
+mtext(r.text, col="tomato2")
+```
+
+![Scatterplot of heights and ages showing random association](/Course-Content/Images/scatterplot-heights-ages-example.png)
 
 ## References
 
