@@ -10,10 +10,10 @@
   - [Strength](#strength)
 - [Covariance](#covariance)
 - [Correlation](#correlation)
-- [Example: Heights and Ages](#example-heights-and-ages)
+  - [Example: Heights and Ages](#example-heights-and-ages)
 - [Data Frames in R](#data-frames-in-r)
 - [Test for Correlation](#test-for-correlation)
-- [Example: Heights and Ages](#example-heights-and-ages-1)
+  - [Example: Heights and Ages](#example-heights-and-ages-1)
 - [References](#references)
 
 ## Introduction
@@ -114,7 +114,7 @@ The correlation coefficient can be interpreted as the strength of a linear relat
 
 In your interpretation of correlation, it is absolutely critical to note that <ins>correlation does not imply causation</ins>. In other words, you cannot assume that one variable has an effect on the other just because a correlation exists [[3]](#references).
 
-## Example: Heights and Ages
+### Example: Heights and Ages
 
 The heights (in inches) and ages (in years) of 30 people randomly sampled from a larger population are given below. Is there a correlation between a person's height and a person's age? Interpret the result.
 
@@ -291,7 +291,7 @@ Recall that the purpose for making inferences based on a sample statistic is to 
 
 R provides a function for carrying out a formal correlation t-test, `cor.test()`.
 
-## Example: Heights and Ages
+### Example: Heights and Ages
 
 The heights (in inches) and ages (in years) of 30 people randomly sampled from a larger population are given below. Formally test whether there is a correlation between a person's height and a person's age.
 
