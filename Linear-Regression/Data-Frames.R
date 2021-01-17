@@ -18,3 +18,7 @@ employees[, c('age', 'salary')]
 # Conditions on rows and columns.
 employees$age > 35
 employees[employees$age > 35, c('name','salary')]
+
+# Examine correlation between salary and age.
+plot(employees$salary, employees$age)
+cor(employees$salary, employees$age)

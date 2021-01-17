@@ -12,6 +12,8 @@
 - [Correlation](#correlation)
 - [Example: Heights and Ages](#example-heights-and-ages)
 - [Data Frames in R](#data-frames-in-r)
+- [Test for Correlation](#test-for-correlation)
+- [Example: Heights and Ages](#example-heights-and-ages-1)
 - [References](#references)
 
 ## Introduction
@@ -269,9 +271,107 @@ The high correlation coefficient of 0.98 suggests a strong correlation between a
 
 The flexibility of data frames makes working with data sets very easy in R. Many functions, such as those that import data from external sources, natively create data frames for you. Before continuing, make sure you are comfortable with the basics of data frames.
 
+## Test for Correlation
+
+A test statistic exists for correlation, allowing us to formally test the strength of a linear association between two variables. We use a t-test [[5]](#references):
+
+![Formula for t-test for correlation](/Course-Content/Images/Equations/t-test-correlation.png)
+
+We use *n - 2* degrees of freedom in the t-distribution since we have already estimated two parameters: the means of the variables and the correlation coefficient.
+
+Recall that the purpose for making inferences based on a sample statistic is to estimate a population parameter to a level of confidence. In the case of correlation, we use the sample correlation coefficient, *r*, to estimate the population correlation, *ρ* (Greek letter "rho"). Thus, the hypothesis tests for correlation are:
+
+> H<sub>0</sub>: ρ = 0 (there is no linear association)
+> 
+> **Left-tailed test**: H<sub>1</sub>: ρ < 0 (there is a negative linear association)
+> 
+> **Right-tailed test**: H<sub>1</sub>: ρ > µ<sub>2</sub> (there is a positive linear association)
+> 
+> **Two-tailed test**: H<sub>1</sub>: ρ ≠ 0 (there is a positive or negative linear association)
+
+R provides a function for carrying out a formal correlation t-test, `cor.test()`.
+
+## Example: Heights and Ages
+
+The heights (in inches) and ages (in years) of 30 people randomly sampled from a larger population are given below. Formally test whether there is a correlation between a person's height and a person's age.
+
+> <ins>Heights<ins>
+> 
+> 66.9, 52.2, 56.5, 56.0, 62.3, 72.1, 68.3, 66.1, 69.1, 63.1, 70.2, 56.2, 75.2, 61.9, 72.7, 65.7, 54.1, 56.4, 49.5, 57.9, 53.8, 58.4, 63.8, 67.7, 86.3, 54.5, 59.4, 69.3, 50.3, 64.6
+> 
+> <ins>Ages</ins>
+> 
+> 55, 36, 71, 43, 10, 28, 46, 39, 59, 40, 49, 4, 34, 31, 40, 36, 50, 26, 32, 21, 29, 18, 28, 35, 47, 39, 27, 25, 75, 33
+
+After loading the data into R, we can use the `cor.test()` function to carry out the test. We use the five-step procedure for hypothesis testing.
+
+**State the hypotheses and significance level**
+
+> <sub>0</sub>: ρ = 0 (there is no linear association)
+> 
+> H<sub>1</sub>: ρ ≠ 0 (there is a positive or negative linear association)
+> 
+> α = 0.05
+
+**Select the test statistic**
+
+![Formula for t-statistic/t-test](/Course-Content/Images/Equations/t-test-correlation.png)
+
+**State the decision rule**
+
+We find a critical value from the t-distribution with *n - 2 = 28* degrees of freedom a left-hand tail probability of α, t<sub>0.025, 28</sub>:
+
+```R
+critical.t <- qt(0.025, df=length(heights) - 2, lower.tail=FALSE)
+print(critical.t)
+[1] 2.048407
+```
+
+We reject H<sub>0</sub> if the p-value associated with the t-statistic is less than α. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+test.t <- (r * sqrt(length(heights) - 2)) /
+  (sqrt(1 - r ^ 2))
+print(test.t)
+[1] 0.2621987
+```
+
+The p-value associated with this t-statistic is:
+
+```R
+pt(test.t, df=length(heights) - 2, lower.tail=FALSE) * 2
+[1] 0.7950877
+```
+
+**Draw a conclusion**
+
+We fail to reject the null hypothesis H<sub>0</sub>: ρ = 0 since 0.80 > 0.05. We do not have significance evidence at the *α = 0.05* level that a linear association exists between age and height.
+
+**Alternate method**
+
+We could have carried out this test using the `cor.test()` function in R, which produces the same results:
+
+```R
+cor.test(heights, ages)
+
+	Pearson's product-moment correlation
+
+data:  heights and ages
+t = 0.2622, df = 28, p-value = 0.7951
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.3164208  0.4025815
+sample estimates:
+       cor 
+0.04949018
+```
+
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
 2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 105-109.
 3. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, p. 252.
 4. https://www.tutorialspoint.com/r/r_data_frames.htm
+5. https://online.stat.psu.edu/stat501/lesson/conducting-hypothesis-test-population-correlation-coefficient-r

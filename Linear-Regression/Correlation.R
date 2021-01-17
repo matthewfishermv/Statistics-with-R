@@ -41,3 +41,20 @@ cor(heights, ages)
 plot(ages, heights, main="Heights and Ages", xlab="Age", ylab="Height")
 r.text <- paste("r=", round(cor(heights, ages), 2), sep="")
 mtext(r.text, col="tomato2")
+
+# Test whether a correlation exists (rho not equal 0).
+critical.t <- qt(0.025, df=length(heights) - 2, lower.tail=FALSE)
+print(critical.t)
+
+r <- (1 / (length(heights) - 1)) *
+  sum(((heights - mean(heights)) / sd(heights)) *
+        ((ages - mean(ages)) / sd(ages)))
+
+test.t <- (r * sqrt(length(heights) - 2)) /
+  (sqrt(1 - r ^ 2))
+print(test.t)
+
+pt(test.t, df=length(heights) - 2, lower.tail=FALSE) * 2
+
+# Perform the correlation t-test using a single R function.
+cor.test(heights, ages)
