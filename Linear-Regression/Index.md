@@ -14,6 +14,7 @@
 - [Data Frames in R](#data-frames-in-r)
 - [Test for Correlation](#test-for-correlation)
   - [Example: Heights and Ages](#example-heights-and-ages-1)
+- [Linear Regression](#linear-regression)
 - [References](#references)
 
 ## Introduction
@@ -368,6 +369,59 @@ sample estimates:
 0.04949018
 ```
 
+## Linear Regression
+
+Correlation sets out to show whether a linear relationship exists between two variables. **Linear regression** extends the concept of correlation by establishing the equation of the line that describes the linear relationship. The process for establishing a linear regression line builds a model that fits the observed data.
+
+This is useful because it allows us to make predictions. That is, we can estimate the value of the dependent variable for any value of the independent variable, even those values that were not measured in the sample.
+
+The process for carrying out a linear regression is similar to the process for computing test statistics - we estimate a population parameter from the sample data. When we perform linear regression with one dependent variable and one independent variable, it is called **simple linear regression**, sometimes abbreviated as SLR. The general equation for simple linear regression is:
+
+![Formula for simple linear regression](/Course-Content/Images/Equations/linear-regression-simple.png)
+
+where:
+
+- *y* is the dependent variable,
+- *β<sub>0</sub>* is the *y*-intercept of the line
+- *β<sub>1</sub>* is the slope of the line
+- *x* is the independent variable,
+- *ε* (Greek letter "epsilon") is the error term.
+
+You may notice this equation follows the slope-intercept form of a line, *y = a + bx*. When performing simple linear regression, we are interesting in estimating *β<sub>1</sub>*, the slope of the line. The population parameter we are estimating is *β<sub>1</sub>* ("beta-1") and the estimate notation has a hat over it ("beta-hat-1"). This is the **slope coefficient**:
+
+![Beta-hat-1 - the slope coefficient](/Course-Content/Images/Equations/beta-hat-1.png)
+
+To visualize linear regression, suppose you have two variables *X*, *Y* with some positive linear relationship (as determined by observing the scatterplot and formally testing for correlation). Such an example is shown below.
+
+![Example of positively correlated variables](/Course-Content/Images/linear-regression-XY-example.png)
+
+In R, we compute a linear model by using the `lm()` function and passing in the dependent and independent variables in the form `dependent.variable ~ independent.variable`. This notation is called a **model formula** in R [[6]](#references). If we have two variables `x`, `y` in R, we can construct a linear model from them with `y` as the dependent variable as follows:
+
+```R
+model <- lm(y ~ x)
+```
+
+You can view the coefficients (y-intercept and slope) by printing the output:
+
+```R
+print(model)
+
+Call:
+lm(formula = y ~ x)
+
+Coefficients:
+(Intercept)            x  
+     1.2856       0.9798 
+```
+
+This example shows a linear relationship constructed with `y` as the dependent variable and `x` as the independent variable. The equation we extract is *y = 1.29 + 0.98x*. Adding the model to the plot using the `abline()` function, we can see that the model is a best-fit line for the data:
+
+```R
+abline(model)
+```
+
+![Example of linear regression line](/Course-Content/Images/linear-regression-XY-model-example.png)
+
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
@@ -375,3 +429,4 @@ sample estimates:
 3. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, p. 252.
 4. https://www.tutorialspoint.com/r/r_data_frames.htm
 5. https://online.stat.psu.edu/stat501/lesson/conducting-hypothesis-test-population-correlation-coefficient-r
+6. https://thomasleeper.com/Rcourse/Tutorials/formulae.html
