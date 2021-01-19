@@ -15,6 +15,7 @@
 - [Test for Correlation](#test-for-correlation)
   - [Example: Heights and Ages](#example-heights-and-ages-1)
 - [Linear Regression](#linear-regression)
+  - [Equation of the Linear Regression Line](#equation-of-the-linear-regression-line)
 - [References](#references)
 
 ## Introduction
@@ -51,7 +52,7 @@ The first step in looking for a relationship between two variables is often to p
 
 The **form** of a scatterplot is the general shape of the relationship between the independent and dependent variable [[1]](#references). It describes the overall pattern (or lack of pattern) in the scatterplot. The form may be **linear** (like a line), **curvilinear** (like a curve), or **random** (lacking a pattern).
 
-In the plot above, you can perceive of a linear pattern, where as x increases, so does y. A curvilinear pattern may looks something like the plot below:
+In the plot above, you can perceive of a linear pattern, in which as x increases, so does y. A curvilinear pattern may look something like the plot below:
 
 ![Example of a curvilinear scatterplot pattern](/Course-Content/Images/scatterplot-curvilinear.png)
 
@@ -93,15 +94,17 @@ The covariance is the same whether `x` is the dependent variable or `y` is. That
 
 ## Correlation
 
+*Code for this section:* [Correlation](/Linear-Regression/Correlation.R)
+
 Extending the concept of covariance, we can standardize the (x - x̄) and (y - y̅) terms by dividing by the standard deviation of the variable. Recall that x - x̄ and y - y̅ are called errors. You may notice that by dividing the errors by their standard deviations, you are computing z-scores [[2]](#references). The standardized quantity is known as the **correlation coefficient** or **Pearson's correlation** and it measures linear dependence between two variables:
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png)
 
-Note that this is calculated as the covariance of the two variables divided by the product of the standard deviations of both variables. Thus the equation can also be stated as follows:
+Note that this is calculated as the covariance of the two variables divided by the product of the standard deviations of both variables. Thus, the equation can also be stated as follows:
 
 ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient-simplified.png)
 
-Correlation measures how closely related two numeric variables are in a linear relationship [[2]](#references). The measure is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example of each of these values of *r* are shown below:
+Correlation measures how closely related two numeric variables are in a linear relationship [[2]](#references). The measure is useful because it takes on a range of values between -1 and 1. A value of 1 indicates the strongest possible positive association between x and y. A value of -1 indicates the strongest possible negative association between x and y. A value of 0 indicates no association between x and y. An example for each of these values of *r* is shown below:
 
 ![Correlation coefficient extreme values](/Course-Content/Images/correlation-coefficients.png)
 
@@ -113,7 +116,7 @@ cor(x, y)
 
 The correlation coefficient can be interpreted as the strength of a linear relationship between two numeric variables. The correlation is the same no matter which variable you select as the dependent variable. That is, *r<sub>xy</sub> = r<sub>yx</sub>*.
 
-In your interpretation of correlation, it is absolutely critical to note that <ins>correlation does not imply causation</ins>. In other words, you cannot assume that one variable has an effect on the other just because a correlation exists [[3]](#references).
+In your interpretation of correlation, it is crucial to note that <ins>correlation does not imply causation</ins>. In other words, you cannot assume that one variable has an effect on the other just because a correlation exists [[3]](#references).
 
 ### Example: Heights and Ages
 
@@ -158,6 +161,8 @@ The interpretation of this correlation coefficient is that a near-zero correlati
 ![Scatterplot of heights and ages showing random association](/Course-Content/Images/scatterplot-heights-ages-example.png)
 
 ## Data Frames in R
+
+*Code for this section:* [Data Frames](/Linear-Regression/Data-Frames.R)
 
 At this point, it will be useful to introduce a new data structure in R: data frames. A **data frame** is "a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column" [[4]](#references). This is beneficial for working with data sets that have more than one variable.
 
@@ -220,7 +225,7 @@ employees[1, 2]
 [1] 43
 ```
 
-By leaving out either the row number, we retrieve all rows. By leaving out the column number, we retrieve all columns. For example, we can retrieve all columns for the first employee as follows:
+By leaving out the row number, we retrieve all rows. By leaving out the column number, we retrieve all columns. For example, we can retrieve all columns for the first employee as follows:
 
 ```R
 employees[3, ]
@@ -270,9 +275,11 @@ cor(employees$salary, employees$age)
 
 The high correlation coefficient of 0.98 suggests a strong correlation between an employee's salary and age.
 
-The flexibility of data frames makes working with data sets very easy in R. Many functions, such as those that import data from external sources, natively create data frames for you. Before continuing, make sure you are comfortable with the basics of data frames.
+The flexibility of data frames makes working with data sets quite easy in R. Many functions, such as those that import data from external sources, natively create data frames for you. Before continuing, make sure you are comfortable with the basics of data frames.
 
 ## Test for Correlation
+
+*Code for this section:* [Correlation](/Linear-Regression/Correlation.R)
 
 A test statistic exists for correlation, allowing us to formally test the strength of a linear association between two variables. We use a t-test [[5]](#references):
 
@@ -371,6 +378,8 @@ sample estimates:
 
 ## Linear Regression
 
+*Code for this section:* [Linear Regression](/Linear-Regression/Linear-Regression.R)
+
 Correlation sets out to show whether a linear relationship exists between two variables. **Linear regression** extends the concept of correlation by establishing the equation of the line that describes the linear relationship. The process for establishing a linear regression line builds a model that fits the observed data.
 
 This is useful because it allows us to make predictions. That is, we can estimate the value of the dependent variable for any value of the independent variable, even those values that were not measured in the sample.
@@ -382,12 +391,12 @@ The process for carrying out a linear regression is similar to the process for c
 where:
 
 - *y* is the dependent variable,
-- *β<sub>0</sub>* is the *y*-intercept of the line
-- *β<sub>1</sub>* is the slope of the line
-- *x* is the independent variable,
+- *β<sub>0</sub>* is the *y*-intercept of the line,
+- *β<sub>1</sub>* is the slope of the line,
+- *x* is the independent variable, and
 - *ε* (Greek letter "epsilon") is the error term.
 
-You may notice this equation follows the slope-intercept form of a line, *y = a + bx*. When performing simple linear regression, we are interesting in estimating *β<sub>1</sub>*, the slope of the line. The population parameter we are estimating is *β<sub>1</sub>* ("beta-1") and the estimate notation has a hat over it ("beta-hat-1"). This is the **slope coefficient**:
+You may notice this equation follows the slope-intercept form of a line, *y = a + bx*. When performing simple linear regression, we are interested in estimating *β<sub>1</sub>*, the slope of the line. The population parameter we are estimating is *β<sub>1</sub>* ("beta-1") and the estimate notation has a hat over it ("beta-hat-1"). This is the **slope coefficient**:
 
 ![Beta-hat-1 - the slope coefficient](/Course-Content/Images/Equations/beta-hat-1.png)
 
@@ -411,16 +420,32 @@ lm(formula = y ~ x)
 
 Coefficients:
 (Intercept)            x  
-     1.2856       0.9798 
+     0.5983       0.9885
 ```
 
-This example shows a linear relationship constructed with `y` as the dependent variable and `x` as the independent variable. The equation we extract is *y = 1.29 + 0.98x*. Adding the model to the plot using the `abline()` function, we can see that the model is a best-fit line for the data:
+This example shows a linear relationship constructed with `y` as the dependent variable and `x` as the independent variable. The equation we extract is *y = 0.60 + 0.99x*. Adding the model to the plot using the `abline()` function, we can see that the model is a best-fit line for the data:
 
 ```R
 abline(model)
 ```
 
 ![Example of linear regression line](/Course-Content/Images/linear-regression-XY-model-example.png)
+
+### Equation of the Linear Regression Line
+
+The equation for the regression line can be computed by hand, but we usually rely on software like R to calculate the line for us. With that in mind, let us develop an understanding for where the equation comes from. The equation for the **least-squares regression line**, which is the simple linear regression line we are interested in, is:
+
+![Equation of the least-squares regression line](/Course-Content/Images/Equations/linear-regression-simple-estimate.png)
+
+The hat symbol (^) above the beta coefficients indicates that these quantities are *estimates* rather than population parameters. Thus, the beta coefficients in the equation above are sample estimates for the population coefficients *β₀* and *β₁* respectively.
+
+A useful property of the linear regression line is that it will always pass through the point known as the **centroid**, which is the point *(x̄, y̅)*:
+
+![Example of linear model with centroid](/Course-Content/Images/linear-regression-XY-model-with-centroid-example.png)
+
+For the purposes of this course, we are not concerned with the specific calculations involved in computing a linear regression line. Instead, we briefly touch on the subject by suggesting that a method of **least squares regression** is used, in which the goal is to minimize the sum of all squared errors. The errors (also called "residuals") are shown as vertical lines in the model below between each data point a possible line. The sum of these values squared is what we seek to minimize to produce the best fit linear regression line.
+
+![Least squares regression line](/Course-Content/Images/linear-regression-least-squares.png)
 
 ## References
 
