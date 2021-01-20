@@ -16,6 +16,7 @@
   - [Example: Heights and Ages](#example-heights-and-ages-1)
 - [Linear Regression](#linear-regression)
   - [Equation of the Linear Regression Line](#equation-of-the-linear-regression-line)
+  - [Example: Ages of Spouses](#example-ages-of-spouses)
 - [References](#references)
 
 ## Introduction
@@ -446,6 +447,50 @@ A useful property of the linear regression line is that it will always pass thro
 For the purposes of this course, we are not concerned with the specific calculations involved in computing a linear regression line. Instead, we briefly touch on the subject by suggesting that a method of **least squares regression** is used, in which the goal is to minimize the sum of all squared errors. The errors (also called "residuals") are shown as vertical lines in the model below between each data point a possible line. The sum of these values squared is what we seek to minimize to produce the best fit linear regression line.
 
 ![Least squares regression line](/Course-Content/Images/linear-regression-least-squares.png)
+
+### Example: Ages of Spouses
+
+A sample of the ages of husbands and wives is given below. Find the equation of the linear relationship.
+
+> | Couple # | Wife | Husband |
+> |----------|------|---------|
+> | 1 | 35 | 41 |
+> | 2 | 59 | 56 |
+> | 3 | 60 | 61 |
+> | 4 | 74 | 68 |
+> | 5 | 74 | 77 |
+> | 6 | 81 | 77 |
+
+First, we load the data into R and create a data frame:
+
+```R
+wife <- c(35, 59, 60, 74, 74, 81)
+husband <- c(41, 56, 61, 68, 77, 77)
+spouse.ages <- data.frame(wife, husband)
+```
+
+Next, we check whether there a linear relationship exists by computing the correlation coefficient:
+
+```R
+cor(spouse.ages$wife, spouse.ages$husband)
+[1] 0.9703923
+```
+
+Indeed, there is a strong positive correlation. Now we can find the equation for the linear relationship:
+
+```R
+model <- lm(spouse.ages$wife ~ spouse.ages$husband)
+print(model)
+
+Call:
+lm(formula = spouse.ages$wife ~ spouse.ages$husband)
+
+Coefficients:
+        (Intercept)  spouse.ages$husband  
+             -9.864                1.164
+```
+
+The equation for the linear relationship between ages of spouses is *age<sub>husband</sub> = -9.9 + 1.2 × age<sub>wife</sub>*.
 
 ## References
 
