@@ -53,3 +53,45 @@ cor(spouse.ages$wife, spouse.ages$husband)
 # Find the model for the linear relationship.
 model <- lm(spouse.ages$wife ~ spouse.ages$husband)
 print(model)
+
+####
+# Regression fit
+####
+
+# Visualize regression components.
+x <- c(10.1, 8.5, 9.0, 11.2, 10.2, 11.8, 10.5, 10.3, 11.0,
+       10.1, 11.5, 10.4, 11.7, 9.8, 8.8, 10.5, 10.6, 10.3,
+       9.2, 11.6, 11.7, 11.8, 10.4, 10.9, 9.9, 9.3, 9.2, 9.6,
+       12.6, 10.5)
+y <- c(9.4, 9.1, 8.5, 11.0, 9.5, 11.8, 9.6, 10.4, 10.1, 9.7,
+       10.7, 11.1, 11.3, 9.8, 8.6, 10.7, 11.2, 11.0, 10.1,
+       12.4, 11.5, 11.3, 9.9, 9.9, 10.0, 10.1, 9.7, 10.3,
+       13.6, 11.3)
+plot(x, y, main="Regression Components", xlab="", ylab="")
+
+# Draw the linear model and mean line.
+model <- lm(y ~ x)
+abline(h=mean(y), col="steelblue", lwd=2, lty=3)
+abline(model, col="tomato2", lwd=2)
+
+# Add labels for regression line and mean line.
+polygon(c(9, 9.5), c(9.17, 9.17), border="tomato2", lwd=2)
+text(9.5, 9.17, expression(hat(y)==beta[0]+beta[1]*x+epsilon), pos=4, cex=1.5, col="tomato2")
+
+polygon(c(11, 11.5), c(mean(y), 9.9), border="steelblue", lwd=2, lty=3)
+text(11.5, 9.9, expression(bar(y)), cex=1.5, col="steelblue", pos=4)
+
+# Draw a point on the regression line and lines showing the
+# regression component and residual component.
+points(11.6, predict(model)[20], pch=16)
+polygon(c(11.6, 11.6), c(predict(model)[20], mean(y)), lwd=2, lty=3)
+polygon(c(11.6, 11.6), c(predict(model)[20], y[20]), lwd=2, lty=3)
+
+# Add labels fir regression an residual components.
+polygon(c(10, 11.6), c(12, 12), lwd=2)
+text(10, 12, expression(y[i] - hat(y)[i]), pos=2, cex=1.5)
+text(10, 12.5, "Residual:", pos=2, cex=1.5)
+
+polygon(c(10, 11.6), c(11, 11), lwd=2)
+text(10, 11, expression(hat(y)[i] - bar(y)), pos=2, cex=1.5)
+text(10, 11.5, "Regression:", pos=2, cex=1.5)

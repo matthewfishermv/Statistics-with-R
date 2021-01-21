@@ -17,13 +17,16 @@
 - [Linear Regression](#linear-regression)
   - [Equation of the Linear Regression Line](#equation-of-the-linear-regression-line)
   - [Example: Ages of Spouses](#example-ages-of-spouses)
+- [Assessing Linear Regression Fit](#assessing-linear-regression-fit)
+  - [Regression Components](#regression-components)
+  - [Coefficient of Variation](#coefficient-of-variation)
 - [References](#references)
 
 ## Introduction
 
 In the previous modules, you have seen how to design experiments and work with variables, infer properties of a population from characteristics of a sample, and compare means across two populations. We turn next to a basic modelling technique - Simple Linear Regression.
 
-In this module, you will learn how to create and interpret <ins>scatterplots</ins>, measure and test relationships between two variables in the same population through <ins>correlation</ins>, build and test a <ins>simple linear model</ins>, and assess the fit of a linear regression model using a <ins>global F-test</ins>.
+In this module, you will learn how to create and interpret <ins>scatterplots</ins>, measure and test relationships between two variables in the same population through <ins>correlation</ins>, build and test a <ins>simple linear model</ins>, and assess the fit of a linear regression model using the <ins>coefficient of determination</ins>.
 
 These concepts will lay the groundwork for understanding Multiple Linear Regression and regression diagnostics in the next module.
 
@@ -316,7 +319,7 @@ After loading the data into R, we can use the `cor.test()` function to carry out
 
 **State the hypotheses and significance level**
 
-> <sub>0</sub>: ρ = 0 (there is no linear association)
+> H<sub>0</sub>: ρ = 0 (there is no linear association)
 > 
 > H<sub>1</sub>: ρ ≠ 0 (there is a positive or negative linear association)
 > 
@@ -492,6 +495,49 @@ Coefficients:
 
 The equation for the linear relationship between ages of spouses is *age<sub>husband</sub> = -9.9 + 1.2 × age<sub>wife</sub>*.
 
+## Assessing Linear Regression Fit
+
+Two very different sets of variables may produce a linear equation with the same slopes and intercepts [[7]](#references). To account for this, we need a measure for the fit of a line to the data that accounts for the <ins>strength</ins> of the relationship, or how closely clustered the data points are around the regression line. The **coefficient of variation** or **coefficient of determination** is a measure of the variation in the response variable that is explained by variation in the explanatory variable.
+
+### Regression Components
+
+To find the coefficient of variation, we first break the regression model into two distinct components. For each point on the regression line, the **regression component** is the difference between the point on the regression line and the mean of the sample. This is the variation that is *explained by the model*:
+
+![Formula for regression component](/Course-Content/Images/Equations/linear-regression-component-regression.png)
+
+For each point on the regression line, the **residual component** is that which is *not explained by the model*. It is the residual between the observed value and that which was predicted by the model:
+
+![Formula for residual component](/Course-Content/Images/Equations/linear-regression-component-residual.png)
+
+The scatterplot below visualizes the regression components. The mean (*ȳ*) is shown as a dotted blue line, the regression line is shown as a red line, and the residual and regression components are shown for the point *(11.5, 11.4)*.
+
+![Visualization of regression components](/Course-Content/Images/linear-regression-components.png)
+
+From these components, we can derive new quantities: the **regression sum of squares** and **residual sum of squares** (also called the **sum of squared errors*). They are the *variation explained by the model* and the *variation not explained by the model* respectively. The regression sum of squares is denoted *SSR* and the error sum of squared errors is denoted *SSE*:
+
+![Formula for regression sum of squares](/Course-Content/Images/Equations/sum-of-squares-regression.png)
+
+![Formula for residual sum of squares](/Course-Content/Images/Equations/sum-of-squared-errors.png)
+
+Thus, the total variation in the data is explained partly by the model and partly by other factors. The **total sum of squares** describes the overall variability:
+
+![Formula for total sum of squares](/Course-Content/Images/Equations/sum-of-squares-total.png)
+
+### Coefficient of Variation
+
+The regression components give us the variability in the data that is explained by the model and that which is not. The coefficient of variation is simply the proportion of the variability explained by the model, *SSR/SST*. We denote the coefficient of determination *R²*:
+
+![Formula for coefficient of variation](/Course-Content/Images/Equations/coefficient-of-determination.png)
+
+This quantity gives us a sense of the model fit. A coefficient of *1* would be a perfect fit (a straight line) and a coefficient of *0* would be the worst possible fit (100% scatter) [[7]](#references). The interpretation of *R²* is the percentage of the variation in the response variable explained by the variation in the explanatory variable. An *R²* of *0.75*, for example, means that 75% of the variability in the dependent variable is explained by the variability in the independent variable.
+
+In R, we can view the *R²* value by calling `summary()` on a linear model generated using the `lm()` function:
+
+```R
+model <- lm(y ~ x)
+summary(model)
+```
+
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
@@ -500,3 +546,4 @@ The equation for the linear relationship between ages of spouses is *age<sub>hus
 4. https://www.tutorialspoint.com/r/r_data_frames.htm
 5. https://online.stat.psu.edu/stat501/lesson/conducting-hypothesis-test-population-correlation-coefficient-r
 6. https://thomasleeper.com/Rcourse/Tutorials/formulae.html
+7. Crawley, Michael J. "Statistics: An Introduction Using R". 2nd Edition, 2015, pp. 133-134.
