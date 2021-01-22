@@ -20,6 +20,7 @@
 - [Assessing Linear Regression Fit](#assessing-linear-regression-fit)
   - [Regression Components](#regression-components)
   - [Coefficient of Variation](#coefficient-of-variation)
+  - [Example:](#example)
 - [References](#references)
 
 ## Introduction
@@ -513,7 +514,7 @@ The scatterplot below visualizes the regression components. The mean (*ȳ*) is 
 
 ![Visualization of regression components](/Course-Content/Images/linear-regression-components.png)
 
-From these components, we can derive new quantities: the **regression sum of squares** and **residual sum of squares** (also called the **sum of squared errors*). They are the *variation explained by the model* and the *variation not explained by the model* respectively. The regression sum of squares is denoted *SSR* and the error sum of squared errors is denoted *SSE*:
+From these components, we can derive new quantities: the **regression sum of squares** and **residual sum of squares** (also called the **sum of squared errors**). They are the *variation explained by the model* and the *variation not explained by the model* respectively. The regression sum of squares is denoted *SSR* and the error sum of squared errors is denoted *SSE*:
 
 ![Formula for regression sum of squares](/Course-Content/Images/Equations/sum-of-squares-regression.png)
 
@@ -529,7 +530,9 @@ The regression components give us the variability in the data that is explained 
 
 ![Formula for coefficient of variation](/Course-Content/Images/Equations/coefficient-of-determination.png)
 
-This quantity gives us a sense of the model fit. A coefficient of *1* would be a perfect fit (a straight line) and a coefficient of *0* would be the worst possible fit (100% scatter) [[7]](#references). The interpretation of *R²* is the percentage of the variation in the response variable explained by the variation in the explanatory variable. An *R²* of *0.75*, for example, means that 75% of the variability in the dependent variable is explained by the variability in the independent variable.
+This quantity gives us a sense of the model fit. A coefficient of *1* would be a perfect fit (a straight line) and a coefficient of *0* would be the worst possible fit (100% scatter) [[7]](#references). In general, a well-fit regression line will have a small residual sum of squares, *Σ (yᵢ - ŷᵢ)²*, because the model sufficiently explains most of the variability [[2]](#references).
+
+The interpretation of *R²* is the percentage of the variation in the response variable explained by the variation in the explanatory variable. An *R²* of *0.75*, for example, means that 75% of the variability in the dependent variable is explained by the variability in the independent variable.
 
 In R, we can view the *R²* value by calling `summary()` on a linear model generated using the `lm()` function:
 
@@ -538,10 +541,14 @@ model <- lm(y ~ x)
 summary(model)
 ```
 
+The output gives a "Multiple R-Squared" value and an "Adjusted R-Squared" value. The adjusted *R²* is *R²* divided by the degrees of freedom, which in the simple linear regression case is *n - 2*. The adjusted *R²* is more conservative than the *R²* value, as it "penalizes models that get better values of *R²* by using more predictors" [[2]](#references).
+
+### Example: 
+
 ## References
 
 1. https://courses.lumenlearning.com/wmopen-concepts-statistics/chapter/scatterplots-2-of-5/
-2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 105-109.
+2. Verzani, John. "Using R for Introductory Statistics". 2nd Edition, 2014, pp. 105-109, 373.
 3. Lander, Jared P. "R for Everyone: Advanced Analytics and Graphics". 2nd Edition, 2017, p. 252.
 4. https://www.tutorialspoint.com/r/r_data_frames.htm
 5. https://online.stat.psu.edu/stat501/lesson/conducting-hypothesis-test-population-correlation-coefficient-r
