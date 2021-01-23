@@ -20,7 +20,7 @@
 - [Assessing Linear Regression Fit](#assessing-linear-regression-fit)
   - [Regression Components](#regression-components)
   - [Coefficient of Variation](#coefficient-of-variation)
-  - [Example:](#example)
+- [Summary](#summary)
 - [References](#references)
 
 ## Introduction
@@ -298,7 +298,7 @@ Recall that the purpose for making inferences based on a sample statistic is to 
 > 
 > **Left-tailed test**: H<sub>1</sub>: ρ < 0 (there is a negative linear association)
 > 
-> **Right-tailed test**: H<sub>1</sub>: ρ > µ<sub>2</sub> (there is a positive linear association)
+> **Right-tailed test**: H<sub>1</sub>: ρ > 0 (there is a positive linear association)
 > 
 > **Two-tailed test**: H<sub>1</sub>: ρ ≠ 0 (there is a positive or negative linear association)
 
@@ -543,7 +543,13 @@ summary(model)
 
 The output gives a "Multiple R-Squared" value and an "Adjusted R-Squared" value. The adjusted *R²* is *R²* divided by the degrees of freedom, which in the simple linear regression case is *n - 2*. The adjusted *R²* is more conservative than the *R²* value, as it "penalizes models that get better values of *R²* by using more predictors" [[2]](#references).
 
-### Example: 
+## Summary
+
+| Concept | Discussion | Formula | R Code | Examples |
+|---------|------------|---------|--------|----------|
+| Scatterplots | Scatterplots are a visual representation of the relationship between two continuous variables. They show how a dependent variable changes as an independent variable changes. Scatterplots have varying <ins>form</ins>, <ins>direction</ins>, and <ins>strength</ins>. | N/A | `plot()` | `plot(x, y)`, `plot(y ~ x)` |
+| Covariance | Covariance is a measure of the joint variability of two variables with respect to their means. Values close to *1* indicate a strong relationship between the variables. | ![Formula for covariance](/Course-Content/Images/Equations/covariance.png) | `cov()` | `cov(x, y)`, `cov(y, x)` |
+| Correlation | Correlation is the standardized covariance. It measures whether a strong, weak, or no linear relationship exists and in what direction, positive or negative. | ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png) | `cor(x, y)` | `cor(x, y)`, `cor(y, x)` |
 
 ## References
 
