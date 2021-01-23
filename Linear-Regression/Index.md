@@ -20,6 +20,8 @@
 - [Assessing Linear Regression Fit](#assessing-linear-regression-fit)
   - [Regression Components](#regression-components)
   - [Coefficient of Variation](#coefficient-of-variation)
+- [Linear Regression Tests](#linear-regression-tests)
+  - [T-Test for Linear Regression](#t-test-for-linear-regression)
 - [Summary](#summary)
 - [References](#references)
 
@@ -452,6 +454,10 @@ For the purposes of this course, we are not concerned with the specific calculat
 
 ![Least squares regression line](/Course-Content/Images/linear-regression-least-squares.png)
 
+As with other population parameters we estimate using sample statistics, there is a standard error for simple linear regression. The standard error for simple linear regression is:
+
+![Formula for standard error in linear regression](/Course-Content/Images/Equations/standard-error-linear-regression.png)
+
 ### Example: Ages of Spouses
 
 A sample of the ages of husbands and wives is given below. Find the equation of the linear relationship.
@@ -542,6 +548,32 @@ summary(model)
 ```
 
 The output gives a "Multiple R-Squared" value and an "Adjusted R-Squared" value. The adjusted *R²* is *R²* divided by the degrees of freedom, which in the simple linear regression case is *n - 2*. The adjusted *R²* is more conservative than the *R²* value, as it "penalizes models that get better values of *R²* by using more predictors" [[2]](#references).
+
+## Linear Regression Tests
+
+Having established a linear regression line, the next logical step is to test it for statistical significance. The slope coefficient, β₁ is the focus of formal tests for linear regression since it quantifies the linear relationship. We will see two equivalent tests that test whether a linear relationship exists - the linear regression t-test and an equivalent F-test.
+
+### T-Test for Linear Regression
+
+The **T-test for linear regression** tests whether there is a statistically significant linear relationship between two continuous variables. The test statistic is:
+
+![Formula for T-test in linear regression](/Course-Content/Images/Equations/t-test-linear-regression.png)
+
+Since we have estimated two parameters in the calculation of this t-statistic, there are *n - 1* degrees of freedom.
+
+In this test, we assess the following hypotheses:
+
+> H<sub>0</sub>: β₁ = 0 (there is no linear relationship)
+> 
+> **Left-tailed test**: H<sub>1</sub>: β₁ < 0 (there is a negative linear relationship)
+> 
+> **Right-tailed test**: H<sub>1</sub>: β₁ > 0 (there is a positive linear relationship)
+> 
+> **Two-tailed test**: H<sub>1</sub>: β₁ ≠ 0 (there is a positive or negative linear relationship)
+
+Using the t-distribution, we can construct a confidence interval:
+
+![Formula for confidence interval in linear regression t-test](/Course-Content/Images/Equations/confidence-interval-t-linear-regression.png)
 
 ## Summary
 
