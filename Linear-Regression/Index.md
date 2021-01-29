@@ -582,6 +582,9 @@ Using the t-distribution, we can construct a confidence interval:
 | Scatterplots | Scatterplots are a visual representation of the relationship between two continuous variables. They show how a dependent variable changes as an independent variable changes. Scatterplots have varying <ins>form</ins>, <ins>direction</ins>, and <ins>strength</ins>. | N/A | `plot()` | `plot(x, y)`, `plot(y ~ x)` |
 | Covariance | Covariance is a measure of the joint variability of two variables with respect to their means. Values close to *1* indicate a strong relationship between the variables. | ![Formula for covariance](/Course-Content/Images/Equations/covariance.png) | `cov()` | `cov(x, y)`, `cov(y, x)` |
 | Correlation | Correlation is the standardized covariance. It measures whether a strong, weak, or no linear relationship exists and in what direction, positive or negative. | ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png) | `cor(x, y)` | `cor(x, y)`, `cor(y, x)` |
+| Data frames | A two-dimensional table of data with rows and columns. | N/A | `data.frame()` | `data.frame(name=c("Samantha", "Greg", "Patricia"), age=c(45, 50, 55))` |
+| Correlation t-test | A t-test that assesses whether a linear relationship exists between two continuous variables. | ![Formula for t-test for correlation](/Course-Content/Images/Equations/t-test-correlation.png) | `cor.test()` | `cor.test(x, y)` |
+| Linear regression | A process by which an equation is derived for a line that best fits through the center of points formed by two related variables, an independent (explanatory) and dependent (response) variable.<br><br>This is a simple linear model of the relationship between the variables and allows us to estimate values and make predictions. | ![Formula for simple linear regression](/Course-Content/Images/Equations/linear-regression-simple.png) | `lm()` | `lm(y ~ x)` |
 
 ## References
 
