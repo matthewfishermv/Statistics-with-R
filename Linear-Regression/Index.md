@@ -444,7 +444,7 @@ The equation for the regression line can be computed by hand, but we usually rel
 
 ![Equation of the least-squares regression line](/Course-Content/Images/Equations/linear-regression-simple-estimate.png)
 
-The hat symbol (^) above the beta coefficients indicates that these quantities are *estimates* rather than population parameters. Thus, the beta coefficients in the equation above are sample estimates for the population coefficients *β₀* and *β₁* respectively.
+The hat symbol (^) above y and the beta coefficients indicates that these quantities are *estimates* rather than population parameters. The beta coefficients in the equation above are sample estimates for the population coefficients *β₀* and *β₁* respectively. The *ŷ* quantity is the value that the model predicts or a given value of *x*.
 
 A useful property of the linear regression line is that it will always pass through the point known as the **centroid**, which is the point *(x̄, y̅)*:
 
@@ -584,7 +584,8 @@ Using the t-distribution, we can construct a confidence interval:
 | Correlation | Correlation is the standardized covariance. It measures whether a strong, weak, or no linear relationship exists and in what direction, positive or negative. | ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png) | `cor(x, y)` | `cor(x, y)`, `cor(y, x)` |
 | Data frames | A two-dimensional table of data with rows and columns. | N/A | `data.frame()` | `data.frame(name=c("Samantha", "Greg", "Patricia"), age=c(45, 50, 55))` |
 | Correlation t-test | A t-test that assesses whether a linear relationship exists between two continuous variables. | ![Formula for t-test for correlation](/Course-Content/Images/Equations/t-test-correlation.png) | `cor.test()` | `cor.test(x, y)` |
-| Linear regression | A process by which an equation is derived for a line that best fits through the center of points formed by two related variables, an independent (explanatory) and dependent (response) variable.<br><br>This is a simple linear model of the relationship between the variables and allows us to estimate values and make predictions. | ![Formula for simple linear regression](/Course-Content/Images/Equations/linear-regression-simple.png) | `lm()` | `lm(y ~ x)` |
+| Linear regression | A process by which an equation is derived for a line that best fits through the center of points formed by two related variables, an independent (explanatory) and dependent (response) variable.<br><br>This is a simple linear model of the relationship between the variables and allows us to estimate values and make predictions. | ![Formula for simple linear regression](/Course-Content/Images/Equations/linear-regression-simple.png)<br>![Formula for standard error in linear regression](/Course-Content/Images/Equations/standard-error-linear-regression.png) | `lm()` | `lm(y ~ x)` |
+| 
 
 ## References
 
