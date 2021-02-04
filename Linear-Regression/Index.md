@@ -22,6 +22,7 @@
   - [Coefficient of Variation](#coefficient-of-variation)
 - [Linear Regression Tests](#linear-regression-tests)
   - [T-Test for Linear Regression](#t-test-for-linear-regression)
+    - [Example: Marketing and sales](#example-marketing-and-sales)
 - [Summary](#summary)
 - [References](#references)
 
@@ -588,6 +589,89 @@ confint(lm(y ~ x), level=0.95)
 ```
 
 The results will show the confidence interval for both the intercept (β₀) estimate and slope (β₁) estimate. We are more interested in the slope coefficient, as it defines the strength and direction of the linear relationship, whereas the intercept only serves to shift the linear regression function up or down the y-axis.
+
+#### Example: Marketing and sales
+
+Company A spends on marketing quarterly and tracks its sales. The data for two years (four quarters) of marketing and sales for Company A is shown below in units of *$100,000*. Assume there is a linear relationship between how much Company A spends on marketing in a quarter and its total sales in the same quarter. Formally test whether the relationship is significant.
+
+| Quarter | Marketing | Sales |
+|---------|-----------|-------|
+| 1 | 150 | 789 |
+| 2 | 145 | 766 |
+| 3 | 160 | 815 |
+| 4 | 180 | 823 |
+| 5 | 190 | 810 |
+| 6 | 190 | 880 |
+| 7 | 200 | 885 |
+| 8 | 210 | 900 |
+
+Prior to performing the significance test, it is a good idea to load the data into a data frame in R and plot the relationship:
+
+```R
+quarters <- c(1, 2, 3, 4, 5, 6, 7, 8)
+marketing <- c(150, 145, 160, 180, 190, 190, 200, 210)
+sales <- c(789, 766, 815, 823, 810, 880, 885, 900)
+data <- data.frame(qarter=quarters, marketing, sales)
+
+plot(data$sales ~ data$marketing, main="Sales vs. Marketing", xlab="Marketing ($100k)", ylab="Sales ($100k)")
+```
+
+![Plot of marketing and sales data](/Course-Content/Images/linear-regression-sales-marketing-example.png)
+
+**State the hypotheses and significance level**
+
+> H<sub>0</sub>: β₁ = 0 (there is no linear relationship)
+> 
+> H<sub>1</sub>: β₁ ≠ 0 (there is a positive or negative linear relationship)
+> 
+> α = 0.05
+
+**Select the test statistic**
+
+![Formula for T-test in linear regression](/Course-Content/Images/Equations/t-test-linear-regression.png)
+
+**State the decision rule**
+
+We find a critical value from the t-distribution with *n - 2 = 6* degrees of freedom a left-hand tail probability of α, t<sub>0.025, 6</sub>:
+
+```R
+critical.t <- qt(0.025, df=6, lower.tail=FALSE)
+print(critical.t)
+[1] 2.446912
+```
+
+We reject H<sub>0</sub> if the p-value associated with the t-statistic is less than α. Otherwise, we fail to reject H<sub>0</sub>.
+
+**Compute the test statistic**
+
+```R
+model <- lm(data$sales ~ data$marketing)
+summary(model)
+
+Call:
+lm(formula = data$sales ~ data$marketing)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-45.256  -8.594   7.565  12.244  24.744 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    507.1650    67.2249   7.544 0.000281 ***
+data$marketing   1.8321     0.3745   4.892 0.002732 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 23.67 on 6 degrees of freedom
+Multiple R-squared:  0.7996,	Adjusted R-squared:  0.7662 
+F-statistic: 23.94 on 1 and 6 DF,  p-value: 0.002732
+```
+
+From the output above, we see that the equation for the linear model is *sales = 507.2 + 1.8321 × marketing*. The output also shows the t-statistic for the slope coefficient, *t = 4.89*, and the associated p-value, *0.000281*.
+
+**Draw a conclusion**
+
+We reject the null hypothesis H<sub>0</sub>: β₁ = 0 since p < 0.05. We have significance evidence at the *α = 0.05* level that a significant linear relationship exists between marketing and sales. From the available sample data, Company A's sales increased by *$1.83* for every *$1* increase in marketing.
 
 ## Summary
 

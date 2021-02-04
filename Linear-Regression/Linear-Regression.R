@@ -95,3 +95,30 @@ text(10, 12.5, "Residual:", pos=2, cex=1.5)
 polygon(c(10, 11.6), c(11, 11), lwd=2)
 text(10, 11, expression(hat(y)[i] - bar(y)), pos=2, cex=1.5)
 text(10, 11.5, "Regression:", pos=2, cex=1.5)
+
+####
+# Example: Marketing and sales
+####
+
+# Load the data into a data frame.
+quarters <- c(1, 2, 3, 4, 5, 6, 7, 8)
+marketing <- c(150, 145, 160, 180, 190, 190, 200, 210)
+sales <- c(789, 766, 815, 823, 810, 880, 885, 900)
+
+data <- data.frame(qarter=quarters, marketing, sales)
+
+# Always plot the data first.
+plot(data$sales ~ data$marketing, main="Sales vs. Marketing", xlab="Marketing ($100k)", ylab="Sales ($100k)")
+
+# Build a linear model.
+model <- lm(data$sales ~ data$marketing)
+
+# Add the model to the plot.
+abline(model, col="tomato", lwd=2)
+
+# Test the model for significance.
+summary(model)
+
+# Values used in the formal test.
+critical.t <- qt(0.025, df=6, lower.tail=FALSE)
+print(critical.t)
