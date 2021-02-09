@@ -22,7 +22,7 @@
   - [Coefficient of Variation](#coefficient-of-variation)
 - [Linear Regression Tests](#linear-regression-tests)
   - [T-Test for Linear Regression](#t-test-for-linear-regression)
-    - [Example: Marketing and sales](#example-marketing-and-sales)
+    - [Example: Marketing and Sales](#example-marketing-and-sales)
 - [Summary](#summary)
 - [References](#references)
 
@@ -590,7 +590,7 @@ confint(lm(y ~ x), level=0.95)
 
 The results will show the confidence interval for both the intercept (β₀) estimate and slope (β₁) estimate. We are more interested in the slope coefficient, as it defines the strength and direction of the linear relationship, whereas the intercept only serves to shift the linear regression function up or down the y-axis.
 
-#### Example: Marketing and sales
+#### Example: Marketing and Sales
 
 Company A spends on marketing quarterly and tracks its sales. The data for two years (four quarters) of marketing and sales for Company A is shown below in units of *$100,000*. Assume there is a linear relationship between how much Company A spends on marketing in a quarter and its total sales in the same quarter. Formally test whether the relationship is significant.
 
@@ -681,7 +681,7 @@ We reject the null hypothesis H<sub>0</sub>: β₁ = 0 since p < 0.05. We have s
 | Covariance | Covariance is a measure of the joint variability of two variables with respect to their means. Values close to *1* indicate a strong relationship between the variables. | ![Formula for covariance](/Course-Content/Images/Equations/covariance.png) | `cov()` | `cov(x, y)`, `cov(y, x)` |
 | Correlation | Correlation is the standardized covariance. It measures whether a strong, weak, or no linear relationship exists and in what direction, positive or negative. | ![Formula for correlation coefficient](/Course-Content/Images/Equations/correlation-coefficient.png) | `cor(x, y)` | `cor(x, y)`, `cor(y, x)` |
 | Data frames | A two-dimensional table of data with rows and columns. | N/A | `data.frame()` | `data.frame(name=c("Samantha", "Greg", "Patricia"), age=c(45, 50, 55))` |
-| Correlation t-test | A t-test that assesses whether a linear relationship exists between two continuous variables. | ![Formula for t-test for correlation](/Course-Content/Images/Equations/t-test-correlation.png) | `cor.test()` | `cor.test(x, y)` |
+| Correlation t-test | A t-test that assesses whether a linear relationship exists between two continuous variables.<br>H<sub>0</sub>: β₁ = 0<br>H<sub>1: β₁ > 0 or β₁ < 0 or β₁ ≠ 0 | ![Formula for t-test for correlation](/Course-Content/Images/Equations/t-test-correlation.png) | `cor.test()` | `cor.test(x, y)` |
 | Linear regression | A process by which an equation is derived for a line that best fits through the center of points formed by two related variables, an independent (explanatory) and dependent (response) variable.<br><br>This is a simple linear model of the relationship between the variables and allows us to estimate values and make predictions. | ![Formula for simple linear regression](/Course-Content/Images/Equations/linear-regression-simple.png)<br>![Formula for standard error in linear regression](/Course-Content/Images/Equations/standard-error-linear-regression.png) | `lm()` | `lm(y ~ x)` |
 | Regression fit (R²) | The coefficient of variation or coefficient of determination (R²) is a measure of the variability explained by a linear model as a proportion of the total variability. | ![Formula for coefficient of variation](/Course-Content/Images/Equations/coefficient-of-determination.png) | `summary(lm())` | `summary(lm(y ~ x))` |
 
