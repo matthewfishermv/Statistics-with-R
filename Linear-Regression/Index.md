@@ -23,6 +23,7 @@
 - [Linear Regression Tests](#linear-regression-tests)
   - [T-Test for Linear Regression](#t-test-for-linear-regression)
     - [Example: Marketing and Sales](#example-marketing-and-sales)
+  - [F-Test of Overall Significance](#f-test-of-overall-significance)
 - [Summary](#summary)
 - [References](#references)
 
@@ -517,6 +518,14 @@ For each point on the regression line, the **residual component** is that which 
 
 ![Formula for residual component](/Course-Content/Images/Equations/linear-regression-component-residual.png)
 
+To summarize the notation in the regression setting, we have:
+
+| Notation | Pronunciation | Description |
+|----------|---------------|-------------|
+| *yᵢ* | "y-i" | The iᵗʰ value <ins>observed</ins> in the data |
+| *ŷᵢ* | "y-hat-i" | The iᵗʰ value <ins>predicted</ins> by the model |
+| *ȳ* | "y-bar" | The <ins>mean</ins> of the data |
+
 The scatterplot below visualizes the regression components. The mean (*ȳ*) is shown as a dotted blue line, the regression line is shown as a red line, and the residual and regression components are shown for the point *(11.5, 11.4)*.
 
 ![Visualization of regression components](/Course-Content/Images/linear-regression-components.png)
@@ -672,6 +681,37 @@ From the output above, we see that the equation for the linear model is *sales =
 **Draw a conclusion**
 
 We reject the null hypothesis H<sub>0</sub>: β₁ = 0 since p < 0.05. We have significance evidence at the *α = 0.05* level that a significant linear relationship exists between marketing and sales. From the available sample data, Company A's sales increased by *$1.83* for every *$1* increase in marketing.
+
+### F-Test of Overall Significance
+
+In addition to the T-test for linear regression, there is an F-test. Similar to the z- and t-tests, the F-test has an associated F-distribution. The **F-Test of overall significance** or **global F-test** is a significance test used to test the overall strength of a model. Whereas the t-test for linear regression can only test individual coefficients in the linear model (β₀ and β₁), the global F-test can test the entire model for significance. This can be useful in comparing the strength of multiple models.
+
+The general principle for the global F-test is to break the model into regression and residual components, as we did when finding the coefficient of determination (*R²*). This separates the regression component (the variation explained by the model) from the residual component (the variation <ins>not</ins> explained by the model). The regression and residual components are shown in the graphic below:
+
+![Visualization of regression components](/Course-Content/Images/linear-regression-components.png)
+
+By summing across all of the squared regression components and all of the squared residual components, we get the regression sum of squares (SSR) and sum of squared errors (SSE):
+
+![Formula for regression sum of squares](/Course-Content/Images/Equations/sum-of-squares-regression.png)
+
+![Formula for residual sum of squares](/Course-Content/Images/Equations/sum-of-squared-errors.png)
+
+Taking this one step further, we divide each quantity by its degrees of freedom to get an average. The new quantities are the **regression mean square** (MSR) and **mean squared error** (MSE):
+
+![Formula for regression mean squares](/Course-Content/Images/Equations/mean-square-regression.png)
+
+![Formula for residual mean squares](/Course-Content/Images/Equations/mean-squared-error.png)
+
+The degrees of freedom are the number of parameters being estimated minus one. The degrees of freedom for the global F test are *1* for the regression component and *n - 2* for the residual component, as shown in the table below:
+
+| Component | Degrees of Freedom |
+|-----------|--------------------|
+| Regression | ![Formula for regression degrees of freedom](/Course-Content/Images/Equations/degrees-of-freedom-regression-component.png) |
+| Regression | ![Formula for residual degrees of freedom](/Course-Content/Images/Equations/degrees-of-freedom-residual-component.png) |
+
+Putting this altogether, the global F-test is the ratio of data explained by the model to data not explained by the model, or the regression mean square divided by the residual mean square. This is shown in the equation below:
+
+![Formula for global F-test](/Course-Content/Images/Equations/f-test-global.png)
 
 ## Summary
 
